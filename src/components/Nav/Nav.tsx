@@ -1,4 +1,4 @@
-const Nav = () => {
+const Nav: React.FC = () => {
   return (
     <>
       <p>News</p>

@@ -1,4 +1,4 @@
-const FindPetPage = () => {
+const FindPetPage: React.FC = () => {
   return <p> FindPetPage</p>;
 };
 

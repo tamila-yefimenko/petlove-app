@@ -5,7 +5,7 @@ import { Suspense, useEffect, lazy } from "react";
 import { refreshThunk } from "../../redux/auth/operations";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
 import { Route, Routes } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
 const RegistrationPage = lazy(
@@ -20,7 +20,7 @@ const NotFoundPage = lazy(
   () => import("../../pages/NotFoundPage/NotFoundPage")
 );
 
-function App() {
+const App: React.FC = () => {
   const dispatch = useAppDispatch();
   const isRefreshing = useAppSelector(selectIsRefreshing);
 
@@ -47,6 +47,6 @@ function App() {
       </div>
     </Suspense>
   );
-}
+};
 
 export default App;

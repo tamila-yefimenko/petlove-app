@@ -1,4 +1,4 @@
-const NoticesPage = () => {
+const NoticesPage: React.FC = () => {
   return <p> NoticesPage</p>;
 };
 

@@ -2,7 +2,7 @@
 import Header from "../Header/Header";
 import Loader from "../Loader/Loader";
 
-const Layout = () => {
+const Layout: React.FC = () => {
   // const isLoading = useSelector(isLoading);
   return (
     <>

@@ -1,4 +1,4 @@
-const ProfilePage = () => {
+const ProfilePage: React.FC = () => {
   return <p>Profile</p>;
 };
 

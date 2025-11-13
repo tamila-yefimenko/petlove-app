@@ -1,4 +1,4 @@
-const RegistrationForm = () => {
+const RegistrationForm: React.FC = () => {
   return <p>Register</p>;
 };
 

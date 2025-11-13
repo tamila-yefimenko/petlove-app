@@ -1,6 +1,6 @@
 import s from "./Logo.module.css";
 
-const Logo = () => {
+const Logo: React.FC = () => {
   return (
     <>
       <span>pet</span>

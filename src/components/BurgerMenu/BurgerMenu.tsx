@@ -1,6 +1,10 @@
 import s from "./BurgerMenu.module.css";
 
-const BurgerMenu = ({ onClick }) => {
+export interface BurgerMenuProps {
+  onClick?: () => void;
+}
+
+const BurgerMenu: React.FC<BurgerMenuProps> = ({ onClick }) => {
   return (
     <>
       <button type="button" onClick={onClick} className={s.menuBtn}>

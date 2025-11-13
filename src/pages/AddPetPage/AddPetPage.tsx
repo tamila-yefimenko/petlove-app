@@ -1,4 +1,4 @@
-const AddPetPage = () => {
+const AddPetPage: React.FC = () => {
   return <p> AddPetPage</p>;
 };
 

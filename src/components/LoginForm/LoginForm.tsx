@@ -1,4 +1,4 @@
-const LoginForm = () => {
+const LoginForm: React.FC = () => {
   return <p>Login</p>;
 };
 

@@ -1,4 +1,4 @@
-const NotFoundPage = () => {
+const NotFoundPage: React.FC = () => {
   return <p> Page not found</p>;
 };
 

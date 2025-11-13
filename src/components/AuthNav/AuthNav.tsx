@@ -1,11 +1,12 @@
-import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import clsx from "clsx";
 import s from "./AuthNav.module.css";
+import { useAppSelector } from "../../redux/hooks";
 
 const AuthNav: React.FC = () => {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+
   const setActiveClass = ({ isActive }: { isActive: boolean }) => {
     return clsx(s.link, isActive && s.active);
   };

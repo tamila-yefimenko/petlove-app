@@ -6,7 +6,7 @@ import UserNav from "../UserNav/UserNav";
 import Menu from "../Menu/Menu";
 import Logo from "../Logo/Logo";
 
-const Header = () => {
+const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 

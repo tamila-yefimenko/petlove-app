@@ -1,4 +1,4 @@
-const FriendsPage = () => {
+const FriendsPage: React.FC = () => {
   return <p> FriendsPage</p>;
 };
 
