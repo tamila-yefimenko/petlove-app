@@ -4,9 +4,9 @@ import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import clsx from "clsx";
 import s from "./AuthNav.module.css";
 
-const AuthNav = () => {
+const AuthNav: React.FC = () => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
-  const setActiveClass = ({ isActive }) => {
+  const setActiveClass = ({ isActive }: { isActive: boolean }) => {
     return clsx(s.link, isActive && s.active);
   };
 
@@ -22,8 +22,6 @@ const AuthNav = () => {
           </NavLink>
         </>
       )}
-      <p>Login</p>
-      <p>Register</p>
     </nav>
   );
 };

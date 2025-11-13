@@ -1,8 +1,12 @@
+import { useSelector } from "react-redux";
 import AuthNav from "../AuthNav/AuthNav";
 import Nav from "../Nav/Nav";
 import UserNav from "../UserNav/UserNav";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
 const Menu = ({ isOpen, onClose }) => {
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
   return (
     <>
       {isOpen && (
@@ -11,8 +15,7 @@ const Menu = ({ isOpen, onClose }) => {
             Close
           </button>
           <Nav />
-          <AuthNav />
-          <UserNav />
+          {!isLoggedIn && <AuthNav />}
         </>
       )}
     </>

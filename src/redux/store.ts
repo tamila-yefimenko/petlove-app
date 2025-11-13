@@ -12,6 +12,9 @@ import {
   REGISTER,
 } from "redux-persist";
 
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
 const persistConfig = {
   key: "root-auth",
   version: 1,
