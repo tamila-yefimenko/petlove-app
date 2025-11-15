@@ -1,0 +1,42 @@
+.userNav {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  cursor: pointer;
+}
+
+.userPreview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: #fff4df;
+  border-radius: 100%;
+}
+.iconUser {
+  fill: #f6b83d;
+  stroke-width: 2px;
+  stroke: #f6b83d;
+  width: 20px;
+  height: 20px;
+}
+
+.userName {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+}
+
+@media (min-width: 768px) {
+  .userPreview {
+    width: 50px;
+    height: 50px;
+  }
+
+  .iconUser {
+    width: 24px;
+    height: 24px;
+  }
+}

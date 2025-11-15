@@ -1,5 +1,17 @@
-.link {
+.wrapper {
+  display: flex;
+  gap: 8px;
 }
 
-.active {
+.vertical {
+  flex-direction: column;
+}
+
+.wrapper:not(.vertical) {
+  flex-direction: row;
+}
+
+.vertical {
+  flex-direction: column;
+  width: 100%;
 }

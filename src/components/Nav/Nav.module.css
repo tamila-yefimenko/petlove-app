@@ -1,0 +1,44 @@
+.nav {
+  display: flex;
+  gap: 10px;
+}
+
+.navItem {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.25;
+  letter-spacing: -0.03em;
+  border: 1px solid rgba(38, 38, 38, 0.15);
+  border-radius: 30px;
+  padding: 15px 20px;
+  width: 119px;
+  height: 48px;
+  cursor: pointer;
+  transition: border 0.3s ease-in-out;
+}
+
+.navItem:hover {
+  border: 1px solid #f6b83d;
+}
+
+.active {
+  border: 1px solid #f6b83d;
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .navItem {
+    height: 50px;
+    width: 120px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navItem {
+    padding: 15px 20px;
+    width: auto;
+  }
+}

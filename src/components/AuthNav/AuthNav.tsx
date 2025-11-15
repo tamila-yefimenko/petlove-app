@@ -1,29 +1,29 @@
 import { NavLink } from "react-router-dom";
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import clsx from "clsx";
 import s from "./AuthNav.module.css";
-import { useAppSelector } from "../../redux/hooks";
+import Button from "../Button/Button";
+import clsx from "clsx";
 
-const AuthNav: React.FC = () => {
-  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+export interface AuthNavProps {
+  onClickItem?: () => void;
+  isMenu?: boolean;
+  vertical?: boolean;
+}
 
-  const setActiveClass = ({ isActive }: { isActive: boolean }) => {
-    return clsx(s.link, isActive && s.active);
-  };
-
+const AuthNav: React.FC<AuthNavProps> = ({ onClickItem, isMenu, vertical }) => {
   return (
-    <nav>
-      {!isLoggedIn && (
-        <>
-          <NavLink className={setActiveClass} to="/login">
-            Login
-          </NavLink>
-          <NavLink className={setActiveClass} to="/register">
-            Register
-          </NavLink>
-        </>
-      )}
-    </nav>
+    <div className={clsx(s.wrapper, vertical && s.vertical)}>
+      <NavLink to="/login" onClick={onClickItem}>
+        <Button fullWidth={isMenu} size="medium" variant="orange">
+          Log in
+        </Button>
+      </NavLink>
+
+      <NavLink to="/register" onClick={onClickItem}>
+        <Button fullWidth={isMenu} size="medium" variant="light">
+          Registration
+        </Button>
+      </NavLink>
+    </div>
   );
 };
 

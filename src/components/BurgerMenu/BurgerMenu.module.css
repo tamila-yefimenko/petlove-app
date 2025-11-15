@@ -5,7 +5,21 @@
   border: none;
   background-color: inherit;
 }
+
+.menuBtn:focus {
+  outline: none;
+}
+
 .menuIcon {
   stroke-width: 3px;
   stroke: #262626;
+  width: 32px;
+  height: 32px;
+}
+
+@media (min-width: 768px) {
+  .menuIcon {
+    width: 36px;
+    height: 36px;
+  }
 }

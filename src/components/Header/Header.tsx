@@ -5,6 +5,11 @@ import AuthNav from "../AuthNav/AuthNav";
 import UserNav from "../UserNav/UserNav";
 import Menu from "../Menu/Menu";
 import Logo from "../Logo/Logo";
+import { useAppSelector } from "../../redux/hooks";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import s from "./Header.module.css";
+import { Container } from "../Container/Container";
+import { Link } from "react-router-dom";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -19,32 +24,43 @@ const Header: React.FC = () => {
   const isMobile = windowWidth < 768;
   const isTablet = windowWidth < 1280 && windowWidth >= 768;
   const isDesktop = windowWidth >= 1280;
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
-    <header>
-      <Logo />
-      {isMobile && (
-        <>
-          <BurgerMenu onClick={() => setIsMenuOpen(true)} />
-          <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-        </>
-      )}
+    <header className={s.header}>
+      <Container className={s.headerContainer}>
+        <Link to={"/"}>
+          <Logo />
+        </Link>
+        {isMobile && (
+          <>
+            <div className={s.menuWrapper}>
+              {<UserNav isMobile />}
+              <BurgerMenu onClick={() => setIsMenuOpen(true)} />
+              <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+            </div>
+          </>
+        )}
 
-      {isTablet && (
-        <>
-          <Nav />
-          <BurgerMenu onClick={() => setIsMenuOpen(true)} />
-          <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-        </>
-      )}
+        {isTablet && (
+          <>
+            <div className={s.menuWrapper}>
+              {isLoggedIn ? <UserNav /> : <AuthNav />}
+              <BurgerMenu onClick={() => setIsMenuOpen(true)} />
+              <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+            </div>
+          </>
+        )}
 
-      {isDesktop && (
-        <>
-          <Nav />
-          <AuthNav />
-          <UserNav />
-        </>
-      )}
+        {isDesktop && (
+          <>
+            <Nav />
+            <div className={s.menuWrapper}>
+              {isLoggedIn ? <UserNav /> : <AuthNav />}
+            </div>
+          </>
+        )}
+      </Container>
     </header>
   );
 };

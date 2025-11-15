@@ -1,3 +1,33 @@
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
 .icon {
-  fill: black;
+  width: 17px;
+  height: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  stroke: #f6b83d;
+  fill: #f6b83d;
+}
+
+.span {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+@media (min-width: 768px) {
+  .icon {
+    width: 23px;
+    height: 23px;
+  }
+
+  .span {
+    font-size: 28px;
+  }
 }

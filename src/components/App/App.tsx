@@ -30,7 +30,7 @@ const App: React.FC = () => {
 
   return isRefreshing ? null : (
     <Suspense fallback={<h2>Loading...</h2>}>
-      <div>
+      <>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
@@ -44,7 +44,7 @@ const App: React.FC = () => {
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
-      </div>
+      </>
     </Suspense>
   );
 };
