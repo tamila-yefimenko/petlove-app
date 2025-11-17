@@ -5,10 +5,11 @@ import {
   logoutThunk,
   refreshThunk,
 } from "./operations.js";
+import { AuthState } from "../../utils/types.js";
 
-const initialState = {
+const initialState: AuthState = {
   user: {
-    name: "Anna",
+    name: null,
     email: null,
   },
   token: null,

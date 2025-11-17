@@ -1,6 +1,5 @@
 .loginForm {
   border-radius: 30px;
-  height: 422px;
   background-color: #fff;
   padding: 60px 20px;
 }
@@ -11,33 +10,51 @@
   line-height: 1;
   letter-spacing: -0.04em;
   text-align: left;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .loginText {
+  max-width: 285px;
   font-weight: 500;
-  font-size: 18px;
-  line-height: 1.22;
-  letter-spacing: -0.02em;
+  font-size: 14px;
+  line-height: 1.2871;
+  letter-spacing: -0.01em;
   text-align: left;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 
 .fieldset {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 10px;
   padding: 0;
-  margin: 0 0 64px 0;
+  margin: 0 0 40px 0;
   border: none;
 }
 
+.inputWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.inputWrapper button {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
 .field {
+  position: relative;
   border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
   padding: 16px;
   width: 100%;
-  height: 52px;
+  height: 44px;
   font-weight: 500;
   font-size: 16px;
   line-height: 1.25;
@@ -61,13 +78,14 @@
 }
 
 .button {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .link {
+  display: block;
   font-weight: 500;
-  font-size: 14px;
-  line-height: 1.42857;
+  font-size: 12px;
+  line-height: 1.16667;
   letter-spacing: -0.03em;
   color: rgba(38, 38, 38, 0.5);
 }
@@ -82,14 +100,56 @@
 @media (min-width: 768px) {
   .loginForm {
     border-radius: 60px;
-    height: 560px;
     padding: 71px 140px;
   }
 
   .loginTitle {
     font-size: 54px;
+    margin-bottom: 16px;
+  }
+
+  .loginText {
+    max-width: 414px;
+    font-size: 18px;
+    line-height: 1.28;
+    margin-bottom: 32px;
+  }
+
+  .fieldset {
+    gap: 16px;
+    margin: 0 0 64px 0;
+  }
+
+  .inputWrapper button {
+    right: 15px;
+  }
+
+  .field {
+    height: 52px;
+  }
+
+  .button {
+    margin-bottom: 16px;
+  }
+
+  .link {
+    font-size: 14px;
+    line-height: 1.42857;
   }
 }
 
 @media (min-width: 1280px) {
+  .loginForm {
+    width: 592px;
+    padding: 118px 84px;
+  }
+
+  .loginText {
+    line-height: 1.22222;
+    letter-spacing: -0.02em;
+  }
+
+  .inputWrapper button {
+    right: 16px;
+  }
 }
