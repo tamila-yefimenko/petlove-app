@@ -26,18 +26,27 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(registerThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = {
+          name: action.payload.name,
+          email: action.payload.email,
+        };
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
       .addCase(loginThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = {
+          name: action.payload.name,
+          email: action.payload.email,
+        };
         state.token = action.payload.token;
         state.isLoggedIn = true;
       })
       .addCase(logoutThunk.fulfilled, () => initialState)
       .addCase(refreshThunk.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = {
+          name: action.payload.name,
+          email: action.payload.email,
+        };
         state.token = action.payload.token;
         state.isLoggedIn = true;
         state.isRefreshing = false;

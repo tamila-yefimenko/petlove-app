@@ -4,7 +4,8 @@ export interface IUser {
 }
 
 export interface AuthResponse {
-  user: IUser;
+  name: string;
+  email: string;
   token: string;
 }
 

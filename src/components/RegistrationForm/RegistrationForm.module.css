@@ -1,10 +1,10 @@
-.loginForm {
+.registerForm {
   border-radius: 30px;
   background-color: #fff;
-  padding: 55px 20px;
+  padding: 20px;
 }
 
-.loginTitle {
+.registerTitle {
   font-weight: 700;
   font-size: 28px;
   line-height: 1;
@@ -13,7 +13,7 @@
   margin-bottom: 12px;
 }
 
-.loginText {
+.registerText {
   max-width: 285px;
   font-weight: 500;
   font-size: 14px;
@@ -26,9 +26,9 @@
 .fieldset {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 4px;
   padding: 0;
-  margin: 0 0 40px 0;
+  margin: 0 0 6px 0;
   border: none;
 }
 
@@ -98,17 +98,17 @@
 }
 
 @media (min-width: 768px) {
-  .loginForm {
+  .registerForm {
     border-radius: 60px;
-    padding: 71px 140px;
+    padding: 27px 140px;
   }
 
-  .loginTitle {
+  .registerTitle {
     font-size: 54px;
     margin-bottom: 16px;
   }
 
-  .loginText {
+  .registerText {
     max-width: 414px;
     font-size: 18px;
     line-height: 1.28;
@@ -116,8 +116,8 @@
   }
 
   .fieldset {
-    gap: 16px;
-    margin: 0 0 32px 0;
+    gap: 4px;
+    margin: 0 0 6px 0;
   }
 
   .toggleBtn {
@@ -139,19 +139,18 @@
 }
 
 @media (min-width: 1280px) {
-  .loginForm {
+  .registerForm {
     width: 592px;
-    padding: 114px 84px;
+    padding: 68px 84px;
   }
 
-  .loginText {
+  .registerText {
     line-height: 1.22222;
     letter-spacing: -0.02em;
   }
 
   .fieldset {
-    gap: 12px;
-    margin: 0 0 40px 0;
+    margin: 0 0 14px 0;
   }
 
   .toggleBtn {

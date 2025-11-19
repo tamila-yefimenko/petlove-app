@@ -8,18 +8,18 @@
 }
 
 .field.error {
-  border-color: #ef2447;
+  border: 1px solid #ef2447;
 }
 
 .field.success {
-  border-color: #08aa83;
+  border: 1px solid #08aa83;
 }
 
 .clearBtn {
   position: absolute;
   right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 35%;
+  transform: translateY(-35%);
   background: none;
   border: none;
   font-size: 16px;
@@ -36,8 +36,8 @@
   width: 18px;
   height: 18px;
   right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 35%;
+  transform: translateY(-35%);
   stroke-width: 1.5px;
   stroke: #08aa83;
   fill: none;
@@ -49,9 +49,9 @@
 }
 
 .messageArea {
-  min-height: 14px;
+  min-height: 12px;
   padding-left: 12px;
-  margin-top: 4px;
+  margin-top: 2px;
   display: flex;
   align-items: center;
 }
@@ -74,10 +74,19 @@
 }
 
 @media (min-width: 768px) {
+  .messageArea {
+    min-height: 14px;
+    margin-top: 4px;
+  }
+
   .ok,
   .iconClear {
     width: 22px;
     height: 22px;
+  }
+
+  .ok,
+  .clearBtn {
     right: 15px;
   }
 

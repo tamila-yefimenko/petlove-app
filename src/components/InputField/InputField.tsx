@@ -1,5 +1,7 @@
 import { useField } from "formik";
 import s from "./InputField.module.css";
+import clsx from "clsx";
+import { useState } from "react";
 
 interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -9,25 +11,28 @@ export const InputField: React.FC<
   InputFieldProps & { isPassword?: boolean }
 > = ({ className, isPassword, ...props }) => {
   const [field, meta, helpers] = useField(props.name);
+  const [showPassword, setShowPassword] = useState(false);
 
   const showError = meta.touched && meta.error;
   const showSuccess = meta.touched && !meta.error;
-  //   const isPassword = props.name === "password";
 
   return (
     <div className={s.wrapper}>
       <input
         {...field}
         {...props}
-        className={`${s.field} ${className || ""}
-          ${showError ? s.error : ""}
-          ${showSuccess ? s.success : ""}`}
+        className={clsx(
+          s.field,
+          className,
+          showError && s.error,
+          showSuccess && s.success
+        )}
       />
 
       {showError && field.value && (
         <button
           type="button"
-          className={`${s.clearBtn} ${isPassword ? s.pwdBtn : ""}`}
+          className={clsx(s.clearBtn, isPassword && s.pwdBtn)}
           onClick={() => helpers.setValue("")}>
           <svg width="18" height="18" className={s.iconClear}>
             <use href="/icons/sprite.svg#icon-x" />
@@ -37,7 +42,7 @@ export const InputField: React.FC<
 
       {showSuccess && (
         <>
-          <svg className={`${s.ok} ${isPassword ? s.pwdIcon : ""}`}>
+          <svg className={clsx(s.ok, isPassword && s.pwdIcon)}>
             <use href="/icons/sprite.svg#icon-check" />
           </svg>
         </>

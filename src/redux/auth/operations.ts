@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthResponse } from "../../utils/types";
 
 export const goitAPI = axios.create({
-  baseURL: "https://petlove.b.goit.study",
+  baseURL: "https://petlove.b.goit.study/api",
 });
 
 const setAuthNav = (token: string) => {

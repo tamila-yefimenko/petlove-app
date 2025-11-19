@@ -1,11 +1,10 @@
-import { ErrorMessage, Field, Form, Formik, FormikHelpers } from "formik";
+import { Form, Formik, FormikHelpers } from "formik";
 import s from "./LoginForm.module.css";
 import Button from "../Button/Button";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { useState } from "react";
 import { ToggleBtn } from "../ToggleBtn/ToggleBttn";
-import { useDispatch } from "react-redux";
 import { loginThunk } from "../../redux/auth/operations";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "../../redux/hooks";
@@ -43,7 +42,7 @@ const LoginForm: React.FC = () => {
     // dispatch(setLoading(true));
     try {
       await dispatch(loginThunk(values)).unwrap();
-      navigate("/");
+      navigate("/profile");
       actions.resetForm();
     } catch (error) {
       toast.error(`Login failed: ${error}`);
@@ -86,6 +85,7 @@ const LoginForm: React.FC = () => {
                 className={s.field}
               />
               <ToggleBtn
+                className={s.toggleBtn}
                 isShown={showPassword}
                 onClick={() => setShowPassword((prev) => !prev)}
               />

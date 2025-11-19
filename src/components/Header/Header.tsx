@@ -9,7 +9,8 @@ import { useAppSelector } from "../../redux/hooks";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import s from "./Header.module.css";
 import { Container } from "../Container/Container";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import clsx from "clsx";
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -26,8 +27,11 @@ const Header: React.FC = () => {
   const isDesktop = windowWidth >= 1280;
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
+  const location = useLocation();
+  const isHome = location.pathname === "/";
+
   return (
-    <header className={s.header}>
+    <header className={clsx(s.header, isHome && s.whiteHeader)}>
       <Container className={s.headerContainer}>
         <Link to={"/"}>
           <Logo />
