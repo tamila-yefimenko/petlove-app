@@ -1,7 +1,6 @@
 import { useField } from "formik";
 import s from "./InputField.module.css";
 import clsx from "clsx";
-import { useState } from "react";
 
 interface InputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
   name: string;
@@ -11,7 +10,6 @@ export const InputField: React.FC<
   InputFieldProps & { isPassword?: boolean }
 > = ({ className, isPassword, ...props }) => {
   const [field, meta, helpers] = useField(props.name);
-  const [showPassword, setShowPassword] = useState(false);
 
   const showError = meta.touched && meta.error;
   const showSuccess = meta.touched && !meta.error;

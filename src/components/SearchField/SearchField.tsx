@@ -1,5 +1,5 @@
 const SearchField: React.FC = () => {
-  return <p>Search</p>;
+  return <input></input>;
 };
 
 export default SearchField;

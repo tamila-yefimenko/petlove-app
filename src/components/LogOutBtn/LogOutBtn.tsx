@@ -6,7 +6,7 @@ import Button from "../Button/Button";
 export interface LogOutBtnProps {
   onClick?: () => void;
   isMenu?: boolean;
-  vertical: boolean;
+  vertical?: boolean;
 }
 
 const LogOutBtn: React.FC<LogOutBtnProps> = ({ onClick, isMenu, vertical }) => {
@@ -22,7 +22,7 @@ const LogOutBtn: React.FC<LogOutBtnProps> = ({ onClick, isMenu, vertical }) => {
       return "orange";
     }
   }
-  const logOutVariant = getVariant(vertical, isHome);
+  const logOutVariant = getVariant(Boolean(vertical), isHome);
 
   const handleLogout = async () => {
     await dispatch(logoutThunk());

@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import UserBar from "../UserBar/UserBar";
 import LogOutBtn from "../LogOutBtn/LogOutBtn";
@@ -14,7 +14,7 @@ const UserNav: React.FC<UserNavProps> = ({ isMobile = false, isHome }) => {
 
   return (
     <div className={s.userWrapper}>
-      {isLoggedIn && !isMobile && !isHome && <LogOutBtn isHome={isHome} />}
+      {isLoggedIn && !isMobile && !isHome && <LogOutBtn />}
       {isLoggedIn && <UserBar showName={!isMobile} isHome={isHome} />}
     </div>
   );
