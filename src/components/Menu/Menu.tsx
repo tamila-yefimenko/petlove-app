@@ -11,7 +11,7 @@ import { useLocation } from "react-router-dom";
 export interface MenuProps {
   isOpen: boolean;
   onClose: () => void;
-  // isHome: boolean;
+  isMobile?: boolean;
 }
 
 const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
@@ -60,7 +60,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
           {isLoggedIn ? (
             <LogOutBtn onClick={onClose} vertical isMenu />
           ) : (
-            <AuthNav onClickItem={onClose} vertical isHome />
+            <AuthNav onClickItem={onClose} vertical isMenu isMobile />
           )}
         </div>
       )}

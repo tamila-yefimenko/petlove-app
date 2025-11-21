@@ -5,13 +5,11 @@
 
 .vertical {
   flex-direction: column;
-}
-
-.wrapper:not(.vertical) {
-  flex-direction: row;
-}
-
-.vertical {
-  flex-direction: column;
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    flex-direction: row;
+  }
 }

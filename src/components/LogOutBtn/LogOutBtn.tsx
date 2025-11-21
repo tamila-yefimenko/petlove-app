@@ -15,7 +15,14 @@ const LogOutBtn: React.FC<LogOutBtnProps> = ({ onClick, isMenu, vertical }) => {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
 
-  const logOutVariant = isHome ? "orange" : "transparent";
+  function getVariant(vertical: boolean, isHome: boolean) {
+    if (vertical) {
+      return isHome ? "orange" : "transparent";
+    } else {
+      return "orange";
+    }
+  }
+  const logOutVariant = getVariant(vertical, isHome);
 
   const handleLogout = async () => {
     await dispatch(logoutThunk());

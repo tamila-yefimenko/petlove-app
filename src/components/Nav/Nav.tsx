@@ -5,7 +5,6 @@ import clsx from "clsx";
 interface NavProps {
   vertical?: boolean;
   onClickItem?: () => void;
-  // isHome?: boolean;
 }
 
 const Nav: React.FC<NavProps> = ({ vertical, onClickItem }) => {
