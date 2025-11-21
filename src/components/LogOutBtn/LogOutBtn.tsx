@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import { logoutThunk } from "../../redux/auth/operations";
 import { useAppDispatch } from "../../redux/hooks";
 import Button from "../Button/Button";
@@ -5,10 +6,16 @@ import Button from "../Button/Button";
 export interface LogOutBtnProps {
   onClick?: () => void;
   isMenu?: boolean;
+  vertical: boolean;
 }
 
-const LogOutBtn: React.FC<LogOutBtnProps> = ({ onClick, isMenu }) => {
+const LogOutBtn: React.FC<LogOutBtnProps> = ({ onClick, isMenu, vertical }) => {
   const dispatch = useAppDispatch();
+
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
+  const logOutVariant = isHome ? "orange" : "transparent";
 
   const handleLogout = async () => {
     await dispatch(logoutThunk());
@@ -22,7 +29,7 @@ const LogOutBtn: React.FC<LogOutBtnProps> = ({ onClick, isMenu }) => {
       onClick={handleLogout}
       fullWidth={isMenu}
       size="small"
-      variant="orange">
+      variant={logOutVariant}>
       Log out
     </Button>
   );

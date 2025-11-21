@@ -17,8 +17,16 @@
   height: 32px;
 }
 
+.iconHome {
+  stroke-width: 3px;
+  stroke: #fff;
+  width: 32px;
+  height: 32px;
+}
+
 @media (min-width: 768px) {
-  .menuIcon {
+  .menuIcon,
+  .iconHome {
     width: 36px;
     height: 36px;
   }

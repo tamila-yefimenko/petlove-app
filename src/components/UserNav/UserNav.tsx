@@ -6,15 +6,16 @@ import s from "./UserNav.module.css";
 
 interface UserNavProps {
   isMobile?: boolean;
+  isHome: boolean;
 }
 
-const UserNav: React.FC<UserNavProps> = ({ isMobile = false }) => {
+const UserNav: React.FC<UserNavProps> = ({ isMobile = false, isHome }) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (
     <div className={s.userWrapper}>
-      {isLoggedIn && !isMobile && <LogOutBtn />}
-      {isLoggedIn && <UserBar showName={!isMobile} />}
+      {isLoggedIn && !isMobile && !isHome && <LogOutBtn isHome={isHome} />}
+      {isLoggedIn && <UserBar showName={!isMobile} isHome={isHome} />}
     </div>
   );
 };

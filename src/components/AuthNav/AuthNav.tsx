@@ -7,13 +7,21 @@ export interface AuthNavProps {
   onClickItem?: () => void;
   isMenu?: boolean;
   vertical?: boolean;
+  isHome: boolean;
 }
 
-const AuthNav: React.FC<AuthNavProps> = ({ onClickItem, isMenu, vertical }) => {
+const AuthNav: React.FC<AuthNavProps> = ({
+  onClickItem,
+  isMenu,
+  vertical,
+  isHome,
+}) => {
+  const loginVariant = isHome ? "transparent" : "orange";
+
   return (
     <div className={clsx(s.wrapper, vertical && s.vertical)}>
       <NavLink to="/login" onClick={onClickItem}>
-        <Button fullWidth={isMenu} size="medium" variant="orange">
+        <Button fullWidth={isMenu} size="medium" variant={loginVariant}>
           Log in
         </Button>
       </NavLink>

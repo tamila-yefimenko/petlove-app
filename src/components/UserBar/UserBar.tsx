@@ -5,9 +5,10 @@ import s from "./UserBar.module.css";
 
 interface UserBarProps {
   showName?: boolean;
+  isHome: boolean;
 }
 
-const UserBar: React.FC<UserBarProps> = ({ showName = true }) => {
+const UserBar: React.FC<UserBarProps> = ({ showName = true, isHome }) => {
   const user = useAppSelector(selectUser);
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
@@ -20,7 +21,9 @@ const UserBar: React.FC<UserBarProps> = ({ showName = true }) => {
               <use href="icons/sprite.svg#icon-user-02" />
             </svg>
           </div>
-          {showName && <p className={s.userName}>{user.name}</p>}
+          {showName && (
+            <p className={isHome ? s.homeName : s.userName}>{user.name}</p>
+          )}
         </NavLink>
       )}
     </nav>

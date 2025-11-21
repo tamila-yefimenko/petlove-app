@@ -5,15 +5,21 @@ import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import LogOutBtn from "../LogOutBtn/LogOutBtn";
 import s from "./Menu.module.css";
 import { useEffect, useRef } from "react";
+import clsx from "clsx";
+import { useLocation } from "react-router-dom";
 
 export interface MenuProps {
   isOpen: boolean;
   onClose: () => void;
+  // isHome: boolean;
 }
 
 const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -42,17 +48,19 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
   return (
     <>
       {isOpen && (
-        <div ref={menuRef} className={`${s.menu} ${isOpen ? s.open : ""}`}>
+        <div
+          ref={menuRef}
+          className={clsx(s.menu, isOpen ? s.open : "", isHome && s.isHome)}>
           <button className={s.button} type="button" onClick={onClose}>
-            <svg className={s.iconClose}>
+            <svg className={clsx(s.iconClose, isHome && s.homeBtn)}>
               <use href="/icons/sprite.svg#icon-x" />
             </svg>
           </button>
           <Nav vertical onClickItem={onClose} />
           {isLoggedIn ? (
-            <LogOutBtn onClick={onClose} isMenu />
+            <LogOutBtn onClick={onClose} vertical isMenu />
           ) : (
-            <AuthNav onClickItem={onClose} isMenu vertical />
+            <AuthNav onClickItem={onClose} vertical isHome />
           )}
         </div>
       )}

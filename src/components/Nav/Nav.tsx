@@ -1,17 +1,26 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import s from "./Nav.module.css";
 import clsx from "clsx";
-
-const setActiveClass = ({ isActive }: { isActive: boolean }) => {
-  return clsx(s.navItem, isActive && s.active);
-};
 
 interface NavProps {
   vertical?: boolean;
   onClickItem?: () => void;
+  // isHome?: boolean;
 }
 
-const Nav: React.FC<NavProps> = ({ vertical = false, onClickItem }) => {
+const Nav: React.FC<NavProps> = ({ vertical, onClickItem }) => {
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
+
+  const setActiveClass = ({ isActive }: { isActive: boolean }) => {
+    return clsx(
+      s.navItem,
+      isActive && s.active,
+      isHome && s.isHome,
+      vertical && s.verticalItem
+    );
+  };
+
   return (
     <nav className={clsx(s.nav, vertical && s.vertical)}>
       <NavLink to="/news" className={setActiveClass} onClick={onClickItem}>

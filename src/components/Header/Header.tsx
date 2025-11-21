@@ -12,9 +12,16 @@ import { Container } from "../Container/Container";
 import { Link, useLocation } from "react-router-dom";
 import clsx from "clsx";
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  className: string;
+}
+
+const Header: React.FC<HeaderProps> = ({ className }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  const { pathname } = useLocation();
+  const isHome = pathname === "/";
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -27,20 +34,17 @@ const Header: React.FC = () => {
   const isDesktop = windowWidth >= 1280;
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
-  const location = useLocation();
-  const isHome = location.pathname === "/";
-
   return (
-    <header className={clsx(s.header, isHome && s.whiteHeader)}>
+    <header className={clsx(s.header, isHome && s.whiteHeader, className)}>
       <Container className={s.headerContainer}>
         <Link to={"/"}>
-          <Logo />
+          <Logo isHome={isHome} />
         </Link>
         {isMobile && (
           <>
             <div className={s.menuWrapper}>
-              {<UserNav isMobile />}
-              <BurgerMenu onClick={() => setIsMenuOpen(true)} />
+              {<UserNav isMobile isHome={isHome} />}
+              <BurgerMenu isHome={isHome} onClick={() => setIsMenuOpen(true)} />
               <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
             </div>
           </>
@@ -49,8 +53,12 @@ const Header: React.FC = () => {
         {isTablet && (
           <>
             <div className={s.menuWrapper}>
-              {isLoggedIn ? <UserNav /> : <AuthNav />}
-              <BurgerMenu onClick={() => setIsMenuOpen(true)} />
+              {isLoggedIn ? (
+                <UserNav isHome={isHome} />
+              ) : (
+                <AuthNav isHome={isHome} />
+              )}
+              <BurgerMenu isHome={isHome} onClick={() => setIsMenuOpen(true)} />
               <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
             </div>
           </>
@@ -60,7 +68,11 @@ const Header: React.FC = () => {
           <>
             <Nav />
             <div className={s.menuWrapper}>
-              {isLoggedIn ? <UserNav /> : <AuthNav />}
+              {isLoggedIn ? (
+                <UserNav isHome={isHome} />
+              ) : (
+                <AuthNav isHome={isHome} />
+              )}
             </div>
           </>
         )}

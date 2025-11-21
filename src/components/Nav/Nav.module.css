@@ -3,21 +3,51 @@
   gap: 10px;
 }
 
-.navItem {
+.navItem,
+.isHome {
   font-weight: 500;
   font-size: 16px;
   line-height: 1.25;
   letter-spacing: -0.03em;
-  border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
   padding: 15px 20px;
   width: 119px;
   height: 48px;
   cursor: pointer;
-  transition: border 0.3s ease-in-out;
+  transition: border 0.3s ease-in-out, background 0.3s ease-in-out,
+    color 0.3s ease-in-out;
+}
+
+.navItem {
+  border: 1px solid rgba(38, 38, 38, 0.15);
+}
+
+.navItem.isHome,
+.navItem.verticalItem {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+}
+
+.verticalItem.isHome {
+  border: 1px solid rgba(38, 38, 38, 0.4);
+  color: #262626;
 }
 
 .navItem:hover {
+  border: 1px solid #f6b83d;
+}
+
+.navItem.isHome:hover {
+  background-color: #fff4df;
+  color: #f6b83d;
+}
+
+.navItem.verticalItem:hover {
+  background-color: #fff4df;
+  color: #f6b83d;
+}
+
+.navItem.verticalItem.isHome:hover {
   border: 1px solid #f6b83d;
 }
 

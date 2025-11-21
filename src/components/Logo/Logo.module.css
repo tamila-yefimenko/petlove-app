@@ -4,30 +4,46 @@
   gap: 2px;
 }
 
-.icon {
+.logoIcon,
+.homeIcon {
   width: 17px;
   height: 17px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.logoIcon {
   stroke: #f6b83d;
   fill: #f6b83d;
 }
 
-.span {
+.homeIcon {
+  stroke: #fff;
+  fill: #fff;
+}
+
+.logoSpan,
+.homeSpan {
   font-weight: 700;
   font-size: 20px;
   line-height: 1;
   letter-spacing: -0.04em;
 }
 
+.homeSpan {
+  color: #fff;
+}
+
 @media (min-width: 768px) {
-  .icon {
+  .logoIcon,
+  .homeIcon {
     width: 23px;
     height: 23px;
   }
 
-  .span {
+  .logoSpan,
+  .homeSpan {
     font-size: 28px;
   }
 }

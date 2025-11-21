@@ -22,11 +22,16 @@
   height: 20px;
 }
 
-.userName {
+.userName,
+.homeName {
   font-weight: 700;
   font-size: 20px;
   line-height: 1;
   letter-spacing: -0.03em;
+}
+
+.homeName {
+  color: #fff;
 }
 
 @media (min-width: 768px) {
