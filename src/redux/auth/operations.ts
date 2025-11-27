@@ -14,7 +14,7 @@ const removeAuthNav = () => {
   goitAPI.defaults.headers.common.Authorization = ``;
 };
 
-const getErrorMessage = (error: unknown) => {
+export const getErrorMessage = (error: unknown) => {
   if (axios.isAxiosError(error)) {
     return error.response?.data?.message || error.message;
   }

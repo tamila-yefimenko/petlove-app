@@ -23,8 +23,8 @@
 }
 
 @media (min-width: 1280px) {
-  .headerContainer {
-    padding: 32px 64px;
+  .header .headerContainer {
+    padding: 0 64px;
     justify-content: baseline;
   }
 }

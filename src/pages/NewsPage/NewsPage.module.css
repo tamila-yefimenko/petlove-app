@@ -1,0 +1,44 @@
+.newsPage {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  margin-bottom: 20px;
+}
+
+.search {
+  margin-bottom: 24px;
+}
+
+@media (min-width: 768px) {
+  .newsPage {
+    padding-top: 76px;
+  }
+
+  .wrapper {
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 44px;
+  }
+
+  .title {
+    margin-bottom: 0;
+  }
+
+  .search {
+    max-width: 230px;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .newsContainer {
+    padding: 0 64px;
+  }
+}
