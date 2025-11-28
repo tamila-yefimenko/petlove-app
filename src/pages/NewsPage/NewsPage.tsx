@@ -50,7 +50,9 @@ const NewsPage: React.FC = () => {
           )}
         </div>
         {hasNews && <NewsList news={news} />}
-        <Pagination totalPages={totalPages} onChange={handlePageChange} />
+        {totalPages > 1 && (
+          <Pagination totalPages={totalPages} onChange={handlePageChange} />
+        )}
         {error && <p>error</p>}
       </Container>
     </div>
