@@ -27,6 +27,9 @@ const newsSlice = createSlice({
     setQuery(state, action) {
       state.query = action.payload;
     },
+    setPage(state, action) {
+      state.page = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -38,7 +41,7 @@ const newsSlice = createSlice({
         state.isLoading = false;
         state.items = action.payload.results;
         state.totalPages = action.payload.totalPages;
-        state.page += 1;
+        state.page = action.meta.arg.page;
         state.isEmpty = action.payload.results.length === 0;
       })
       .addCase(fetchNews.rejected, (state, action) => {
@@ -48,5 +51,5 @@ const newsSlice = createSlice({
   },
 });
 
-export const { resetNews, setQuery } = newsSlice.actions;
+export const { resetNews, setQuery, setPage } = newsSlice.actions;
 export const newsReducer = newsSlice.reducer;

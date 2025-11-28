@@ -1,0 +1,85 @@
+.pagination {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.arrowWrapper,
+.arrowRightWrapper {
+  display: flex;
+  gap: 6px;
+}
+
+.numberWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.item,
+.dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(38, 38, 38, 0.05);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: #262626;
+  border-radius: 100%;
+  background-color: transparent;
+  padding: 0;
+}
+
+.arrowRightWrapper .item {
+  border-color: rgba(38, 38, 38, 0.2);
+}
+
+.active {
+  background-color: #f6b83d;
+  color: #fff;
+}
+
+.item:disabled .icon {
+  fill: rgba(38, 38, 38, 0.5);
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+}
+
+.double {
+  display: flex;
+  align-items: center;
+  gap: 0;
+}
+
+.double .right {
+  margin-left: -12px;
+}
+
+@media (min-width: 768px) {
+  .pagination {
+    gap: 24px;
+  }
+
+  .arrowWrapper,
+  .arrowRightWrapper {
+    gap: 8px;
+  }
+
+  .item,
+  .dots {
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    line-height: 1.22222;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+}

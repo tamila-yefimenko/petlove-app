@@ -1,11 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import Nav from "../Nav/Nav";
 import AuthNav from "../AuthNav/AuthNav";
 import UserNav from "../UserNav/UserNav";
 import Menu from "../Menu/Menu";
 import Logo from "../Logo/Logo";
-import { useAppSelector } from "../../redux/hooks";
+import { useAppSelector, useWindowWidth } from "../../redux/hooks";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import s from "./Header.module.css";
 import { Container } from "../Container/Container";
@@ -18,20 +18,16 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ className }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const { pathname } = useLocation();
   const isHome = pathname === "/";
 
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  const width = useWindowWidth();
 
-  const isMobile = windowWidth < 768;
-  const isTablet = windowWidth < 1280 && windowWidth >= 768;
-  const isDesktop = windowWidth >= 1280;
+  const isMobile = width < 768;
+  const isTablet = width < 1280 && width >= 768;
+  const isDesktop = width >= 1280;
+
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   return (

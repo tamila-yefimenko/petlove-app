@@ -14,12 +14,11 @@ export interface OneNews {
 
 export const fetchNews = createAsyncThunk<
   { results: OneNews[]; totalPages: number },
-  FetchNewsParams | undefined,
+  FetchNewsParams,
   { rejectValue: string; state: { news: NewsState } }
 >("news/fetchAll", async (params, thunkAPI) => {
   try {
-    const state = thunkAPI.getState().news;
-    // const { page = state.page, limit = state.limit, keyword } = params;
+    // const state = thunkAPI.getState().news;
 
     const response = await goitAPI.get("/news", {
       params: params,

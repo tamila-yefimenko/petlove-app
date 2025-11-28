@@ -32,8 +32,8 @@ export interface NewsState {
 }
 
 export interface FetchNewsParams {
-  page?: number;
+  page: number;
   limit?: number;
-  category?: string;
+  // category?: string;
   keyword?: string;
 }

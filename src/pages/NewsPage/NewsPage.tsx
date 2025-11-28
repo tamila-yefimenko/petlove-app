@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import NewsList from "../../components/NewsList/NewsList";
 import SearchField from "../../components/SearchField/SearchField";
 import Title from "../../components/Title/Title";
@@ -6,9 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   selectError,
   selectIsLoading,
-  selectLimit,
   selectNews,
-  selectPage,
   selectQuery,
   selectTotalPages,
 } from "../../redux/news/selectors";
@@ -16,12 +14,12 @@ import s from "./NewsPage.module.css";
 import { fetchNews } from "../../redux/news/operations";
 import { resetNews, setQuery } from "../../redux/news/slice";
 import { Container } from "../../components/Container/Container";
+import Pagination from "../../components/Pagination/Pagination";
 
 const NewsPage: React.FC = () => {
   const news = useAppSelector(selectNews);
   const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectError);
-  const page = useAppSelector(selectPage);
   const totalPages = useAppSelector(selectTotalPages);
   const query = useAppSelector(selectQuery);
 
@@ -38,10 +36,8 @@ const NewsPage: React.FC = () => {
     dispatch(setQuery(value.toLowerCase()));
   };
 
-  const handleLoadMore = () => {
-    if (page <= totalPages) {
-      dispatch(fetchNews({ page, keyword: query }));
-    }
+  const handlePageChange = (newPage: number) => {
+    dispatch(fetchNews({ page: newPage, keyword: query }));
   };
 
   return (
@@ -54,11 +50,7 @@ const NewsPage: React.FC = () => {
           )}
         </div>
         {hasNews && <NewsList news={news} />}
-        {page <= totalPages && !isLoading && news.length > 0 && (
-          <button className={s.loadMore} onClick={handleLoadMore}>
-            Load More
-          </button>
-        )}
+        <Pagination totalPages={totalPages} onChange={handlePageChange} />
         {error && <p>error</p>}
       </Container>
     </div>
