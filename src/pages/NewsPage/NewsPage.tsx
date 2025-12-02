@@ -5,7 +5,6 @@ import Title from "../../components/Title/Title";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   selectError,
-  selectIsLoading,
   selectNews,
   selectQuery,
   selectTotalPages,
@@ -15,6 +14,8 @@ import { fetchNews } from "../../redux/news/operations";
 import { resetNews, setQuery } from "../../redux/news/slice";
 import { Container } from "../../components/Container/Container";
 import Pagination from "../../components/Pagination/Pagination";
+import Loader from "../../components/Loader/Loader";
+import { selectIsLoading } from "../../redux/global/selectors";
 
 const NewsPage: React.FC = () => {
   const news = useAppSelector(selectNews);
@@ -53,6 +54,7 @@ const NewsPage: React.FC = () => {
         {totalPages > 1 && (
           <Pagination totalPages={totalPages} onChange={handlePageChange} />
         )}
+        {isLoading && <Loader />}
         {error && <p>error</p>}
       </Container>
     </div>

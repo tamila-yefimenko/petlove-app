@@ -4,7 +4,6 @@ import { fetchNews } from "./operations";
 
 const initialState: NewsState = {
   items: [],
-  isLoading: false,
   error: null,
   isEmpty: false,
   page: 1,
@@ -34,11 +33,9 @@ const newsSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchNews.pending, (state, action) => {
-        state.isLoading = true;
         state.error = null;
       })
       .addCase(fetchNews.fulfilled, (state, action) => {
-        state.isLoading = false;
         state.items = action.payload.results;
         state.totalPages = action.payload.totalPages;
         state.page = action.meta.arg.page;
@@ -46,7 +43,6 @@ const newsSlice = createSlice({
       })
       .addCase(fetchNews.rejected, (state, action) => {
         state.error = action.payload ?? "Unknown error";
-        state.isLoading = false;
       });
   },
 });

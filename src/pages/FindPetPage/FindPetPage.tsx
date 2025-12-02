@@ -1,5 +1,7 @@
+import Loader from "../../components/Loader/Loader";
+
 const FindPetPage: React.FC = () => {
-  return <p> FindPetPage</p>;
+  return <Loader />;
 };
 
 export default FindPetPage;

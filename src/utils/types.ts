@@ -22,7 +22,7 @@ export interface AuthState {
 
 export interface NewsState {
   items: OneNews[];
-  isLoading: boolean;
+  // isLoading: boolean;
   error: string | null;
   isEmpty: boolean;
   page: number;
@@ -34,6 +34,9 @@ export interface NewsState {
 export interface FetchNewsParams {
   page: number;
   limit?: number;
-  // category?: string;
   keyword?: string;
+}
+
+export interface GlobalState {
+  isLoading: boolean;
 }

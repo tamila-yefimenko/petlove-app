@@ -1,5 +1,7 @@
+import Loader from "../../components/Loader/Loader";
+
 const NoticesPage: React.FC = () => {
-  return <p> NoticesPage</p>;
+  return <Loader />;
 };
 
 export default NoticesPage;

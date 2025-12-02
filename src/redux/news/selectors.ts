@@ -1,7 +1,6 @@
 import { RootState } from "../store";
 
 export const selectNews = (state: RootState) => state.news.items;
-export const selectIsLoading = (state: RootState) => state.news.isLoading;
 export const selectError = (state: RootState) => state.news.error;
 export const selectQuery = (state: RootState) => state.news.query;
 export const selectPage = (state: RootState) => state.news.page;

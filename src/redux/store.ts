@@ -12,6 +12,7 @@ import {
   REGISTER,
 } from "redux-persist";
 import { newsReducer } from "./news/slice";
+import { globalReducer } from "./global/slice";
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
@@ -30,6 +31,7 @@ export const store = configureStore({
     news: newsReducer,
     // filters: filterReducer,
     auth: persistedReducer,
+    global: globalReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

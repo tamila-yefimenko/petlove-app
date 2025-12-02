@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage, goitAPI } from "../auth/operations";
 import { FetchNewsParams, NewsState } from "../../utils/types";
+import { setLoading } from "../global/slice";
 
 export interface OneNews {
   id: string;
@@ -17,8 +18,10 @@ export const fetchNews = createAsyncThunk<
   FetchNewsParams,
   { rejectValue: string; state: { news: NewsState } }
 >("news/fetchAll", async (params, thunkAPI) => {
+  const { dispatch } = thunkAPI;
+
   try {
-    // const state = thunkAPI.getState().news;
+    dispatch(setLoading(true));
 
     const response = await goitAPI.get("/news", {
       params: params,
@@ -30,5 +33,7 @@ export const fetchNews = createAsyncThunk<
     };
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
+  } finally {
+    dispatch(setLoading(false));
   }
 });

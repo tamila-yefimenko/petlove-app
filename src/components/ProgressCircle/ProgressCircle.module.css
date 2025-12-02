@@ -1,0 +1,14 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.CircularProgressbar-text {
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+.CircularProgressbar {
+  overflow: visible;
+}
