@@ -1,5 +1,3 @@
-import { OneNews } from "../redux/news/operations";
-
 export interface IUser {
   name: string | null;
   email: string | null;
@@ -20,9 +18,17 @@ export interface AuthState {
   isPending: boolean;
 }
 
+export interface OneNews {
+  id: string;
+  imgUrl: string;
+  title: string;
+  text: string;
+  date: string;
+  url: string;
+}
+
 export interface NewsState {
   items: OneNews[];
-  // isLoading: boolean;
   error: string | null;
   isEmpty: boolean;
   page: number;
@@ -39,4 +45,28 @@ export interface FetchNewsParams {
 
 export interface GlobalState {
   isLoading: boolean;
+}
+
+export interface WorkDay {
+  _id: string;
+  isOpen: boolean;
+  from?: string;
+  to?: string;
+}
+
+export interface Friend {
+  id: string;
+  title: string;
+  url: string;
+  addressUrl: string;
+  imageUrl: string;
+  address: string;
+  phone: string;
+  email: string;
+  workDays: WorkDay[];
+}
+
+export interface FriendsState {
+  items: Friend[];
+  error: string | null;
 }

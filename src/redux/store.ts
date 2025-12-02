@@ -13,6 +13,7 @@ import {
 } from "redux-persist";
 import { newsReducer } from "./news/slice";
 import { globalReducer } from "./global/slice";
+import { friendsReducer } from "./friends/slice";
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
@@ -32,6 +33,7 @@ export const store = configureStore({
     // filters: filterReducer,
     auth: persistedReducer,
     global: globalReducer,
+    friends: friendsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

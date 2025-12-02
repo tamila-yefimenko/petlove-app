@@ -1,17 +1,8 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage, goitAPI } from "../auth/operations";
-import { FetchNewsParams, NewsState } from "../../utils/types";
+import { FetchNewsParams, NewsState, OneNews } from "../../utils/types";
 import { setLoading } from "../global/slice";
-
-export interface OneNews {
-  id: string;
-  imgUrl: string;
-  title: string;
-  text: string;
-  date: string;
-  url: string;
-}
 
 export const fetchNews = createAsyncThunk<
   { results: OneNews[]; totalPages: number },
