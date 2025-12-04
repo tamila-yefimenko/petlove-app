@@ -54,15 +54,13 @@ const RegistrationForm: React.FC = () => {
       email: values.email,
       password: values.password,
     };
-    // dispatch(setLoading(true));
+
     try {
       await dispatch(registerThunk(payload)).unwrap();
       navigate("/profile");
       actions.resetForm();
     } catch (error) {
       toast.error(`Registration failed: ${error}`);
-    } finally {
-      // dispatch(setLoading(false));
     }
   };
 

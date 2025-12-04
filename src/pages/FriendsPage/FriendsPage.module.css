@@ -1,0 +1,33 @@
+.friendPage {
+  padding-top: 40px;
+  padding-bottom: 80px;
+}
+
+.friendsTitle {
+  margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+  .friendPage {
+    padding-top: 76px;
+  }
+
+  .friendsTitle {
+    padding-bottom: 44px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .friendPage {
+    padding-top: 87px;
+  }
+
+  .friendsContainer {
+    padding-left: 64px;
+    padding-right: 64px;
+  }
+
+  .friendsTitle {
+    margin-bottom: 60px;
+  }
+}

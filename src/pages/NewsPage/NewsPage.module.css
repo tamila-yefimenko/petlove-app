@@ -41,4 +41,8 @@
   .newsContainer {
     padding: 0 64px;
   }
+
+  .newsPage {
+    padding-top: 87px;
+  }
 }

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { OneNews } from "../../redux/news/operations";
 import s from "./NewsList.module.css";
 import { formatDate } from "../../utils/formatDate";
+import { OneNews } from "../../utils/types";
 
 interface NewsListProps {
   news: OneNews[];
@@ -17,9 +17,9 @@ const NewsList: React.FC<NewsListProps> = ({ news }) => {
           <p className={s.text}>{item.text}</p>
           <div className={s.wrapper}>
             <p className={s.date}>{formatDate(item.date)}</p>
-            <Link className={s.link} to={item.url} target="blank">
+            <a className={s.link} href={item.url} target="blank">
               Read more
-            </Link>
+            </a>
           </div>
         </li>
       ))}

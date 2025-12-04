@@ -12,7 +12,7 @@ const Loader: React.FC = () => {
   useEffect(() => {
     if (isLoading) {
       setShowLogo(true);
-      setValue(0);
+      setValue(80);
 
       const timeout = setTimeout(() => {
         setShowLogo(false);

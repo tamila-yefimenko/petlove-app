@@ -6,7 +6,7 @@ import { getErrorMessage, goitAPI } from "../auth/operations";
 export const fetchFriends = createAsyncThunk<
   Friend[],
   void,
-  { rejectValue: string; state: { news: FriendsState } }
+  { rejectValue: string }
 >("friends/fetchAll", async (_, thunkAPI) => {
   const { dispatch } = thunkAPI;
 

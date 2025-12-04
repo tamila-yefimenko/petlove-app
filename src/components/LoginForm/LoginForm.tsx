@@ -39,15 +39,12 @@ const LoginForm: React.FC = () => {
     values: LoginValues,
     actions: FormikHelpers<LoginValues>
   ) => {
-    // dispatch(setLoading(true));
     try {
       await dispatch(loginThunk(values)).unwrap();
       navigate("/profile");
       actions.resetForm();
     } catch (error) {
       toast.error(`Login failed: ${error}`);
-    } finally {
-      // dispatch(setLoading(false));
     }
   };
 
