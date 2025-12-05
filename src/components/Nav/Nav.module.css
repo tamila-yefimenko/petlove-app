@@ -6,7 +6,7 @@
 .navItem,
 .isHome {
   font-weight: 500;
-  font-size: 16px;
+  font-size: 14px;
   line-height: 1.25;
   letter-spacing: -0.03em;
   border-radius: 30px;
@@ -63,6 +63,7 @@
 
 @media (min-width: 768px) {
   .navItem {
+    font-size: 16px;
     height: 50px;
     width: 120px;
   }

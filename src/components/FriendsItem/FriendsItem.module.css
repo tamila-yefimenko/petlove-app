@@ -2,7 +2,7 @@
   position: absolute;
   top: 12px;
   right: 12px;
-  width: 88px;
+  width: 90px;
   height: 32px;
   border-radius: 30px;
   padding: 8px;
@@ -57,7 +57,7 @@
 
 @media (min-width: 768px) {
   .hours {
-    width: 100px;
+    width: 102px;
     height: 34px;
     font-size: 14px;
     line-height: 1.28571;
