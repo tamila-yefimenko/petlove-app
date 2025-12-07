@@ -2,13 +2,10 @@ import RegistrationForm from "../../components/RegistrationForm/RegistrationForm
 import catIcon from "../../assets/images/cat-icon.png";
 import s from "./RegistrationPage.module.css";
 import { useAppSelector } from "../../redux/hooks";
-import { selectIsLoading } from "../../redux/global/selectors";
 import { selectIsError } from "../../redux/auth/selectors";
-import Loader from "../../components/Loader/Loader";
 import { Container } from "../../components/Container/Container";
 
 const RegistrationPage: React.FC = () => {
-  const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectIsError);
 
   return (
@@ -34,7 +31,6 @@ const RegistrationPage: React.FC = () => {
           </div>
         </div>
         <RegistrationForm />
-        {isLoading && <Loader />}
         {error && <p>error</p>}
       </div>
     </Container>

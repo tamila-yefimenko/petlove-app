@@ -6,24 +6,37 @@ import { selectIsLoading } from "../../redux/global/selectors";
 
 const Loader: React.FC = () => {
   const [showLogo, setShowLogo] = useState(false);
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(70);
+  const [visible, setVisible] = useState(false);
+
   const isLoading = useAppSelector(selectIsLoading);
 
   useEffect(() => {
     if (isLoading) {
+      setVisible(true);
       setShowLogo(true);
-      setValue(80);
+      setValue(70);
 
-      const timeout = setTimeout(() => {
+      const t = setTimeout(() => {
         setShowLogo(false);
       }, 300);
 
-      return () => clearTimeout(timeout);
+      return () => clearTimeout(t);
+    }
+
+    if (!isLoading) {
+      const t = setTimeout(() => {
+        setVisible(false);
+        setValue(70);
+        setShowLogo(true);
+      }, 400);
+
+      return () => clearTimeout(t);
     }
   }, [isLoading]);
 
   useEffect(() => {
-    if (!isLoading || showLogo) return;
+    if (showLogo || !isLoading) return;
 
     const id = setInterval(() => {
       setValue((prev) => {
@@ -31,12 +44,14 @@ const Loader: React.FC = () => {
           clearInterval(id);
           return 100;
         }
-        return prev + 1;
+        return prev + 2;
       });
     }, 20);
 
     return () => clearInterval(id);
-  }, [isLoading, showLogo]);
+  }, [showLogo, isLoading]);
+
+  if (!visible) return null;
 
   return (
     <div className={s.loader}>

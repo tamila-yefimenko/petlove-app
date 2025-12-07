@@ -26,8 +26,6 @@ const NotFoundPage: React.FC = () => {
               src="../../assets/images/not-found-img-mob.webp"
               alt="cat"
               className={s.innerImg}
-              // width="109"
-              // height="109"
             />
           </picture>
           4

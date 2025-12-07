@@ -4,7 +4,6 @@ import { selectError, selectItems } from "../../redux/friends/selectors";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchFriends } from "../../redux/friends/operations";
 import { selectIsLoading } from "../../redux/global/selectors";
-import Loader from "../../components/Loader/Loader";
 import { Container } from "../../components/Container/Container";
 import s from "./FriendsPage.module.css";
 import Title from "../../components/Title/Title";
@@ -27,7 +26,6 @@ const FriendsPage: React.FC = () => {
       <Container className={s.friendsContainer}>
         {!isLoading && <Title className={s.friendsTitle}>Our friends</Title>}
         {hasFriends && <FriendsList friends={friends} />}
-        {isLoading && <Loader />}
         {error && <p>error</p>}
       </Container>
     </div>

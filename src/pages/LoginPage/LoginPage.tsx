@@ -2,13 +2,10 @@ import LoginForm from "../../components/LoginForm/LoginForm";
 import dogIcon from "../../assets/images/dog-icon.webp";
 import s from "./LoginPage.module.css";
 import { useAppSelector } from "../../redux/hooks";
-import { selectIsLoading } from "../../redux/global/selectors";
 import { selectIsError } from "../../redux/auth/selectors";
-import Loader from "../../components/Loader/Loader";
 import { Container } from "../../components/Container/Container";
 
 const LoginPage: React.FC = () => {
-  const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectIsError);
 
   return (
@@ -35,7 +32,6 @@ const LoginPage: React.FC = () => {
           </div>
         </div>
         <LoginForm />
-        {isLoading && <Loader />}
         {error && <p>error</p>}
       </div>
     </Container>

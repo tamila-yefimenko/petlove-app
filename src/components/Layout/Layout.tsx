@@ -3,6 +3,7 @@ import Header from "../Header/Header";
 import s from "./Layout.module.css";
 import { useAppSelector } from "../../redux/hooks";
 import { selectIsLoading } from "../../redux/global/selectors";
+import Loader from "../Loader/Loader";
 
 const Layout: React.FC = () => {
   const { pathname } = useLocation();
@@ -12,6 +13,7 @@ const Layout: React.FC = () => {
 
   return (
     <div className={s.layout}>
+      {isLoading && <Loader />}
       {!isHome && !isLoading && <Header className={s.header} />}
       <main className={s.main}>
         <Outlet />
