@@ -1,4 +1,5 @@
 .registerForm {
+  width: 100%;
   border-radius: 30px;
   background-color: #fff;
   padding: 20px;
@@ -14,11 +15,10 @@
 }
 
 .registerText {
-  max-width: 285px;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.2871;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   text-align: left;
   margin-bottom: 24px;
 }
@@ -109,7 +109,6 @@
   }
 
   .registerText {
-    max-width: 414px;
     font-size: 18px;
     line-height: 1.28;
     margin-bottom: 32px;

@@ -33,6 +33,7 @@
 @media (min-width: 768px) {
   .loginPage {
     gap: 16px;
+    margin-top: 12px;
   }
 
   .wrapper {
@@ -97,6 +98,7 @@
     text-align: left;
     font-size: 12px;
     line-height: 1.16667;
+    letter-spacing: -0.02em;
     color: rgba(38, 38, 38, 0.8);
   }
 

@@ -9,6 +9,7 @@ import { loginThunk } from "../../redux/auth/operations";
 import { toast } from "react-toastify";
 import { useAppDispatch } from "../../redux/hooks";
 import { InputField } from "../InputField/InputField";
+import Title from "../Title/Title";
 
 const FeedbackSchema = Yup.object().shape({
   email: Yup.string()
@@ -55,7 +56,7 @@ const LoginForm: React.FC = () => {
 
   return (
     <div className={s.loginForm}>
-      <h2 className={s.loginTitle}>Log in</h2>
+      <Title className={s.loginTitle}>Log in</Title>
       <p className={s.loginText}>
         Welcome! Please enter your credentials to login to the platform:
       </p>

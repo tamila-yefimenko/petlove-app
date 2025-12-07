@@ -33,6 +33,7 @@
 @media (min-width: 768px) {
   .registerPage {
     gap: 16px;
+    margin-top: 12px;
   }
 
   .wrapper {
@@ -79,6 +80,7 @@
     font-weight: 700;
     font-size: 16px;
     line-height: 1.25;
+    letter-spacing: -0.03em;
     color: #f6b83d;
   }
 
@@ -97,6 +99,7 @@
     text-align: left;
     font-size: 12px;
     line-height: 1.16667;
+    letter-spacing: -0.02em;
     color: rgba(38, 38, 38, 0.8);
   }
 

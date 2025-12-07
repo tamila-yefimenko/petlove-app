@@ -14,11 +14,10 @@
 }
 
 .loginText {
-  max-width: 285px;
   font-weight: 500;
   font-size: 14px;
   line-height: 1.2871;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
   text-align: left;
   margin-bottom: 24px;
 }
