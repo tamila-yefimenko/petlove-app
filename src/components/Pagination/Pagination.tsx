@@ -1,15 +1,18 @@
 import clsx from "clsx";
-import { useAppSelector, useWindowWidth } from "../../redux/hooks";
-import { selectPage } from "../../redux/news/selectors";
+import { useWindowWidth } from "../../redux/hooks";
 import s from "./Pagination.module.css";
 
 interface PaginationProps {
   totalPages: number;
+  currentPage: number;
   onChange: (page: number) => void;
 }
 
-const Pagination: React.FC<PaginationProps> = ({ totalPages, onChange }) => {
-  const currentPage = useAppSelector(selectPage);
+const Pagination: React.FC<PaginationProps> = ({
+  totalPages,
+  currentPage,
+  onChange,
+}) => {
   const width = useWindowWidth();
 
   const count = width < 768 ? 2 : 3;

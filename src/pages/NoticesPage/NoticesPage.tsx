@@ -9,12 +9,14 @@ import { selectIsLoading } from "../../redux/global/selectors";
 import {
   selectError,
   selectNotices,
+  selectPage,
   selectQuery,
   selectTotalPages,
 } from "../../redux/notices/selectors";
 import { resetNotices, setQuery } from "../../redux/notices/slice";
 import { fetchNotices } from "../../redux/notices/operations";
 import NoticesList from "../../components/NoticesList/NoticesList";
+import { setPage } from "../../redux/notices/slice";
 
 const NoticesPage: React.FC = () => {
   const notices = useAppSelector(selectNotices);
@@ -22,6 +24,7 @@ const NoticesPage: React.FC = () => {
   const error = useAppSelector(selectError);
   const totalPages = useAppSelector(selectTotalPages);
   const query = useAppSelector(selectQuery);
+  const page = useAppSelector(selectPage);
 
   const dispatch = useAppDispatch();
 
@@ -37,6 +40,7 @@ const NoticesPage: React.FC = () => {
   };
 
   const handlePageChange = (newPage: number) => {
+    dispatch(setPage(newPage));
     dispatch(fetchNotices({ page: newPage, keyword: query }));
   };
 
@@ -53,7 +57,11 @@ const NoticesPage: React.FC = () => {
         </div>
         {hasNews && <NoticesList notices={notices} />}
         {totalPages > 1 && (
-          <Pagination totalPages={totalPages} onChange={handlePageChange} />
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            onChange={handlePageChange}
+          />
         )}
         {error && <p>error</p>}
       </Container>

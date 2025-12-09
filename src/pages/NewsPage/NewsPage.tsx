@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import {
   selectError,
   selectNews,
+  selectPage,
   selectQuery,
   selectTotalPages,
 } from "../../redux/news/selectors";
@@ -22,6 +23,7 @@ const NewsPage: React.FC = () => {
   const error = useAppSelector(selectError);
   const totalPages = useAppSelector(selectTotalPages);
   const query = useAppSelector(selectQuery);
+  const page = useAppSelector(selectPage);
 
   const dispatch = useAppDispatch();
 
@@ -51,7 +53,11 @@ const NewsPage: React.FC = () => {
         </div>
         {hasNews && <NewsList news={news} />}
         {totalPages > 1 && (
-          <Pagination totalPages={totalPages} onChange={handlePageChange} />
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            onChange={handlePageChange}
+          />
         )}
         {error && <p>error</p>}
       </Container>
