@@ -70,3 +70,33 @@ export interface FriendsState {
   items: Friend[];
   error: string | null;
 }
+
+export interface Pet {
+  _id: string;
+  imgURL: string;
+  title: string;
+  popularity: string;
+  name: string;
+  birthday: string;
+  sex: string;
+  species: string;
+  category: string;
+  comment: string;
+  price: string;
+}
+
+export interface NoticesState {
+  items: Pet[];
+  error: string | null;
+  isEmpty: boolean;
+  page: number;
+  perPage: number;
+  totalPages: number;
+  query: string | undefined;
+}
+
+export interface FetchNoticesParams {
+  page: number;
+  perPage?: number;
+  keyword?: string;
+}

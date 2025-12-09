@@ -14,6 +14,7 @@ import {
 import { newsReducer } from "./news/slice";
 import { globalReducer } from "./global/slice";
 import { friendsReducer } from "./friends/slice";
+import { noticesReducer } from "./notices/slice";
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
@@ -30,10 +31,10 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 export const store = configureStore({
   reducer: {
     news: newsReducer,
-    // filters: filterReducer,
     auth: persistedReducer,
     global: globalReducer,
     friends: friendsReducer,
+    notices: noticesReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
