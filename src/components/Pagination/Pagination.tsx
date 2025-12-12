@@ -78,6 +78,7 @@ const Pagination: React.FC<PaginationProps> = ({
       <div className={s.arrowRightWrapper}>
         <button
           type="button"
+          disabled={currentPage === totalPages}
           className={s.item}
           onClick={() => onChange(currentPage + 1)}>
           <svg className={s.icon}>
@@ -87,6 +88,7 @@ const Pagination: React.FC<PaginationProps> = ({
 
         <button
           type="button"
+          disabled={currentPage === totalPages}
           className={clsx(s.item, s.double)}
           onClick={() => onChange(totalPages)}>
           <svg className={s.icon}>
