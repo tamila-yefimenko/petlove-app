@@ -83,20 +83,36 @@ export interface Pet {
   category: string;
   comment: string;
   price: string;
+  location: string;
+}
+
+export interface Filters {
+  category?: string;
+  byGender?: string;
+  byType?: string;
+  location?: string;
 }
 
 export interface NoticesState {
   items: Pet[];
   error: string | null;
   isEmpty: boolean;
-  page: number;
+  // page: number;
   perPage: number;
   totalPages: number;
   query: string | undefined;
+  // filtered: Pet[];
+  // filters: Filters;
 }
 
 export interface FetchNoticesParams {
   page: number;
   perPage?: number;
   keyword?: string;
+  category?: string;
+  species?: string;
+  sex?: string;
+  locationId?: string;
+  byPopularity?: boolean | null;
+  byPrice?: boolean | null;
 }

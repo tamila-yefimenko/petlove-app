@@ -8,15 +8,21 @@ export const fetchNotices = createAsyncThunk<
   { results: Pet[]; totalPages: number },
   FetchNoticesParams,
   { rejectValue: string; state: { notices: NoticesState } }
->("notices/fetchAll", async (params, thunkAPI) => {
+>("notices/fetchAll", async (inputParams, thunkAPI) => {
   const { dispatch } = thunkAPI;
 
   try {
     dispatch(setLoading(true));
 
-    const response = await goitAPI.get("/notices", {
-      params: params,
+    const params: any = {};
+
+    Object.entries(inputParams).forEach(([key, value]) => {
+      if (value !== null && value !== undefined && value !== "") {
+        params[key] = value;
+      }
     });
+
+    const response = await goitAPI.get("/notices", { params });
 
     return {
       results: response.data.results,

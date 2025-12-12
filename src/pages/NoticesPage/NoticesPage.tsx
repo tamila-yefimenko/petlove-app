@@ -8,40 +8,68 @@ import Pagination from "../../components/Pagination/Pagination";
 import { selectIsLoading } from "../../redux/global/selectors";
 import {
   selectError,
+  selectFilteredNotices,
   selectNotices,
-  selectPage,
+  // selectPage,
   selectQuery,
   selectTotalPages,
 } from "../../redux/notices/selectors";
-import { resetNotices, setQuery } from "../../redux/notices/slice";
 import { fetchNotices } from "../../redux/notices/operations";
 import NoticesList from "../../components/NoticesList/NoticesList";
-import { setPage } from "../../redux/notices/slice";
+// import { setPage } from "../../redux/notices/slice";
+import NoticesFilters from "../../components/NoticesFilters/NoticesFilters";
+import {
+  selectFiltersForFetch,
+  selectPage,
+} from "../../redux/noticesFilters/selectors";
+import { setPage } from "../../redux/noticesFilters/slice";
 
 const NoticesPage: React.FC = () => {
-  const notices = useAppSelector(selectNotices);
   const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectError);
   const totalPages = useAppSelector(selectTotalPages);
-  const query = useAppSelector(selectQuery);
   const page = useAppSelector(selectPage);
+  const filteredNotices = useAppSelector(selectFilteredNotices);
 
   const dispatch = useAppDispatch();
 
+  const { keyword, category, species, sex, locationId, byPopularity, byPrice } =
+    useAppSelector(selectFiltersForFetch);
+
   useEffect(() => {
-    dispatch(fetchNotices({ page: 1, keyword: query }));
-  }, [dispatch, query]);
+    if (page !== 1) {
+      dispatch(setPage(1));
+    }
+  }, [keyword, category, species, sex, locationId, byPopularity, byPrice]);
 
-  const hasNews = notices.length > 0;
+  useEffect(() => {
+    dispatch(
+      fetchNotices({
+        keyword,
+        category,
+        species,
+        sex,
+        locationId,
+        byPopularity,
+        byPrice,
+        page,
+      })
+    );
+  }, [
+    keyword,
+    category,
+    species,
+    sex,
+    locationId,
+    byPopularity,
+    byPrice,
+    page,
+  ]);
 
-  const handleSearch = (value: string) => {
-    dispatch(resetNotices());
-    dispatch(setQuery(value.toLowerCase()));
-  };
+  const hasNotices = filteredNotices.length > 0;
 
   const handlePageChange = (newPage: number) => {
     dispatch(setPage(newPage));
-    dispatch(fetchNotices({ page: newPage, keyword: query }));
   };
 
   return (
@@ -52,10 +80,12 @@ const NoticesPage: React.FC = () => {
             <Title className={s.title}>Find your favorite pet</Title>
           )}
           {!isLoading && (
-            <SearchField className={s.search} onSubmit={handleSearch} />
+            <div className={s.searchWrapper}>
+              <NoticesFilters />
+            </div>
           )}
         </div>
-        {hasNews && <NoticesList notices={notices} />}
+        {hasNotices && <NoticesList notices={filteredNotices} />}
         {totalPages > 1 && (
           <Pagination
             totalPages={totalPages}

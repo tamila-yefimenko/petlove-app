@@ -7,6 +7,13 @@
   margin-bottom: 40px;
 }
 
+.searchWrapper {
+  border-radius: 30px;
+  background-color: #fff4df;
+  padding: 20px;
+  margin-bottom: 40px;
+}
+
 @media (min-width: 768px) {
   .noticesPage {
     padding-top: 87px;
