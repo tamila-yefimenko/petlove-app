@@ -3,6 +3,8 @@ import Select from "react-select";
 import debounce from "lodash.debounce";
 import s from "./NoticesFilters.module.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import SearchField from "../SearchField/SearchField";
+import { selectStyles } from "../../utils/selectStyles";
 
 import {
   fetchCategories,
@@ -18,13 +20,11 @@ import {
   setByPrice,
   setByPopularity,
 } from "../../redux/noticesFilters/slice";
-import SearchField from "../SearchField/SearchField";
 
 const NoticesFilters: React.FC = () => {
   const dispatch = useAppDispatch();
 
   const {
-    keyword,
     category,
     species,
     sex,
@@ -42,7 +42,6 @@ const NoticesFilters: React.FC = () => {
     dispatch(fetchSpecies());
     dispatch(fetchSex());
     dispatch(fetchLocations());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatch]);
 
   const handleSearch = (value: string) => {
@@ -60,21 +59,34 @@ const NoticesFilters: React.FC = () => {
     [dispatch]
   );
 
-  useEffect(() => {
-    return () => loadCities.cancel();
-  }, [loadCities]);
+  useEffect(() => () => loadCities.cancel(), [loadCities]);
+
+  const handleChange =
+    (key: "category" | "sex" | "species" | "locationId") => (opt: any) => {
+      dispatch(
+        setFilter({
+          key,
+          value: opt ? opt.value : "",
+        })
+      );
+    };
+
+  const withShowAll = (list: string[]) => [
+    { value: "", label: "Show all" },
+    ...list.map((item) => ({ value: item, label: item })),
+  ];
+
+  const categoryOptions = withShowAll(categories);
+  const genderOptions = withShowAll(sexList);
+  const typeOptions = withShowAll(speciesList);
 
   const cityOptions = allLocations.map((loc: any) => ({
     value: loc._id,
     label: `${loc.cityEn}, ${loc.stateEn}`,
   }));
 
-  const selectedCity =
-    cityOptions.find((option) => option.value === locationId) || null;
-
-  const handleCityChange = (opt: any) => {
-    dispatch(setFilter({ key: "locationId", value: opt ? opt.value : "" }));
-  };
+  const getSelectValue = (value: string, options: any[]) =>
+    value ? options.find((o) => o.value === value) : null;
 
   const handleReset = () => {
     dispatch(resetFilters());
@@ -83,113 +95,104 @@ const NoticesFilters: React.FC = () => {
 
   return (
     <div className={s.filters}>
-      <SearchField onSubmit={handleSearch} />
+      <div className={s.filtersWrapper}>
+        <SearchField onSubmit={handleSearch} className={s.searchField} />
 
-      <select
-        className={s.select}
-        value={category}
-        onChange={(e) =>
-          dispatch(setFilter({ key: "category", value: e.target.value }))
-        }>
-        <option value="">Category</option>
-        {categories.map((item: string) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+        <div className={s.categorySex}>
+          <Select
+            styles={selectStyles}
+            classNamePrefix="react-select"
+            options={categoryOptions}
+            placeholder="Category"
+            value={getSelectValue(category, categoryOptions)}
+            onChange={handleChange("category")}
+          />
 
-      <select
-        className={s.select}
-        value={species}
-        onChange={(e) =>
-          dispatch(setFilter({ key: "species", value: e.target.value }))
-        }>
-        <option value="">Species</option>
-        {speciesList.map((item: string) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+          <Select
+            styles={selectStyles}
+            classNamePrefix="react-select"
+            options={genderOptions}
+            placeholder="By gender"
+            value={getSelectValue(sex, genderOptions)}
+            onChange={handleChange("sex")}
+          />
+        </div>
 
-      <select
-        className={s.select}
-        value={sex}
-        onChange={(e) =>
-          dispatch(setFilter({ key: "sex", value: e.target.value }))
-        }>
-        <option value="">Sex</option>
-        {sexList.map((item: string) => (
-          <option key={item} value={item}>
-            {item}
-          </option>
-        ))}
-      </select>
+        <Select
+          styles={selectStyles}
+          classNamePrefix="react-select"
+          options={typeOptions}
+          placeholder="By type"
+          value={getSelectValue(species, typeOptions)}
+          onChange={handleChange("species")}
+        />
 
-      <Select
-        className={s.citySelect}
-        options={cityOptions}
-        onChange={handleCityChange}
-        placeholder="City"
-        isClearable
-        value={selectedCity}
-      />
+        <Select
+          styles={selectStyles}
+          classNamePrefix="react-select"
+          options={cityOptions}
+          placeholder="Location"
+          isClearable
+          value={getSelectValue(locationId, cityOptions)}
+          onChange={handleChange("locationId")}
+          onInputChange={loadCities}
+        />
+      </div>
 
       <div className={s.sortWrapper}>
-        <label>
-          <input
-            type="radio"
-            name="popularity"
-            value="popular"
-            checked={byPopularity === false}
-            onChange={() => {
-              dispatch(setByPopularity(false));
-              dispatch(setByPrice(null));
-            }}
-          />
+        <input
+          type="radio"
+          id="popular"
+          className={s.sort}
+          checked={byPopularity === false}
+          onChange={() => {
+            dispatch(setByPopularity(false));
+            dispatch(setByPrice(null));
+          }}
+        />
+        <label htmlFor="popular" className={s.radioLabel}>
           Popular
         </label>
 
-        <label>
-          <input
-            type="radio"
-            name="popularity"
-            value="unpopular"
-            checked={byPopularity === true}
-            onChange={() => {
-              dispatch(setByPopularity(true));
-              dispatch(setByPrice(null));
-            }}
-          />
+        <input
+          type="radio"
+          id="unpopular"
+          className={s.sort}
+          checked={byPopularity === true}
+          onChange={() => {
+            dispatch(setByPopularity(true));
+            dispatch(setByPrice(null));
+          }}
+        />
+        <label htmlFor="unpopular" className={s.radioLabel}>
           Unpopular
         </label>
 
-        <label>
-          <input
-            type="radio"
-            name="price"
-            value="cheap"
-            checked={byPrice === true}
-            onChange={() => {
-              dispatch(setByPrice(true));
-              dispatch(setByPopularity(null));
-            }}
-          />
+        <input
+          type="radio"
+          id="cheap"
+          className={s.sort}
+          checked={byPrice === true}
+          onChange={() => {
+            dispatch(setByPrice(true));
+            dispatch(setByPopularity(null));
+          }}
+        />
+        <label htmlFor="cheap" className={s.radioLabel}>
           Cheap
         </label>
 
-        <label>
-          <input
-            type="radio"
-            name="price"
-            value="expensive"
-            checked={byPrice === false}
-            onChange={() => {
-              dispatch(setByPrice(false));
-              dispatch(setByPopularity(null));
-            }}
-          />
+        <input
+          type="radio"
+          id="expensive"
+          className={s.sort}
+          checked={byPrice === false}
+          onChange={() => {
+            dispatch(setByPrice(false));
+            dispatch(setByPopularity(null));
+          }}
+        />
+        <label htmlFor="expensive" className={s.radioLabel}>
           Expensive
         </label>
       </div>

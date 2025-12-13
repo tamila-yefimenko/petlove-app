@@ -19,7 +19,7 @@
   transition: border 0.3s ease-in-out;
 }
 
-input:hover,
+.input:hover,
 .input:focus {
   outline: none;
   border: 1px solid #f6b83d;

@@ -1,0 +1,94 @@
+.filters {
+  width: 100%;
+}
+
+.filtersWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: solid 1px rgba(38, 38, 38, 0.1);
+}
+
+.searchField input {
+  border: none;
+  font-size: 14px;
+}
+
+.searchField input::placeholder {
+  color: #262626;
+}
+
+.selectWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.categorySex {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.categorySex > div {
+  flex: 1;
+}
+
+.sortWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 20px;
+}
+
+.sort {
+  border-radius: 30px;
+  padding: 12px;
+  height: 42px;
+  background-color: #fff;
+  border: none;
+  font-size: 14px;
+}
+
+.filters :global(.react-select__menu-list)::-webkit-scrollbar {
+  width: 8px;
+}
+
+.filters :global(.react-select__menu-list)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.filters :global(.react-select__menu-list)::-webkit-scrollbar-thumb {
+  background-color: rgba(38, 38, 38, 0.08);
+  border-radius: 10px;
+}
+
+.filters :global(.react-select__menu-list) {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(38, 38, 38, 0.08) transparent;
+}
+
+.sort {
+  cursor: pointer;
+  margin-right: 8px;
+  position: relative;
+  display: none;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
+  padding: 12px;
+  font-size: 14px;
+  height: 42px;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.sort:checked + .radioLabel {
+  background-color: #f6b83d;
+  color: #fff;
+}
