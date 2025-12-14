@@ -40,7 +40,6 @@ const noticesFiltersSlice = createSlice({
     setByPrice(state, action) {
       state.byPrice = action.payload;
     },
-
     setByPopularity(state, action) {
       state.byPopularity = action.payload;
     },

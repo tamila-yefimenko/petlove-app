@@ -4,7 +4,7 @@ export const selectStyles = {
     minHeight: "42px",
     width: "100%",
     borderRadius: "30px",
-    border: state.isFocused ? "1px solid #f6b83d" : "none",
+    border: state.isFocused ? "1px solid #f6b83d" : "1px solid transparent",
     boxShadow: "none",
     padding: "0 8px",
     cursor: "pointer",

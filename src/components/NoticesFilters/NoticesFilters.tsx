@@ -20,6 +20,8 @@ import {
   setByPrice,
   setByPopularity,
 } from "../../redux/noticesFilters/slice";
+import ClearBtn from "../ClearBtn/ClearBtn";
+import Button from "../Button/Button";
 
 const NoticesFilters: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -96,7 +98,7 @@ const NoticesFilters: React.FC = () => {
   return (
     <div className={s.filters}>
       <div className={s.filtersWrapper}>
-        <SearchField onSubmit={handleSearch} className={s.searchField} />
+        <SearchField onSubmit={handleSearch} className={s.search} />
 
         <div className={s.categorySex}>
           <Select
@@ -140,66 +142,102 @@ const NoticesFilters: React.FC = () => {
       </div>
 
       <div className={s.sortWrapper}>
-        <input
-          type="radio"
-          id="popular"
-          className={s.sort}
-          checked={byPopularity === false}
-          onChange={() => {
-            dispatch(setByPopularity(false));
-            dispatch(setByPrice(null));
-          }}
-        />
-        <label htmlFor="popular" className={s.radioLabel}>
-          Popular
-        </label>
+        <div className={s.sortItem}>
+          <input
+            type="radio"
+            id="popular"
+            className={s.sort}
+            checked={byPopularity === false}
+            onChange={() => {
+              dispatch(setByPopularity(false));
+              dispatch(setByPrice(null));
+            }}
+          />
 
-        <input
-          type="radio"
-          id="unpopular"
-          className={s.sort}
-          checked={byPopularity === true}
-          onChange={() => {
-            dispatch(setByPopularity(true));
-            dispatch(setByPrice(null));
-          }}
-        />
-        <label htmlFor="unpopular" className={s.radioLabel}>
-          Unpopular
-        </label>
+          <label htmlFor="popular" className={s.radioLabel}>
+            Popular
+            {byPopularity === false && (
+              <ClearBtn
+                className={s.clearBtn}
+                onClick={() => dispatch(setByPopularity(null))}
+                iconClassName={s.clearIcon}></ClearBtn>
+            )}
+          </label>
+        </div>
 
-        <input
-          type="radio"
-          id="cheap"
-          className={s.sort}
-          checked={byPrice === true}
-          onChange={() => {
-            dispatch(setByPrice(true));
-            dispatch(setByPopularity(null));
-          }}
-        />
-        <label htmlFor="cheap" className={s.radioLabel}>
-          Cheap
-        </label>
+        <div className={s.sortItem}>
+          <input
+            type="radio"
+            id="unpopular"
+            className={s.sort}
+            checked={byPopularity === true}
+            onChange={() => {
+              dispatch(setByPopularity(true));
+              dispatch(setByPrice(null));
+            }}
+          />
 
-        <input
-          type="radio"
-          id="expensive"
-          className={s.sort}
-          checked={byPrice === false}
-          onChange={() => {
-            dispatch(setByPrice(false));
-            dispatch(setByPopularity(null));
-          }}
-        />
-        <label htmlFor="expensive" className={s.radioLabel}>
-          Expensive
-        </label>
+          <label htmlFor="unpopular" className={s.radioLabel}>
+            Unpopular
+            {byPopularity === true && (
+              <ClearBtn
+                className={s.clearBtn}
+                onClick={() => dispatch(setByPopularity(null))}
+                iconClassName={s.clearIcon}></ClearBtn>
+            )}
+          </label>
+        </div>
+
+        <div className={s.sortItem}>
+          <input
+            type="radio"
+            id="cheap"
+            className={s.sort}
+            checked={byPrice === true}
+            onChange={() => {
+              dispatch(setByPrice(true));
+              dispatch(setByPopularity(null));
+            }}
+          />
+
+          <label htmlFor="cheap" className={s.radioLabel}>
+            Cheap
+            {byPrice === true && (
+              <ClearBtn
+                className={s.clearBtn}
+                onClick={() => dispatch(setByPrice(null))}
+                iconClassName={s.clearIcon}></ClearBtn>
+            )}
+          </label>
+        </div>
+
+        <div className={s.sortItem}>
+          <input
+            type="radio"
+            id="expensive"
+            className={s.sort}
+            checked={byPrice === false}
+            onChange={() => {
+              dispatch(setByPrice(false));
+              dispatch(setByPopularity(null));
+            }}
+          />
+
+          <label htmlFor="expensive" className={s.radioLabel}>
+            Expensive
+            {byPrice === false && (
+              <ClearBtn
+                className={s.clearBtn}
+                onClick={() => dispatch(setByPrice(null))}
+                iconClassName={s.clearIcon}></ClearBtn>
+            )}
+          </label>
+        </div>
       </div>
 
-      <button className={s.resetBtn} onClick={handleReset}>
+      <Button className={s.resetBtn} onClick={handleReset}>
         Reset
-      </button>
+      </Button>
     </div>
   );
 };

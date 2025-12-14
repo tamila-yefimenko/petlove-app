@@ -2,6 +2,7 @@ import { useState } from "react";
 import s from "./SearchField.module.css";
 import clsx from "clsx";
 import toast from "react-hot-toast";
+import ClearBtn from "../ClearBtn/ClearBtn";
 
 interface SearchFieldProps {
   className?: string;
@@ -40,14 +41,10 @@ const SearchField: React.FC<SearchFieldProps> = ({ className, onSubmit }) => {
         />
 
         {!!search && (
-          <button
+          <ClearBtn
             className={s.clearBtn}
-            type="button"
-            onClick={() => setSearch("")}>
-            <svg className={s.clearIcon}>
-              <use href="/icons/sprite.svg#icon-x" />
-            </svg>
-          </button>
+            onClick={() => setSearch("")}
+            iconClassName={s.clearIcon}></ClearBtn>
         )}
 
         <button className={s.button} type="submit">

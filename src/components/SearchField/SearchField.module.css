@@ -9,6 +9,9 @@
 }
 
 .input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
   width: 100%;
   min-width: 280px;
   height: 100%;
@@ -16,13 +19,13 @@
   border-radius: 30px;
   padding: 12px;
   background-color: #fff;
-  transition: border 0.3s ease-in-out;
+  transition: border-color 0.3s ease-in-out;
 }
 
 .input:hover,
 .input:focus {
   outline: none;
-  border: 1px solid #f6b83d;
+  border-color: #f6b83d;
 }
 
 .button,

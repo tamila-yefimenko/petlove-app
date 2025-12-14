@@ -10,17 +10,16 @@
   border-bottom: solid 1px rgba(38, 38, 38, 0.1);
 }
 
-.searchField input {
-  border: none;
+.search input {
+  border: 1px solid transparent;
   font-size: 14px;
 }
 
-.searchField input::placeholder {
+.search input::placeholder {
   color: #262626;
 }
 
 .selectWrapper {
-  position: relative;
   width: 100%;
 }
 
@@ -32,22 +31,6 @@
 
 .categorySex > div {
   flex: 1;
-}
-
-.sortWrapper {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding-top: 20px;
-}
-
-.sort {
-  border-radius: 30px;
-  padding: 12px;
-  height: 42px;
-  background-color: #fff;
-  border: none;
-  font-size: 14px;
 }
 
 .filters :global(.react-select__menu-list)::-webkit-scrollbar {
@@ -68,14 +51,38 @@
   scrollbar-color: rgba(38, 38, 38, 0.08) transparent;
 }
 
+.sortWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 20px;
+  margin-bottom: 12px;
+}
+
 .sort {
-  cursor: pointer;
-  margin-right: 8px;
-  position: relative;
+  border-radius: 30px;
+  padding: 12px;
+  height: 42px;
+  background-color: #fff;
+  border: 1px solid transparent;
+  font-size: 14px;
   display: none;
+  cursor: pointer;
+}
+
+.sortItem {
+  position: relative;
+  border: 1px solid transparent;
+  border-radius: 30px;
+  transition: border 0.3s ease-in-out;
+}
+
+.sortItem:hover {
+  border: 1px solid #f6b83d;
 }
 
 .radioLabel {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -91,4 +98,27 @@
 .sort:checked + .radioLabel {
   background-color: #f6b83d;
   color: #fff;
+  padding-right: 36px;
+}
+
+.clearBtn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.clearIcon {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+  stroke: #fff;
+  stroke-width: 2px;
 }
