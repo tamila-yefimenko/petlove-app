@@ -11,6 +11,11 @@
   transition: 0.2s;
 }
 
+.button:focus {
+  outline: none;
+  border: none;
+}
+
 .orange {
   background: #f6b83d;
   color: #fff;

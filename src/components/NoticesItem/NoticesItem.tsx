@@ -2,12 +2,35 @@ import clsx from "clsx";
 import { Pet } from "../../utils/types";
 import Button from "../Button/Button";
 import s from "./NoticesItem.module.css";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { useState } from "react";
+import ModalAttention from "../ModalAttention/ModalAttention";
 
 interface NoticesItemProps {
   pet: Pet;
 }
 
 const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const dispatch = useAppDispatch();
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleLearnMoreClick = () => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+    } else {
+    }
+  };
+
+  const handleFavourite = () => {
+    if (!isLoggedIn) {
+      setShowModal(true);
+    } else {
+    }
+  };
+
   return (
     <>
       <img className={s.noticesImg} src={pet.imgURL} alt="Items picture" />
@@ -54,12 +77,21 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
       )}
 
       <div className={s.btnWrapper}>
-        <Button className={s.button}>Learn more</Button>
-        <button className={s.heartBtn}>
+        <Button className={s.button} onClick={handleLearnMoreClick}>
+          Learn more
+        </Button>
+        <button className={s.heartBtn} onClick={handleFavourite}>
           <svg className={s.heart}>
             <use href="/icons/sprite.svg#icon-heart" />
           </svg>
         </button>
+
+        {showModal && (
+          <ModalAttention
+            isOpen={showModal}
+            onClose={() => setShowModal(false)}
+          />
+        )}
       </div>
     </>
   );
