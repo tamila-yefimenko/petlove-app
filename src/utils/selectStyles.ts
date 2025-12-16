@@ -1,7 +1,7 @@
-export const selectStyles = {
+export const getSelectStyles = (isTablet: boolean) => ({
   control: (base: any, state: any) => ({
     ...base,
-    minHeight: "42px",
+    minHeight: isTablet ? "48px" : "42px",
     width: "100%",
     borderRadius: "30px",
     border: state.isFocused ? "1px solid #f6b83d" : "1px solid transparent",
@@ -25,17 +25,17 @@ export const selectStyles = {
   placeholder: (base: any) => ({
     ...base,
     color: "#262626",
-    fontSize: "14px",
+    fontSize: isTablet ? "16px" : "14px",
     marginLeft: 0,
     textAlign: "left",
   }),
 
-  singleValue: (base: any) => ({
+  singleValue: (base: any, state: any) => ({
     ...base,
-    color: "#262626",
-    fontSize: "14px",
+    fontSize: isTablet ? "16px" : "14px",
     marginLeft: 0,
     textAlign: "left",
+    color: state.data.value === "" ? "#f6b83d" : "#262626",
   }),
 
   menu: (base: any) => ({
@@ -49,39 +49,49 @@ export const selectStyles = {
   menuList: (base: any) => ({
     ...base,
     maxHeight: "180px",
-    padding: "8px",
+    padding: "4px",
   }),
 
-  option: (base: any, state: any) => ({
-    ...base,
-    width: "100%",
-    borderRadius: "15px",
-    padding: "10px 12px",
-    marginBottom: "4px",
-    cursor: "pointer",
-    fontSize: "14px",
-    textAlign: "left",
+  option: (base: any, state: any) => {
+    const isShowAll = state.data.value === "";
+    const currentValue = state.selectProps.value?.value ?? "";
 
-    backgroundColor: state.isFocused ? "rgba(246, 184, 61, 0.15)" : "#fff",
+    return {
+      ...base,
+      width: "100%",
+      borderRadius: "15px",
+      padding: "4px 14px",
+      cursor: "pointer",
+      fontSize: isTablet ? "16px" : "14px",
+      textAlign: "left",
 
-    color: state.isSelected ? "#f6b83d" : "rgba(38, 38, 38, 0.6)",
+      backgroundColor: state.isFocused ? "rgba(246, 184, 61, 0.15)" : "#fff",
 
-    "&:active": {
-      backgroundColor: "rgba(246, 184, 61, 0.15)",
-    },
-  }),
+      color: isShowAll
+        ? currentValue === "" || state.isSelected
+          ? "#f6b83d"
+          : "rgba(38, 38, 38, 0.6)"
+        : state.isSelected
+        ? "#f6b83d"
+        : "rgba(38, 38, 38, 0.6)",
+
+      "&:active": {
+        backgroundColor: "rgba(246, 184, 61, 0.15)",
+      },
+    };
+  },
 
   indicatorSeparator: () => ({ display: "none" }),
 
   dropdownIndicator: (base: any) => ({
     ...base,
     color: "#262626",
-    "&:hover": { color: "#f6b83d" },
+    padding: "2px",
   }),
 
   clearIndicator: (base: any) => ({
     ...base,
     color: "#262626",
-    "&:hover": { color: "#f6b83d" },
+    padding: "2px",
   }),
-};
+});

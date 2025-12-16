@@ -1,0 +1,12 @@
+.icon,
+.clearIcon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: #262626;
+  stroke-width: 2px;
+}
+
+.clearIcon {
+  fill: #262626;
+}

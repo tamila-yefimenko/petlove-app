@@ -19,10 +19,6 @@
   color: #262626;
 }
 
-.selectWrapper {
-  width: 100%;
-}
-
 .categorySex {
   display: flex;
   gap: 8px;
@@ -47,7 +43,7 @@
 }
 
 .filters :global(.react-select__menu-list) {
-  scrollbar-width: thin;
+  scrollbar-width: initial;
   scrollbar-color: rgba(38, 38, 38, 0.08) transparent;
 }
 
@@ -121,4 +117,61 @@
   fill: #fff;
   stroke: #fff;
   stroke-width: 2px;
+}
+
+@media (min-width: 768px) {
+  .search {
+    max-width: 265px;
+  }
+
+  .search input {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .filtersWrapper {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .categorySex {
+    max-width: 356px;
+    gap: 16px;
+  }
+
+  .type {
+    width: 190px;
+  }
+
+  .location {
+    width: 227px;
+  }
+
+  .gender span,
+  .sex span,
+  .type span,
+  .location span {
+    height: 48px !important;
+  }
+
+  .radioLabel {
+    padding: 14px;
+    font-size: 16px;
+    height: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .categorySex {
+    max-width: 406px;
+  }
+
+  .category {
+    max-width: 200px;
+  }
+
+  .sex {
+    max-width: 190px;
+  }
 }

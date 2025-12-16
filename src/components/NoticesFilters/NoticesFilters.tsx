@@ -2,9 +2,13 @@ import { useEffect, useMemo } from "react";
 import Select from "react-select";
 import debounce from "lodash.debounce";
 import s from "./NoticesFilters.module.css";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useWindowWidth,
+} from "../../redux/hooks";
 import SearchField from "../SearchField/SearchField";
-import { selectStyles } from "../../utils/selectStyles";
+import { getSelectStyles } from "../../utils/selectStyles";
 
 import {
   fetchCategories,
@@ -22,9 +26,17 @@ import {
 } from "../../redux/noticesFilters/slice";
 import ClearBtn from "../ClearBtn/ClearBtn";
 import Button from "../Button/Button";
+import {
+  ArrowIndicator,
+  CustomClearIndicator,
+  SearchIndicator,
+} from "../Indicators/Indicators";
+import HighlightOption from "../HighLightOption/HighLightOption";
 
 const NoticesFilters: React.FC = () => {
   const dispatch = useAppDispatch();
+  const width = useWindowWidth();
+  const isTablet = width >= 768;
 
   const {
     category,
@@ -102,42 +114,54 @@ const NoticesFilters: React.FC = () => {
 
         <div className={s.categorySex}>
           <Select
-            styles={selectStyles}
+            styles={getSelectStyles(isTablet)}
             classNamePrefix="react-select"
+            className={s.category}
             options={categoryOptions}
             placeholder="Category"
             value={getSelectValue(category, categoryOptions)}
             onChange={handleChange("category")}
+            components={{ DropdownIndicator: ArrowIndicator }}
           />
 
           <Select
-            styles={selectStyles}
+            styles={getSelectStyles(isTablet)}
             classNamePrefix="react-select"
+            className={s.sex}
             options={genderOptions}
             placeholder="By gender"
             value={getSelectValue(sex, genderOptions)}
             onChange={handleChange("sex")}
+            components={{ DropdownIndicator: ArrowIndicator }}
           />
         </div>
 
         <Select
-          styles={selectStyles}
+          styles={getSelectStyles(isTablet)}
           classNamePrefix="react-select"
+          className={s.type}
           options={typeOptions}
           placeholder="By type"
           value={getSelectValue(species, typeOptions)}
           onChange={handleChange("species")}
+          components={{ DropdownIndicator: ArrowIndicator }}
         />
 
         <Select
-          styles={selectStyles}
+          styles={getSelectStyles(isTablet)}
           classNamePrefix="react-select"
+          className={s.location}
           options={cityOptions}
           placeholder="Location"
           isClearable
           value={getSelectValue(locationId, cityOptions)}
           onChange={handleChange("locationId")}
           onInputChange={loadCities}
+          components={{
+            DropdownIndicator: SearchIndicator,
+            ClearIndicator: CustomClearIndicator,
+            Option: HighlightOption,
+          }}
         />
       </div>
 
