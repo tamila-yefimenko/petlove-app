@@ -99,7 +99,6 @@ export interface NoticesState {
   isEmpty: boolean;
   perPage: number;
   totalPages: number;
-  // query: string | undefined;
 }
 
 export interface FetchNoticesParams {

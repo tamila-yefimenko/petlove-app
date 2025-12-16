@@ -35,7 +35,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.starActive {
   fill: #ffc531;
+}
+
+.starEmpty {
+  fill: rgba(38, 38, 38, 0.05);
 }
 
 .info {

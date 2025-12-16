@@ -79,6 +79,12 @@ const NoticesPage: React.FC = () => {
           )}
         </div>
         {hasNotices && <NoticesList notices={notices} />}
+        {!hasNotices && (
+          <div className={s.noWrapper}>
+            <p className={s.noResults}>No results found.</p>
+            <p className={s.text}>Try changing your search parameters.</p>
+          </div>
+        )}
         {totalPages > 1 && (
           <Pagination
             totalPages={totalPages}

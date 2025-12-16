@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { Pet } from "../../utils/types";
 import Button from "../Button/Button";
 import s from "./NoticesItem.module.css";
@@ -13,7 +14,11 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
       <div className={s.titleWrapper}>
         <h3 className={s.itemTitle}>{pet.title}</h3>
         <div className={s.pop}>
-          <svg className={s.star}>
+          <svg
+            className={clsx(
+              s.star,
+              !pet.popularity ? s.starEmpty : s.starActive
+            )}>
             <use href="/icons/sprite.svg#icon-star" />
           </svg>
           {pet.popularity}
