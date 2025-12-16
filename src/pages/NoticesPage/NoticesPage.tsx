@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import SearchField from "../../components/SearchField/SearchField";
 import Title from "../../components/Title/Title";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import s from "./NoticesPage.module.css";
@@ -8,39 +7,35 @@ import Pagination from "../../components/Pagination/Pagination";
 import { selectIsLoading } from "../../redux/global/selectors";
 import {
   selectError,
-  selectFilteredNotices,
   selectNotices,
-  // selectPage,
-  selectQuery,
   selectTotalPages,
 } from "../../redux/notices/selectors";
 import { fetchNotices } from "../../redux/notices/operations";
 import NoticesList from "../../components/NoticesList/NoticesList";
-// import { setPage } from "../../redux/notices/slice";
 import NoticesFilters from "../../components/NoticesFilters/NoticesFilters";
-import {
-  selectFiltersForFetch,
-  selectPage,
-} from "../../redux/noticesFilters/selectors";
+import { selectFiltersForFetch } from "../../redux/noticesFilters/selectors";
 import { setPage } from "../../redux/noticesFilters/slice";
 
 const NoticesPage: React.FC = () => {
   const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectError);
   const totalPages = useAppSelector(selectTotalPages);
-  const page = useAppSelector(selectPage);
-  const filteredNotices = useAppSelector(selectFilteredNotices);
+  const notices = useAppSelector(selectNotices);
+
+  const hasNotices = notices.length > 0;
 
   const dispatch = useAppDispatch();
 
-  const { keyword, category, species, sex, locationId, byPopularity, byPrice } =
-    useAppSelector(selectFiltersForFetch);
-
-  useEffect(() => {
-    if (page !== 1) {
-      dispatch(setPage(1));
-    }
-  }, [keyword, category, species, sex, locationId, byPopularity, byPrice]);
+  const {
+    keyword,
+    category,
+    species,
+    sex,
+    locationId,
+    byPopularity,
+    byPrice,
+    page,
+  } = useAppSelector(selectFiltersForFetch);
 
   useEffect(() => {
     dispatch(
@@ -66,8 +61,6 @@ const NoticesPage: React.FC = () => {
     page,
   ]);
 
-  const hasNotices = filteredNotices.length > 0;
-
   const handlePageChange = (newPage: number) => {
     dispatch(setPage(newPage));
   };
@@ -85,7 +78,7 @@ const NoticesPage: React.FC = () => {
             </div>
           )}
         </div>
-        {hasNotices && <NoticesList notices={filteredNotices} />}
+        {hasNotices && <NoticesList notices={notices} />}
         {totalPages > 1 && (
           <Pagination
             totalPages={totalPages}

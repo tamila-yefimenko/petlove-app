@@ -33,6 +33,7 @@ const noticesFiltersSlice = createSlice({
     setFilter(state, action) {
       const { key, value } = action.payload;
       (state as any)[key] = value;
+      state.page = 1;
     },
     setPage(state, action) {
       state.page = action.payload;

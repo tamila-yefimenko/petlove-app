@@ -97,12 +97,9 @@ export interface NoticesState {
   items: Pet[];
   error: string | null;
   isEmpty: boolean;
-  // page: number;
   perPage: number;
   totalPages: number;
-  query: string | undefined;
-  // filtered: Pet[];
-  // filters: Filters;
+  // query: string | undefined;
 }
 
 export interface FetchNoticesParams {
