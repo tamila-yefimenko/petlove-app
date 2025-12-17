@@ -6,20 +6,33 @@ import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pet } from "../../utils/types";
 import clsx from "clsx";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { selectFavorites } from "../../redux/favorites/selectors";
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from "../../redux/favorites/operations";
 
 export interface ModalNoticeProps {
   isOpen: boolean;
   onClose: () => void;
   notice: Pet;
+  isFavorite: boolean;
 }
 
 const ModalNotice: React.FC<ModalNoticeProps> = ({
   isOpen,
   onClose,
   notice,
+  isFavorite,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  //   const favorites = useAppSelector(selectFavorites);
+
+  //   const isFavorite = favorites.includes(pet._id);
+
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -52,6 +65,14 @@ const ModalNotice: React.FC<ModalNoticeProps> = ({
   };
 
   const stars = getStarsFromPopularity(notice.popularity);
+
+  const handleFavourite = () => {
+    if (isFavorite) {
+      dispatch(deleteFromFavorites(notice._id));
+    } else {
+      dispatch(addToFavorites(notice._id));
+    }
+  };
 
   return (
     <div className={s.backdrop} onClick={onClose}>
@@ -114,13 +135,17 @@ const ModalNotice: React.FC<ModalNoticeProps> = ({
         )}
 
         <div className={s.actions}>
-          <Button
-            className={s.button}
-            size="medium"
-            onClick={() => navigate("/login")}>
-            Add to
+          <Button className={s.button} size="medium" onClick={handleFavourite}>
+            {isFavorite ? "Remove" : "Add to"}
+
             <svg className={s.heart}>
-              <use href="/icons/sprite.svg#icon-heart" />
+              <use
+                href={
+                  isFavorite
+                    ? "/icons/sprite.svg#icon-trash-2"
+                    : "/icons/sprite.svg#icon-heart"
+                }
+              />
             </svg>
           </Button>
           <Button

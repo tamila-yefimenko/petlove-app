@@ -113,3 +113,8 @@ export interface FetchNoticesParams {
   byPopularity?: boolean | null;
   byPrice?: boolean | null;
 }
+
+export interface FavoriteState {
+  favorites: string[];
+  error: string | null;
+}

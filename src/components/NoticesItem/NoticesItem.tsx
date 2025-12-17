@@ -4,12 +4,16 @@ import Button from "../Button/Button";
 import s from "./NoticesItem.module.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import ModalAttention from "../ModalAttention/ModalAttention";
 import { fetchNoticeById } from "../../redux/notices/operations";
 import { selectCurrentNotice } from "../../redux/notices/selectors";
-import { useParams } from "react-router-dom";
 import ModalNotice from "../ModalNotice/ModalNotice";
+import {
+  addToFavorites,
+  deleteFromFavorites,
+} from "../../redux/favorites/operations";
+import { selectFavorites } from "../../redux/favorites/selectors";
 
 interface NoticesItemProps {
   pet: Pet;
@@ -18,8 +22,11 @@ interface NoticesItemProps {
 const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const currentNotice = useAppSelector(selectCurrentNotice);
+  const favorites = useAppSelector(selectFavorites);
+
+  const isFavorite = favorites.includes(pet._id);
+
   const dispatch = useAppDispatch();
-  // const { id } = useParams();
 
   const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
@@ -30,14 +37,20 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
       return;
     }
 
-    dispatch(fetchNoticeById(pet._id)); // або pet.id
+    dispatch(fetchNoticeById(pet._id));
     setShowDetailsModal(true);
   };
 
   const handleFavourite = () => {
     if (!isLoggedIn) {
       setShowAttentionModal(true);
+      return;
+    }
+
+    if (isFavorite) {
+      dispatch(deleteFromFavorites(pet._id));
     } else {
+      dispatch(addToFavorites(pet._id));
     }
   };
 
@@ -92,7 +105,13 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
         </Button>
         <button className={s.heartBtn} onClick={handleFavourite}>
           <svg className={s.heart}>
-            <use href="/icons/sprite.svg#icon-heart" />
+            <use
+              href={
+                isFavorite
+                  ? "/icons/sprite.svg#icon-trash-2"
+                  : "/icons/sprite.svg#icon-heart"
+              }
+            />
           </svg>
         </button>
 
@@ -108,6 +127,7 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
             isOpen={showDetailsModal}
             notice={currentNotice}
             onClose={() => setShowDetailsModal(false)}
+            isFavorite={isFavorite}
           />
         )}
       </div>
