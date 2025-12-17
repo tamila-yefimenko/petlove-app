@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { NoticesState } from "../../utils/types";
-import { fetchNotices } from "./operations";
+import { fetchNoticeById, fetchNotices } from "./operations";
 
 const initialState: NoticesState = {
   items: [],
@@ -8,6 +8,7 @@ const initialState: NoticesState = {
   isEmpty: false,
   perPage: 6,
   totalPages: 0,
+  currentNotice: null,
 };
 
 const noticesSlice = createSlice({
@@ -31,6 +32,16 @@ const noticesSlice = createSlice({
         state.isEmpty = action.payload.results.length === 0;
       })
       .addCase(fetchNotices.rejected, (state, action) => {
+        state.error = action.payload ?? "Unknown error";
+      })
+      .addCase(fetchNoticeById.pending, (state, action) => {
+        state.error = null;
+        state.currentNotice = null;
+      })
+      .addCase(fetchNoticeById.fulfilled, (state, action) => {
+        state.currentNotice = action.payload;
+      })
+      .addCase(fetchNoticeById.rejected, (state, action) => {
         state.error = action.payload ?? "Unknown error";
       });
   },

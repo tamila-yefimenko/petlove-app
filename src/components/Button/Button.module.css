@@ -1,11 +1,12 @@
 .button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-weight: 700;
   font-size: 14px;
   line-height: 1.28571;
   letter-spacing: -0.03em;
-  text-transform: uppercase;
   border-radius: 30px;
-  padding: 12px 26px;
   border: none;
   cursor: pointer;
   transition: 0.2s;

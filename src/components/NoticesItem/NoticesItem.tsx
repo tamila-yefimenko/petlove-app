@@ -4,8 +4,12 @@ import Button from "../Button/Button";
 import s from "./NoticesItem.module.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ModalAttention from "../ModalAttention/ModalAttention";
+import { fetchNoticeById } from "../../redux/notices/operations";
+import { selectCurrentNotice } from "../../redux/notices/selectors";
+import { useParams } from "react-router-dom";
+import ModalNotice from "../ModalNotice/ModalNotice";
 
 interface NoticesItemProps {
   pet: Pet;
@@ -13,20 +17,26 @@ interface NoticesItemProps {
 
 const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const currentNotice = useAppSelector(selectCurrentNotice);
   const dispatch = useAppDispatch();
+  // const { id } = useParams();
 
-  const [showModal, setShowModal] = useState(false);
+  const [showAttentionModal, setShowAttentionModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
 
   const handleLearnMoreClick = () => {
     if (!isLoggedIn) {
-      setShowModal(true);
-    } else {
+      setShowAttentionModal(true);
+      return;
     }
+
+    dispatch(fetchNoticeById(pet._id)); // або pet.id
+    setShowDetailsModal(true);
   };
 
   const handleFavourite = () => {
     if (!isLoggedIn) {
-      setShowModal(true);
+      setShowAttentionModal(true);
     } else {
     }
   };
@@ -73,7 +83,7 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
       {pet.price ? (
         <p className={s.price}>$ {pet.price}</p>
       ) : (
-        <p className={s.price}>Price negotiable</p>
+        <p className={s.price}>$ Free</p>
       )}
 
       <div className={s.btnWrapper}>
@@ -86,10 +96,18 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
           </svg>
         </button>
 
-        {showModal && (
+        {showAttentionModal && (
           <ModalAttention
-            isOpen={showModal}
-            onClose={() => setShowModal(false)}
+            isOpen={showAttentionModal}
+            onClose={() => setShowAttentionModal(false)}
+          />
+        )}
+
+        {showDetailsModal && currentNotice && (
+          <ModalNotice
+            isOpen={showDetailsModal}
+            notice={currentNotice}
+            onClose={() => setShowDetailsModal(false)}
           />
         )}
       </div>

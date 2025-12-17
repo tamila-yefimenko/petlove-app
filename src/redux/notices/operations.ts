@@ -34,3 +34,23 @@ export const fetchNotices = createAsyncThunk<
     dispatch(setLoading(false));
   }
 });
+
+export const fetchNoticeById = createAsyncThunk<
+  Pet,
+  string,
+  { rejectValue: string }
+>("notices/fetchById", async (id, thunkAPI) => {
+  const { dispatch } = thunkAPI;
+
+  try {
+    dispatch(setLoading(true));
+
+    const response = await goitAPI.get(`/notices/${id}`);
+
+    return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(getErrorMessage(error));
+  } finally {
+    dispatch(setLoading(false));
+  }
+});

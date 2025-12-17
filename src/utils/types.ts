@@ -75,7 +75,7 @@ export interface Pet {
   _id: string;
   imgURL: string;
   title: string;
-  popularity: string;
+  popularity: number;
   name: string;
   birthday: string;
   sex: string;
@@ -99,6 +99,7 @@ export interface NoticesState {
   isEmpty: boolean;
   perPage: number;
   totalPages: number;
+  currentNotice: Pet | null;
 }
 
 export interface FetchNoticesParams {

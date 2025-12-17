@@ -32,6 +32,7 @@ const AuthNav: React.FC<AuthNavProps> = ({
     <div className={clsx(s.wrapper, vertical && s.vertical)}>
       <NavLink to="/login" onClick={onClickItem}>
         <Button
+          className={s.button}
           fullWidth={isMenu && isMobile}
           size="medium"
           variant={loginVariant}>
@@ -40,7 +41,11 @@ const AuthNav: React.FC<AuthNavProps> = ({
       </NavLink>
 
       <NavLink to="/register" onClick={onClickItem}>
-        <Button fullWidth={isMenu && isMobile} size="medium" variant="light">
+        <Button
+          className={s.button}
+          fullWidth={isMenu && isMobile}
+          size="medium"
+          variant="light">
           Registration
         </Button>
       </NavLink>

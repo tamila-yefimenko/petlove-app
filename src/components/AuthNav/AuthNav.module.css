@@ -8,6 +8,10 @@
   width: 100%;
 }
 
+.button {
+  text-transform: uppercase;
+}
+
 @media (min-width: 768px) {
   .wrapper {
     flex-direction: row;
