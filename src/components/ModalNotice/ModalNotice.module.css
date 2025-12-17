@@ -165,10 +165,6 @@
 
 .button {
   width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
 }
 
 .heart {
@@ -181,7 +177,39 @@
 
 @media (min-width: 768px) {
   .modal {
-    width: 473px;
+    max-width: 473px;
     padding: 40px 71px;
+  }
+
+  .imgWrapper {
+    margin-bottom: 16px;
+  }
+
+  .noticeImg {
+    width: 150px;
+    height: 150px;
+  }
+
+  .category {
+    width: 52px;
+    height: 34px;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.33333;
+  }
+
+  .pop {
+    margin-bottom: 20px;
+  }
+
+  .comment {
+    margin-bottom: 20px;
+  }
+
+  .button {
+    height: 48px;
   }
 }
