@@ -1,4 +1,4 @@
-import catIcon from "../../assets/images/cat-icon.png";
+import dogIcon from "../../assets/images/dog-icon.webp";
 import s from "./ModalAttention.module.css";
 import Button from "../Button/Button";
 import ClearBtn from "../ClearBtn/ClearBtn";
@@ -46,7 +46,7 @@ const ModalAttention: React.FC<ModalAttentionProps> = ({ isOpen, onClose }) => {
         />
 
         <div className={s.imgWrapper}>
-          <img src={catIcon} alt="cat icon" width="44" height="44" />
+          <img src={dogIcon} alt="dog icon" width="44" height="44" />
         </div>
 
         <h3 className={s.title}>Attention</h3>

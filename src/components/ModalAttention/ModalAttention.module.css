@@ -78,3 +78,25 @@
   width: 100%;
   text-transform: capitalize;
 }
+
+@media (min-width: 768px) {
+  .modal {
+    max-width: 466px;
+    padding: 60px;
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 1.16667;
+    letter-spacing: -0.03em;
+  }
+
+  .text {
+    margin-bottom: 28px;
+  }
+
+  .button {
+    max-width: 140px;
+    height: 48px;
+  }
+}
