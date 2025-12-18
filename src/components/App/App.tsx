@@ -6,6 +6,7 @@ import { refreshThunk } from "../../redux/auth/operations";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
 import { Route, Routes } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { ToastContainer } from "react-toastify";
 import RestrictedRoute from "../RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
@@ -74,6 +75,7 @@ const App: React.FC = () => {
             <Route path="*" element={<NotFoundPage />} />
           </Route>
         </Routes>
+        <ToastContainer position="top-right" autoClose={3000} />
       </>
     </Suspense>
   );
