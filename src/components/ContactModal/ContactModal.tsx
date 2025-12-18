@@ -1,4 +1,3 @@
-import dogIcon from "../../assets/images/dog-icon.webp";
 import s from "./ContactModal.module.css";
 import Button from "../Button/Button";
 import ClearBtn from "../ClearBtn/ClearBtn";

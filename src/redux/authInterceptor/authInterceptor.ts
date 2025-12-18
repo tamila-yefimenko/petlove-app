@@ -10,13 +10,25 @@ interface FailedRequest {
   reject: (error: AxiosError) => void;
 }
 
-export const handleLogout = async () => {
-  toast.error("Session expired. Please log in again.");
+let isLoggingOut = false;
 
-  TokenService.clearAuthHeader();
-  await store.dispatch(logoutThunk());
+export const handleLogout = async (
+  message = "Session expired. Please log in again.",
+  redirectTo = "/login"
+) => {
+  if (isLoggingOut) return;
+  isLoggingOut = true;
 
-  navigateTo("/login");
+  try {
+    toast.error(message);
+
+    TokenService.clearAuthHeader();
+
+    await store.dispatch(logoutThunk());
+  } finally {
+    navigateTo(redirectTo);
+    isLoggingOut = false;
+  }
 };
 
 let isRefreshing = false;

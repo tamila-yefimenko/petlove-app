@@ -2,11 +2,11 @@ import { useSelector } from "react-redux";
 import AuthNav from "../AuthNav/AuthNav";
 import Nav from "../Nav/Nav";
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import LogOutBtn from "../LogOutBtn/LogOutBtn";
 import s from "./Menu.module.css";
 import { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useLocation } from "react-router-dom";
+import LogoutController from "../LogoutController/LogoutController";
 
 export interface MenuProps {
   isOpen: boolean;
@@ -58,7 +58,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
           </button>
           <Nav vertical onClickItem={onClose} />
           {isLoggedIn ? (
-            <LogOutBtn onClick={onClose} vertical isMenu />
+            <LogoutController vertical isMenu onAfterLogout={onClose} />
           ) : (
             <AuthNav onClickItem={onClose} vertical isMenu isMobile />
           )}
