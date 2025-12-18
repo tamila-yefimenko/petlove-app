@@ -14,6 +14,7 @@ import {
   deleteFromFavorites,
 } from "../../redux/favorites/operations";
 import { selectFavorites } from "../../redux/favorites/selectors";
+import ContactModal from "../ContactModal/ContactModal";
 
 interface NoticesItemProps {
   pet: Pet;
@@ -30,6 +31,7 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
 
   const [showAttentionModal, setShowAttentionModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   const handleLearnMoreClick = () => {
     if (!isLoggedIn) {
@@ -52,6 +54,11 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
     } else {
       dispatch(addToFavorites(pet._id));
     }
+  };
+
+  const handleOpenContact = () => {
+    setShowDetailsModal(false);
+    setShowContactModal(true);
   };
 
   return (
@@ -128,6 +135,15 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
             notice={currentNotice}
             onClose={() => setShowDetailsModal(false)}
             isFavorite={isFavorite}
+            onContact={handleOpenContact}
+          />
+        )}
+
+        {showContactModal && currentNotice && (
+          <ContactModal
+            isOpen={showContactModal}
+            notice={currentNotice}
+            onClose={() => setShowContactModal(false)}
           />
         )}
       </div>

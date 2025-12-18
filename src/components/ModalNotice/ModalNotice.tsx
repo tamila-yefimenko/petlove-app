@@ -2,7 +2,7 @@ import catIcon from "../../assets/images/cat-icon.png";
 import s from "./ModalNotice.module.css";
 import Button from "../Button/Button";
 import ClearBtn from "../ClearBtn/ClearBtn";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Pet } from "../../utils/types";
 import clsx from "clsx";
@@ -12,12 +12,14 @@ import {
   addToFavorites,
   deleteFromFavorites,
 } from "../../redux/favorites/operations";
+import ContactModal from "../ContactModal/ContactModal";
 
 export interface ModalNoticeProps {
   isOpen: boolean;
   onClose: () => void;
   notice: Pet;
   isFavorite: boolean;
+  onContact: () => void;
 }
 
 const ModalNotice: React.FC<ModalNoticeProps> = ({
@@ -25,12 +27,9 @@ const ModalNotice: React.FC<ModalNoticeProps> = ({
   onClose,
   notice,
   isFavorite,
+  onContact,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
-  const navigate = useNavigate();
-  //   const favorites = useAppSelector(selectFavorites);
-
-  //   const isFavorite = favorites.includes(pet._id);
 
   const dispatch = useAppDispatch();
 
@@ -72,6 +71,11 @@ const ModalNotice: React.FC<ModalNoticeProps> = ({
     } else {
       dispatch(addToFavorites(notice._id));
     }
+  };
+
+  const handleContactClick = () => {
+    onClose();
+    onContact();
   };
 
   return (
@@ -152,7 +156,7 @@ const ModalNotice: React.FC<ModalNoticeProps> = ({
             className={s.button}
             variant="light"
             size="medium"
-            onClick={() => navigate("/register")}>
+            onClick={handleContactClick}>
             Contact
           </Button>
         </div>

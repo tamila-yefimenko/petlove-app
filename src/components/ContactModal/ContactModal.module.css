@@ -1,0 +1,120 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 20px;
+  max-width: 335px;
+  width: 100%;
+}
+
+.clearBtn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.clearIcon {
+  width: 24px;
+  height: 24px;
+  fill: #262626;
+  stroke: #262626;
+  stroke-width: 2px;
+}
+
+.imgWrapper {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.noticeImg {
+  border-radius: 100px;
+  width: 120px;
+  height: 120px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #f6b83d;
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.02em;
+  text-align: center;
+  color: #2b2b2a;
+  margin-bottom: 24px;
+}
+
+.actions {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.button {
+  width: 130px;
+  text-transform: capitalize;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    max-width: 466px;
+    padding: 60px;
+  }
+
+  .imgWrapper {
+    margin-bottom: 28px;
+  }
+
+  .noticeImg {
+    width: 150px;
+    height: 150px;
+  }
+
+  .title {
+    font-size: 24px;
+    line-height: 1.16667;
+    letter-spacing: -0.03em;
+  }
+
+  .text {
+    margin-bottom: 28px;
+  }
+
+  .button {
+    width: 140px;
+    height: 48px;
+  }
+}

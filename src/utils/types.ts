@@ -71,6 +71,18 @@ export interface FriendsState {
   error: string | null;
 }
 
+export interface User {
+  _id: string;
+  email: string;
+  phone?: string;
+}
+
+export interface Location {
+  _id: string;
+  stateEn: string;
+  cityEn: string;
+}
+
 export interface Pet {
   _id: string;
   imgURL: string;
@@ -82,8 +94,11 @@ export interface Pet {
   species: string;
   category: string;
   comment: string;
-  price: string;
-  location: string;
+  price?: number;
+  location: Location;
+  user: User;
+  createdAt?: string;
+  updatedAt?: string;
 }
 
 export interface Filters {

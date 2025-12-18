@@ -121,6 +121,7 @@
 
 .resetBtn {
   margin: 0 auto;
+  width: 118px;
 }
 
 @media (min-width: 768px) {
