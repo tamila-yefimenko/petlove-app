@@ -14,9 +14,10 @@ import clsx from "clsx";
 
 interface HeaderProps {
   className: string;
+  onLogoutClick?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ className }) => {
+const Header: React.FC<HeaderProps> = ({ className, onLogoutClick }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { pathname } = useLocation();
@@ -39,12 +40,25 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         {isMobile && (
           <>
             <div className={s.menuWrapper}>
-              {<UserNav isMobile isHome={isHome} />}
+              {
+                <UserNav
+                  isMobile
+                  isHome={isHome}
+                  onLogoutClick={() => {
+                    setIsMenuOpen(false);
+                    onLogoutClick?.();
+                  }}
+                />
+              }
               <BurgerMenu isHome={isHome} onClick={() => setIsMenuOpen(true)} />
               <Menu
                 isOpen={isMenuOpen}
                 isMobile
                 onClose={() => setIsMenuOpen(false)}
+                onLogoutClick={() => {
+                  setIsMenuOpen(false);
+                  onLogoutClick?.();
+                }}
               />
             </div>
           </>
@@ -53,9 +67,26 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
         {isTablet && (
           <>
             <div className={s.menuWrapper}>
-              {isLoggedIn ? <UserNav isHome={isHome} /> : <AuthNav />}
+              {isLoggedIn ? (
+                <UserNav
+                  isHome={isHome}
+                  onLogoutClick={() => {
+                    setIsMenuOpen(false);
+                    onLogoutClick?.();
+                  }}
+                />
+              ) : (
+                <AuthNav />
+              )}
               <BurgerMenu isHome={isHome} onClick={() => setIsMenuOpen(true)} />
-              <Menu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+              <Menu
+                isOpen={isMenuOpen}
+                onClose={() => setIsMenuOpen(false)}
+                onLogoutClick={() => {
+                  setIsMenuOpen(false);
+                  onLogoutClick?.();
+                }}
+              />
             </div>
           </>
         )}
@@ -64,7 +95,17 @@ const Header: React.FC<HeaderProps> = ({ className }) => {
           <>
             <Nav />
             <div className={s.menuWrapper}>
-              {isLoggedIn ? <UserNav isHome={isHome} /> : <AuthNav />}
+              {isLoggedIn ? (
+                <UserNav
+                  isHome={isHome}
+                  onLogoutClick={() => {
+                    setIsMenuOpen(false);
+                    onLogoutClick?.();
+                  }}
+                />
+              ) : (
+                <AuthNav />
+              )}
             </div>
           </>
         )}

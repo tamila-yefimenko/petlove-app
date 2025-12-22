@@ -6,15 +6,16 @@ import s from "./Menu.module.css";
 import { useEffect, useRef } from "react";
 import clsx from "clsx";
 import { useLocation } from "react-router-dom";
-import LogoutController from "../LogoutController/LogoutController";
+import LogOutBtn from "../LogOutBtn/LogOutBtn";
 
 export interface MenuProps {
   isOpen: boolean;
   onClose: () => void;
   isMobile?: boolean;
+  onLogoutClick: () => void;
 }
 
-const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
+const Menu: React.FC<MenuProps> = ({ isOpen, onClose, onLogoutClick }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -58,7 +59,7 @@ const Menu: React.FC<MenuProps> = ({ isOpen, onClose }) => {
           </button>
           <Nav vertical onClickItem={onClose} />
           {isLoggedIn ? (
-            <LogoutController vertical isMenu onAfterLogout={onClose} />
+            <LogOutBtn vertical isMenu onClick={onLogoutClick} />
           ) : (
             <AuthNav onClickItem={onClose} vertical isMenu isMobile />
           )}

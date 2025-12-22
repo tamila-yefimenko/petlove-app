@@ -7,36 +7,35 @@ import LogOutBtn from "../LogOutBtn/LogOutBtn";
 import ModalApproveAction from "../ModalApproveAction/ModalApproveAction";
 import { handleLogout } from "../../redux/authInterceptor/authInterceptor";
 
-const LogoutController = ({ isMenu, vertical }: any) => {
+interface LogoutControllerProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const LogoutController: React.FC<LogoutControllerProps> = ({
+  isOpen,
+  onClose,
+}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleConfirmLogout = async () => {
     try {
       await dispatch(logoutThunk()).unwrap();
       navigate("/");
-    } catch (error) {
+    } catch {
       await handleLogout("Something went wrong. You were logged out.", "/");
     } finally {
-      setIsOpen(false);
+      onClose();
     }
   };
 
   return (
-    <>
-      <LogOutBtn
-        onClick={() => setIsOpen(true)}
-        isMenu={isMenu}
-        vertical={vertical}
-      />
-
-      <ModalApproveAction
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        onConfirm={handleConfirmLogout}
-      />
-    </>
+    <ModalApproveAction
+      isOpen={isOpen}
+      onClose={onClose}
+      onConfirm={handleConfirmLogout}
+    />
   );
 };
 
