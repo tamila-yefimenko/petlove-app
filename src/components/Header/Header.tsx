@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ className, onLogoutClick }) => {
 
   return (
     <header className={clsx(s.header, isHome && s.whiteHeader, className)}>
-      <Container className={s.headerContainer}>
+      <Container className={clsx(s.headerContainer, isHome && s.homeContainer)}>
         <Link to={"/"}>
           <Logo isHome={isHome} />
         </Link>

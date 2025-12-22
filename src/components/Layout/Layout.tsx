@@ -18,21 +18,25 @@ const Layout: React.FC = () => {
   return (
     <div className={s.layout}>
       {isLoading && <Loader />}
-      {!isHome && !isLoading && (
-        <Header
-          className={s.header}
-          onLogoutClick={() => setIsLogoutOpen(true)}
-        />
-      )}
+      <Header
+        className={isHome ? s.homeHeader : s.header}
+        onLogoutClick={() => setIsLogoutOpen(true)}
+      />
+
+      <main className={s.main}>
+        {isHome ? (
+          <div className={s.homeHero}>
+            <Outlet />
+          </div>
+        ) : (
+          <Outlet />
+        )}
+      </main>
 
       <LogoutController
         isOpen={isLogoutOpen}
         onClose={() => setIsLogoutOpen(false)}
       />
-
-      <main className={s.main}>
-        <Outlet />
-      </main>
     </div>
   );
 };
