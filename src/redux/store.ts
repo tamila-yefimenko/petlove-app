@@ -17,6 +17,7 @@ import { friendsReducer } from "./friends/slice";
 import { noticesReducer } from "./notices/slice";
 import { noticesFiltersReducer } from "./noticesFilters/slice";
 import { favoritesReducer } from "./favorites/slice";
+import { userReducer } from "./user/Slice";
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
@@ -39,6 +40,7 @@ export const store = configureStore({
     notices: noticesReducer,
     noticesFilters: noticesFiltersReducer,
     favorites: favoritesReducer,
+    user: userReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

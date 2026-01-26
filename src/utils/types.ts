@@ -73,8 +73,19 @@ export interface FriendsState {
 
 export interface User {
   _id: string;
+  name?: string;
+  email: string;
+  avatar?: string;
+  phone?: string;
+  token?: string;
+}
+
+export interface UserState {
+  name: string;
   email: string;
   phone?: string;
+  avatar?: string;
+  error: string | null;
 }
 
 export interface Location {

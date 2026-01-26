@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { Friend, FriendsState } from "../../utils/types";
+import { Friend } from "../../utils/types";
 import { setLoading } from "../global/slice";
 import { getErrorMessage, goitAPI } from "../auth/operations";
 
