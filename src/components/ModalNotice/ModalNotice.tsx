@@ -1,18 +1,14 @@
-import catIcon from "../../assets/images/cat-icon.png";
 import s from "./ModalNotice.module.css";
 import Button from "../Button/Button";
 import ClearBtn from "../ClearBtn/ClearBtn";
-import { useEffect, useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useRef } from "react";
 import { Pet } from "../../utils/types";
 import clsx from "clsx";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
-import { selectFavorites } from "../../redux/favorites/selectors";
+import { useAppDispatch } from "../../redux/hooks";
 import {
   addToFavorites,
   deleteFromFavorites,
 } from "../../redux/favorites/operations";
-import ContactModal from "../ContactModal/ContactModal";
 
 export interface ModalNoticeProps {
   isOpen: boolean;
@@ -104,7 +100,7 @@ const ModalNotice: React.FC<ModalNoticeProps> = ({
               key={star}
               className={clsx(
                 s.star,
-                star <= stars ? s.starActive : s.starEmpty
+                star <= stars ? s.starActive : s.starEmpty,
               )}>
               <use href="/icons/sprite.svg#icon-star" />
             </svg>

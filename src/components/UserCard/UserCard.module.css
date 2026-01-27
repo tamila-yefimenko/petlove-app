@@ -1,0 +1,11 @@
+.userCard {
+  position: relative;
+  border-radius: 30px;
+  padding: 18px 20px 40px 20px;
+  background-color: #fff;
+}
+
+.button {
+  width: 114px;
+  text-transform: uppercase;
+}

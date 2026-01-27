@@ -21,3 +21,22 @@ export const fetchUser = createAsyncThunk<User, void, { rejectValue: string }>(
     }
   },
 );
+
+export const editUser = createAsyncThunk<
+  User,
+  Partial<User>,
+  { rejectValue: string }
+>("user/editUser", async (data, thunkAPI) => {
+  const { dispatch } = thunkAPI;
+
+  try {
+    dispatch(setLoading(true));
+
+    const response = await goitAPI.patch<User>("users/current/edit", data);
+    return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(getErrorMessage(error));
+  } finally {
+    dispatch(setLoading(false));
+  }
+});

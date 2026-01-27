@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUser } from "./operations";
+import { editUser, fetchUser } from "./operations";
 import { UserState } from "../../utils/types";
 
 const initialState: UserState = {
@@ -7,6 +7,9 @@ const initialState: UserState = {
   email: "",
   phone: "",
   avatar: "",
+  noticesViewed: [],
+  noticesFavourite: [],
+  pets: [],
   error: null,
 };
 
@@ -24,8 +27,23 @@ const userSlice = createSlice({
         state.email = action.payload.email;
         state.phone = action.payload.phone ?? "";
         state.avatar = action.payload.avatar ?? "";
+        state.noticesViewed = action.payload.noticesViewed ?? [];
+        state.noticesFavourite = action.payload.noticesFavourite ?? [];
+        state.pets = action.payload.pets ?? [];
       })
       .addCase(fetchUser.rejected, (state, action) => {
+        state.error = action.payload ?? "unknown error";
+      })
+      .addCase(editUser.pending, (state, action) => {
+        state.error = null;
+      })
+      .addCase(editUser.fulfilled, (state, action) => {
+        state.name = action.payload.name ?? state.name;
+        state.email = action.payload.email ?? state.email;
+        state.phone = action.payload.phone ?? state.phone;
+        state.avatar = action.payload.avatar ?? state.avatar;
+      })
+      .addCase(editUser.rejected, (state, action) => {
         state.error = action.payload ?? "unknown error";
       });
   },

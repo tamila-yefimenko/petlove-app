@@ -34,7 +34,6 @@ export const registerThunk = createAsyncThunk<
     dispatch(setLoading(true));
 
     const response = await goitAPI.post("/users/signup", body);
-    console.log("response", response.data);
     setAuthNav(response.data.token);
     return response.data;
   } catch (error) {

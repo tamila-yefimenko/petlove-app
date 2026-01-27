@@ -75,8 +75,11 @@ export interface User {
   _id: string;
   name?: string;
   email: string;
-  avatar?: string;
   phone?: string;
+  avatar?: string;
+  noticesViewed?: Pet[];
+  noticesFavourite?: Pet[];
+  pets?: Pet[];
   token?: string;
 }
 
@@ -85,6 +88,9 @@ export interface UserState {
   email: string;
   phone?: string;
   avatar?: string;
+  noticesViewed?: Pet[];
+  noticesFavourite?: Pet[];
+  pets?: Pet[];
   error: string | null;
 }
 
