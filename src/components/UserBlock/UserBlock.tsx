@@ -38,7 +38,7 @@ const UserBlock: React.FC<UserBlockProps> = ({ onClick }) => {
       </div>
       <div className={s.avatarWrapper}>
         {avatar ? (
-          <img src={avatar} alt={name} />
+          <img src={avatar} alt={name} className={s.avatar} />
         ) : (
           <div className={s.bigIconWrapper}>
             <svg className={s.bigIcon}>

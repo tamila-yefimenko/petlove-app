@@ -124,7 +124,7 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
         <h2 className={s.title}>Edit information</h2>
         <div className={s.avatarWrapper}>
           {avatarPreview ? (
-            <img src={avatarPreview} alt="avatar" />
+            <img src={avatarPreview} alt="avatar" className={s.avatar} />
           ) : (
             <div className={s.bigIconWrapper}>
               <svg className={s.bigIcon}>
@@ -135,12 +135,20 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
         </div>
 
         <div className={s.upload}>
-          <div className={clsx(s.item, s.readonly)}>
+          <div
+            className={clsx(
+              s.item,
+              s.readonly,
+              watch("avatar") && s.itemValue,
+            )}>
             {watch("avatar") || "https://..."}
           </div>
 
           <label className={s.uploadInput}>
-            Upload photo
+            Upload photo{" "}
+            <svg className={s.uploadIcon}>
+              <use href="/icons/sprite.svg#icon-upload-cloud" />
+            </svg>
             <input
               type="file"
               accept="image/*"
@@ -153,21 +161,34 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
           <input
-            className={clsx(s.item, errors.name && s.errorInput)}
+            className={clsx(
+              s.item,
+              name && s.itemValue,
+              errors.name && s.errorInput,
+            )}
             {...register("name")}
             placeholder="Name"
           />
           {errors.name && <p className={s.error}>{errors.name.message}</p>}
 
           <input
-            className={clsx(s.item, errors.email && s.errorInput)}
+            className={clsx(
+              s.item,
+              email && s.itemValue,
+              errors.email && s.errorInput,
+            )}
             {...register("email")}
             placeholder="name@gmail.com"
           />
           {errors.email && <p className={s.error}>{errors.email.message}</p>}
 
           <input
-            className={clsx(s.item, errors.phone && s.errorInput)}
+            className={clsx(
+              s.item,
+              s.last,
+              phone && s.itemValue,
+              errors.phone && s.errorInput,
+            )}
             {...register("phone")}
             placeholder="+380"
           />
