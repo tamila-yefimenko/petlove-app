@@ -53,7 +53,7 @@ const UserBlock: React.FC<UserBlockProps> = ({ onClick }) => {
         )}
       </div>
       <h3 className={s.info}>My information</h3>
-      <ul>
+      <ul className={s.list}>
         {renderItem(name, "Name")}
         {renderItem(email, "name@gmail.com|")}
         {renderItem(phone, "+380")}

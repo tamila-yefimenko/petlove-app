@@ -9,3 +9,4 @@ export const selectNoticesViewed = (state: RootState) =>
   state.user.noticesViewed;
 export const selectNoticesFavourite = (state: RootState) =>
   state.user.noticesFavourite;
+export const selectPets = (state: RootState) => state.user.pets;

@@ -12,7 +12,7 @@ import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const LoginPage = lazy(() => import("../../pages/LoginPage/LoginPage"));
 const RegistrationPage = lazy(
-  () => import("../../pages/RegistrationPage/RegistrationPage")
+  () => import("../../pages/RegistrationPage/RegistrationPage"),
 );
 const NewsPage = lazy(() => import("../../pages/NewsPage/NewsPage"));
 const NoticesPage = lazy(() => import("../../pages/NoticesPage/NoticesPage"));
@@ -20,7 +20,7 @@ const FriendsPage = lazy(() => import("../../pages/FriendsPage/FriendsPage"));
 const ProfilePage = lazy(() => import("../../pages/ProfilePage/ProfilePage"));
 const AddPetPage = lazy(() => import("../../pages/AddPetPage/AddPetPage"));
 const NotFoundPage = lazy(
-  () => import("../../pages/NotFoundPage/NotFoundPage")
+  () => import("../../pages/NotFoundPage/NotFoundPage"),
 );
 
 const App: React.FC = () => {

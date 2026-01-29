@@ -19,9 +19,6 @@ const ProfilePage: React.FC = () => {
   const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectError);
 
-  const viewed = useAppSelector(selectNoticesViewed);
-  const favourite = useAppSelector(selectNoticesFavourite);
-
   useEffect(() => {
     dispatch(fetchUser());
   }, [dispatch]);

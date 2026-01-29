@@ -18,3 +18,10 @@
   stroke: #f6b83d;
   fill: transparent;
 }
+
+@media (min-width: 768px) {
+  .editButton {
+    top: 40px;
+    right: 40px;
+  }
+}
