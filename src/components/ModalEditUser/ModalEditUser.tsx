@@ -12,10 +12,11 @@ import clsx from "clsx";
 import Button from "../Button/Button";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { EditUserFormValues, editUserSchema } from "./validation";
+import { editUserSchema } from "./validation";
 import { toast } from "react-toastify";
 import { editUser } from "../../redux/user/operations";
 import { uploadToCloudinary } from "../../utils/uploadFile";
+import { EditUserFormValues } from "../../utils/types";
 
 interface ModalEditUserProps {
   isOpen: boolean;
@@ -43,7 +44,7 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm<EditUserFormValues>({
-    resolver: yupResolver(editUserSchema),
+    resolver: yupResolver(editUserSchema) as any,
     defaultValues: {
       avatar: avatar ?? "",
       name: name ?? "",

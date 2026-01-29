@@ -154,9 +154,9 @@ export interface FavoriteState {
   error: string | null;
 }
 
-// export interface EditUserFormValues {
-//   name?: string;
-//   email?: string;
-//   avatar?: string;
-//   phone?: string;
-// }
+export interface EditUserFormValues {
+  name?: string;
+  email?: string;
+  avatar?: string;
+  phone?: string;
+}
