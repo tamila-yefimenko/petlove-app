@@ -1,3 +1,6 @@
+import { InferType } from "yup";
+import { editUserSchema } from "../components/ModalEditUser/validation";
+
 export interface IUser {
   name: string | null;
   email: string | null;
@@ -150,3 +153,10 @@ export interface FavoriteState {
   favorites: string[];
   error: string | null;
 }
+
+// export interface EditUserFormValues {
+//   name?: string;
+//   email?: string;
+//   avatar?: string;
+//   phone?: string;
+// }

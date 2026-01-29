@@ -1,6 +1,21 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import s from "./ModalEditUser.module.css";
 import ClearBtn from "../ClearBtn/ClearBtn";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  selectAvatar,
+  selectEmail,
+  selectName,
+  selectPhone,
+} from "../../redux/user/selectors";
+import clsx from "clsx";
+import Button from "../Button/Button";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { EditUserFormValues, editUserSchema } from "./validation";
+import { toast } from "react-toastify";
+import { editUser } from "../../redux/user/operations";
+import { uploadToCloudinary } from "../../utils/uploadFile";
 
 interface ModalEditUserProps {
   isOpen: boolean;
@@ -8,7 +23,70 @@ interface ModalEditUserProps {
 }
 
 const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
+  const dispatch = useAppDispatch();
+
+  const name = useAppSelector(selectName);
+  const email = useAppSelector(selectEmail);
+  const phone = useAppSelector(selectPhone);
+  const avatar = useAppSelector(selectAvatar);
+
+  const [avatarPreview, setAvatarPreview] = useState<string | null>(
+    avatar ?? null,
+  );
+
   const modalRef = useRef<HTMLDivElement>(null);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors, isSubmitting },
+  } = useForm<EditUserFormValues>({
+    resolver: yupResolver(editUserSchema),
+    defaultValues: {
+      avatar: avatar ?? "",
+      name: name ?? "",
+      email: email ?? "",
+      phone: phone ?? "",
+    },
+  });
+
+  const onSubmit = async (data: EditUserFormValues) => {
+    const payload = Object.fromEntries(
+      (Object.entries(data) as [keyof EditUserFormValues, string][]).filter(
+        ([_, value]) => value.trim() !== "",
+      ),
+    );
+
+    if (Object.keys(payload).length === 0) {
+      toast.info("Nothing to update!");
+      return;
+    }
+
+    try {
+      await dispatch(editUser(payload)).unwrap();
+      onClose();
+    } catch (error) {
+      toast.error(error as string);
+    }
+  };
+
+  const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    const previewUrl = URL.createObjectURL(file);
+    setAvatarPreview(previewUrl);
+
+    const uploadedUrl = await uploadToCloudinary(file);
+
+    setValue("avatar", uploadedUrl, {
+      shouldValidate: true,
+    });
+  };
+
+  const isDirty = Object.values(watch()).some((v) => v?.trim());
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -32,6 +110,8 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, onClose]);
 
+  if (!isOpen) return null;
+
   return (
     <div className={s.backdrop} onClick={onClose}>
       <div className={s.modal} onClick={(e) => e.stopPropagation()}>
@@ -40,7 +120,67 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
           onClick={onClose}
           iconClassName={s.clearIcon}
         />
-        <h2>Edit information</h2>
+        <h2 className={s.title}>Edit information</h2>
+        <div className={s.avatarWrapper}>
+          {avatarPreview ? (
+            <img src={avatarPreview} alt="avatar" />
+          ) : (
+            <div className={s.bigIconWrapper}>
+              <svg className={s.bigIcon}>
+                <use href="/icons/sprite.svg#icon-user-02" />
+              </svg>
+            </div>
+          )}
+        </div>
+
+        <div className={s.upload}>
+          <div className={clsx(s.item, s.readonly)}>
+            {watch("avatar") || "https://..."}
+          </div>
+
+          <label className={s.uploadInput}>
+            Upload photo
+            <input
+              type="file"
+              accept="image/*"
+              hidden
+              onChange={handleAvatarChange}
+            />
+          </label>
+          {errors.avatar && <p className={s.error}>{errors.avatar.message}</p>}
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
+          <input
+            className={clsx(s.item, errors.name && s.errorInput)}
+            {...register("name")}
+            placeholder="Name"
+          />
+          {errors.name && <p className={s.error}>{errors.name.message}</p>}
+
+          <input
+            className={clsx(s.item, errors.email && s.errorInput)}
+            {...register("email")}
+            placeholder="name@gmail.com"
+          />
+          {errors.email && <p className={s.error}>{errors.email.message}</p>}
+
+          <input
+            className={clsx(s.item, errors.phone && s.errorInput)}
+            {...register("phone")}
+            placeholder="+380"
+          />
+          {errors.phone && <p className={s.error}>{errors.phone.message}</p>}
+
+          <Button
+            type="submit"
+            variant="orange"
+            size="medium"
+            fullWidth
+            disabled={!isDirty || isSubmitting}>
+            Go to profile
+          </Button>
+        </form>
       </div>
     </div>
   );

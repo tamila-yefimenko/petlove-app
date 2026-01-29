@@ -3,6 +3,7 @@ import { setLoading } from "../global/slice";
 import axios from "axios";
 import { getErrorMessage, goitAPI } from "../auth/operations";
 import { User } from "../../utils/types";
+import { EditUserFormValues } from "../../components/ModalEditUser/validation";
 
 export const fetchUser = createAsyncThunk<User, void, { rejectValue: string }>(
   "user/fetchUser",
@@ -24,7 +25,7 @@ export const fetchUser = createAsyncThunk<User, void, { rejectValue: string }>(
 
 export const editUser = createAsyncThunk<
   User,
-  Partial<User>,
+  Partial<EditUserFormValues>,
   { rejectValue: string }
 >("user/editUser", async (data, thunkAPI) => {
   const { dispatch } = thunkAPI;
