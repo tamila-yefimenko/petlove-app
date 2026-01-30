@@ -1,0 +1,38 @@
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  width: 123px;
+  height: 42px;
+  background-color: #fff;
+  border: none;
+  border-radius: 30px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.03em;
+  color: #262626;
+}
+
+.active {
+  background-color: #f6b83d;
+  color: #fff;
+}
+
+@media (min-width: 768px) {
+  .tab {
+    width: 142px;
+    height: 48px;
+    font-size: 16px;
+    line-height: 1.25;
+  }
+}
+
+@media (min-width: 1280px) {
+  .tabs {
+    padding-top: 40px;
+  }
+}

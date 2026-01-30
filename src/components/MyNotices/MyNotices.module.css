@@ -1,0 +1,12 @@
+.text {
+  padding: 60px 4px 140px 4px;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.02em;
+  text-align: center;
+}
+
+.span {
+  font-weight: 700;
+  color: #f6b83d;
+}

@@ -3,6 +3,7 @@
   border-radius: 30px;
   padding: 18px 20px 40px 20px;
   background-color: #fff;
+  /* margin-bottom: 40px; */
 }
 
 .button {
@@ -13,5 +14,16 @@
 @media (min-width: 768px) {
   .userCard {
     padding: 40px;
+  }
+
+  .button {
+    width: 136px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .userCard {
+    max-width: 520px;
+    flex-shrink: 0;
   }
 }
