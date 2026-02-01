@@ -1,14 +1,21 @@
 import { useLocation } from "react-router-dom";
 import Button from "../Button/Button";
 import s from "./LogOutBtn.module.css";
+import clsx from "clsx";
 
 export interface LogOutBtnProps {
   onClick?: () => void;
   isMenu?: boolean;
   vertical?: boolean;
+  className?: string;
 }
 
-const LogOutBtn: React.FC<LogOutBtnProps> = ({ onClick, isMenu, vertical }) => {
+const LogOutBtn: React.FC<LogOutBtnProps> = ({
+  onClick,
+  isMenu,
+  vertical,
+  className,
+}) => {
   const { pathname } = useLocation();
   const isHome = pathname === "/";
 
@@ -23,7 +30,7 @@ const LogOutBtn: React.FC<LogOutBtnProps> = ({ onClick, isMenu, vertical }) => {
 
   return (
     <Button
-      className={s.button}
+      className={clsx(s.button, className)}
       onClick={onClick}
       fullWidth={isMenu}
       size="small"

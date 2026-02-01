@@ -140,3 +140,9 @@
     line-height: 1.25;
   }
 }
+
+@media (min-width: 1280px) {
+  .item {
+    max-width: 100%;
+  }
+}

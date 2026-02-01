@@ -11,6 +11,20 @@
   color: #f6b83d;
 }
 
+@media (min-width: 768px) {
+  .wrapper {
+    width: 100%;
+  }
+
+  .text {
+    font-size: 16px;
+    line-height: 1.25;
+    max-width: 458px;
+    padding-top: 160px;
+    margin: 0 auto;
+  }
+}
+
 @media (min-width: 1280px) {
   .list {
     display: grid;

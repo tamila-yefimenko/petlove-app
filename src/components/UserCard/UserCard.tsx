@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Button from "../Button/Button";
 import EditUserBtn from "../EditUserBtn/EditUserBtn";
 import PetsBlock from "../PetsBlock/PetsBlock";
 import UserBlock from "../UserBlock/UserBlock";
 import s from "./UserCard.module.css";
 import ModalEditUser from "../ModalEditUser/ModalEditUser";
+import LogOutBtn from "../LogOutBtn/LogOutBtn";
 
 const UserCard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,9 +18,8 @@ const UserCard: React.FC = () => {
       <EditUserBtn onClick={handleModalOpen} />
       <UserBlock onClick={handleModalOpen} />
       <PetsBlock />
-      <Button variant="light" size="medium" type="button" className={s.button}>
-        log out
-      </Button>
+      <LogOutBtn className={s.button} onClick={() => {}} />
+
       {isModalOpen && (
         <ModalEditUser
           isOpen={isModalOpen}

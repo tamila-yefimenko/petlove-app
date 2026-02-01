@@ -8,7 +8,7 @@ interface PetsListProps {
 
 const PetsList: React.FC<PetsListProps> = ({ pets }) => {
   return (
-    <ul>
+    <ul className={s.petsList}>
       {pets?.map((pet) => (
         <li key={pet._id} className={s.item}>
           <PetsItem pet={pet} />

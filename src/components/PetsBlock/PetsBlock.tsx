@@ -5,7 +5,7 @@ import PetsList from "../PetsList/PetsList";
 import s from "./PetsBlock.module.css";
 
 const PetsBlock = () => {
-  const pets = useAppSelector(selectPets);
+  const pets = useAppSelector(selectPets) ?? [];
 
   return (
     <>
@@ -13,8 +13,8 @@ const PetsBlock = () => {
         <h3>My pets</h3>
         <AddPet />
       </div>
-
-      <PetsList pets={pets} />
+      {pets.length === 0 && <div className={s.spacer} />}
+      {pets.length > 0 && <PetsList pets={pets} />}
     </>
   );
 };

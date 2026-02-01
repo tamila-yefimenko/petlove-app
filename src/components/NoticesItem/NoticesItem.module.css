@@ -117,7 +117,7 @@
   border-radius: 30px;
   background-color: #fff4df;
   border: none;
-  transition: background 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
 .heartBtn:hover {

@@ -1,5 +1,6 @@
 .userCard {
   position: relative;
+  height: 100%;
   border-radius: 30px;
   padding: 18px 20px 40px 20px;
   background-color: #fff;
@@ -8,7 +9,14 @@
 
 .button {
   width: 114px;
-  text-transform: uppercase;
+  height: 42px;
+  color: #f6b83d;
+  background-color: #fff4df;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: #fbe7c1;
 }
 
 @media (min-width: 768px) {
@@ -19,12 +27,13 @@
 
   .button {
     width: 136px;
+    height: 50px;
   }
 }
 
 @media (min-width: 1280px) {
   .userCard {
-    max-width: 520px;
+    width: 520px;
     flex-shrink: 0;
     margin-bottom: 62px;
   }

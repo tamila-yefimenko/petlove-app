@@ -10,3 +10,10 @@
   fill: #fff;
   margin-left: 4px;
 }
+
+@media (min-width: 768px) {
+  .button {
+    padding: 10px 20px;
+    height: 40px;
+  }
+}
