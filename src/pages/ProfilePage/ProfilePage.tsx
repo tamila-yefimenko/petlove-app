@@ -5,11 +5,7 @@ import UserCard from "../../components/UserCard/UserCard";
 import s from "./ProfilePage.module.css";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { selectIsLoading } from "../../redux/global/selectors";
-import {
-  selectError,
-  selectNoticesFavourite,
-  selectNoticesViewed,
-} from "../../redux/user/selectors";
+import { selectError } from "../../redux/user/selectors";
 import { fetchUser } from "../../redux/user/operations";
 import Loader from "../../components/Loader/Loader";
 
@@ -26,8 +22,10 @@ const ProfilePage: React.FC = () => {
   return (
     <>
       <Container className={s.profileContainer}>
-        <UserCard />
-        <MyNotices />
+        <div className={s.wrapper}>
+          <UserCard />
+          <MyNotices />
+        </div>
         {isLoading && <Loader />}
         {error && <p>error</p>}
       </Container>

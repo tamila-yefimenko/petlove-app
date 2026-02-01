@@ -48,7 +48,7 @@ const NoticesPage: React.FC = () => {
         byPopularity,
         byPrice,
         page,
-      })
+      }),
     );
   }, [
     keyword,
@@ -78,7 +78,7 @@ const NoticesPage: React.FC = () => {
             </div>
           )}
         </div>
-        {hasNotices && <NoticesList notices={notices} />}
+        {hasNotices && <NoticesList notices={notices} variant="notice" />}
         {!hasNotices && (
           <div className={s.noWrapper}>
             <p className={s.noResults}>No results found.</p>

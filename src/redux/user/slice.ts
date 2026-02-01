@@ -1,5 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { editUser, fetchUser } from "./operations";
+import {
+  addToFavorites,
+  deleteFromFavorites,
+  editUser,
+  fetchUser,
+} from "./operations";
 import { UserState } from "../../utils/types";
 
 const initialState: UserState = {
@@ -8,7 +13,8 @@ const initialState: UserState = {
   phone: "",
   avatar: "",
   noticesViewed: [],
-  noticesFavourite: [],
+  noticesFavorites: [],
+  noticesFavIds: [],
   pets: [],
   error: null,
 };
@@ -28,7 +34,9 @@ const userSlice = createSlice({
         state.phone = action.payload.phone ?? "";
         state.avatar = action.payload.avatar ?? "";
         state.noticesViewed = action.payload.noticesViewed ?? [];
-        state.noticesFavourite = action.payload.noticesFavourite ?? [];
+        state.noticesFavorites = action.payload.noticesFavorites ?? [];
+        state.noticesFavIds =
+          action.payload.noticesFavorites?.map((fav) => fav._id) ?? [];
         state.pets = action.payload.pets ?? [];
       })
       .addCase(fetchUser.rejected, (state, action) => {
@@ -45,6 +53,36 @@ const userSlice = createSlice({
       })
       .addCase(editUser.rejected, (state, action) => {
         state.error = action.payload ?? "unknown error";
+      })
+      .addCase(addToFavorites.pending, (state, action) => {
+        state.error = null;
+      })
+      .addCase(addToFavorites.fulfilled, (state, action) => {
+        const id = action.meta.arg;
+
+        if (!state.noticesFavIds.includes(id)) {
+          state.noticesFavIds.push(id);
+        }
+      })
+      .addCase(addToFavorites.rejected, (state, action) => {
+        state.error = action.payload ?? "Unknown error";
+      })
+      .addCase(deleteFromFavorites.pending, (state, action) => {
+        state.error = null;
+      })
+      .addCase(deleteFromFavorites.fulfilled, (state, action) => {
+        const id = action.meta.arg;
+
+        state.noticesFavIds = state.noticesFavIds.filter(
+          (favId) => favId !== id,
+        );
+
+        state.noticesFavorites = state.noticesFavorites.filter(
+          (notice) => notice._id !== id,
+        );
+      })
+      .addCase(deleteFromFavorites.rejected, (state, action) => {
+        state.error = action.payload ?? "Unknown error";
       });
   },
 });

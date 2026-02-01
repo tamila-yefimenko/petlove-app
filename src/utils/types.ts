@@ -81,7 +81,7 @@ export interface User {
   phone?: string;
   avatar?: string;
   noticesViewed?: Pet[];
-  noticesFavourite?: Pet[];
+  noticesFavorites?: Pet[];
   pets?: Pet[];
   token?: string;
 }
@@ -92,7 +92,8 @@ export interface UserState {
   phone?: string;
   avatar?: string;
   noticesViewed?: Pet[];
-  noticesFavourite?: Pet[];
+  noticesFavorites: Pet[];
+  noticesFavIds: string[];
   pets?: Pet[];
   error: string | null;
 }

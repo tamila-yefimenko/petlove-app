@@ -8,7 +8,7 @@ import { useAppDispatch } from "../../redux/hooks";
 import {
   addToFavorites,
   deleteFromFavorites,
-} from "../../redux/favorites/operations";
+} from "../../redux/user/operations";
 
 export interface ModalNoticeProps {
   isOpen: boolean;

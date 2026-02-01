@@ -9,21 +9,22 @@ import ModalAttention from "../ModalAttention/ModalAttention";
 import { fetchNoticeById } from "../../redux/notices/operations";
 import { selectCurrentNotice } from "../../redux/notices/selectors";
 import ModalNotice from "../ModalNotice/ModalNotice";
+import ContactModal from "../ContactModal/ContactModal";
+import { selectNoticesFavIds } from "../../redux/user/selectors";
 import {
   addToFavorites,
   deleteFromFavorites,
-} from "../../redux/favorites/operations";
-import { selectFavorites } from "../../redux/favorites/selectors";
-import ContactModal from "../ContactModal/ContactModal";
+} from "../../redux/user/operations";
 
 interface NoticesItemProps {
   pet: Pet;
+  variant: "notice" | "favorite" | "viewed";
 }
 
-const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
+const NoticesItem: React.FC<NoticesItemProps> = ({ pet, variant }) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const currentNotice = useAppSelector(selectCurrentNotice);
-  const favorites = useAppSelector(selectFavorites);
+  const favorites = useAppSelector(selectNoticesFavIds);
 
   const isFavorite = favorites.includes(pet._id);
 
@@ -56,6 +57,16 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
     }
   };
 
+  const handleRemoveFavorite = () => {
+    if (!isLoggedIn) {
+      setShowAttentionModal(true);
+      return;
+    }
+    if (isFavorite) {
+      dispatch(deleteFromFavorites(pet._id));
+    }
+  };
+
   const handleOpenContact = () => {
     setShowDetailsModal(false);
     setShowContactModal(true);
@@ -70,7 +81,7 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
           <svg
             className={clsx(
               s.star,
-              !pet.popularity ? s.starEmpty : s.starActive
+              !pet.popularity ? s.starEmpty : s.starActive,
             )}>
             <use href="/icons/sprite.svg#icon-star" />
           </svg>
@@ -110,17 +121,27 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet }) => {
         <Button className={s.button} onClick={handleLearnMoreClick}>
           Learn more
         </Button>
-        <button className={s.heartBtn} onClick={handleFavourite}>
-          <svg className={s.heart}>
-            <use
-              href={
-                isFavorite
-                  ? "/icons/sprite.svg#icon-trash-2"
-                  : "/icons/sprite.svg#icon-heart"
-              }
-            />
-          </svg>
-        </button>
+        {variant === "notice" && (
+          <button className={s.heartBtn} onClick={handleFavourite}>
+            <svg className={s.heart}>
+              <use
+                href={
+                  isFavorite
+                    ? "/icons/sprite.svg#icon-trash-2"
+                    : "/icons/sprite.svg#icon-heart"
+                }
+              />
+            </svg>
+          </button>
+        )}
+
+        {variant === "favorite" && (
+          <button className={s.heartBtn} onClick={handleRemoveFavorite}>
+            <svg className={s.heart}>
+              <use href={"/icons/sprite.svg#icon-trash-2"} />
+            </svg>
+          </button>
+        )}
 
         {showAttentionModal && (
           <ModalAttention
