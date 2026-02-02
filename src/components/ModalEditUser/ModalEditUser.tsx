@@ -42,7 +42,7 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
     handleSubmit,
     watch,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, dirtyFields },
   } = useForm<EditUserFormValues>({
     resolver: yupResolver(editUserSchema) as any,
     defaultValues: {
@@ -55,9 +55,10 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
 
   const onSubmit = async (data: EditUserFormValues) => {
     const payload = Object.fromEntries(
-      (Object.entries(data) as [keyof EditUserFormValues, string][]).filter(
-        ([_, value]) => value.trim() !== "",
-      ),
+      Object.entries(dirtyFields).map(([key]) => [
+        key,
+        data[key as keyof EditUserFormValues],
+      ]),
     );
 
     if (Object.keys(payload).length === 0) {
@@ -86,8 +87,6 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
       shouldValidate: true,
     });
   };
-
-  const isDirty = Object.values(watch()).some((v) => v?.trim());
 
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
@@ -199,7 +198,7 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
             variant="orange"
             size="medium"
             fullWidth
-            disabled={!isDirty || isSubmitting}>
+            disabled={isSubmitting}>
             Go to profile
           </Button>
         </form>

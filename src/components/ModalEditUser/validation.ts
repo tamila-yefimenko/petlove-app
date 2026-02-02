@@ -1,5 +1,4 @@
 import * as yup from "yup";
-import { InferType } from "yup";
 
 export const editUserSchema = yup.object({
   name: yup.string().trim().min(2, "Name is too short").notRequired(),
@@ -25,5 +24,3 @@ export const editUserSchema = yup.object({
     )
     .notRequired(),
 });
-
-// export type EditUserFormValues = InferType<typeof editUserSchema>;
