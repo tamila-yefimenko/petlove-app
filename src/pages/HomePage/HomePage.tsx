@@ -1,5 +1,4 @@
 import { Container } from "../../components/Container/Container";
-// import Header from "../../components/Header/Header";
 import s from "./HomePage.module.css";
 
 const HomePage: React.FC = () => {
@@ -7,7 +6,6 @@ const HomePage: React.FC = () => {
     <div className={s.home}>
       <Container className={s.container}>
         <div className={s.wrapper}>
-          {/* <Header className={s.homeHeader} /> */}
           <div className={s.content}>
             <h1 className={s.title}>
               Take good <span className={s.span}>care</span> of your small pets

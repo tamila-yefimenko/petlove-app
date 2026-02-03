@@ -15,12 +15,15 @@ const Layout: React.FC = () => {
 
   const isLoading = useAppSelector(selectIsLoading);
 
+  const openLogoutModal = () => setIsLogoutOpen(true);
+  const closeLogoutModal = () => setIsLogoutOpen(false);
+
   return (
     <div className={s.layout}>
       {isLoading && <Loader />}
       <Header
         className={isHome ? s.homeHeader : s.header}
-        onLogoutClick={() => setIsLogoutOpen(true)}
+        onLogoutClick={openLogoutModal}
       />
 
       <main className={s.main}>
@@ -29,14 +32,11 @@ const Layout: React.FC = () => {
             <Outlet />
           </div>
         ) : (
-          <Outlet />
+          <Outlet context={{ openLogoutModal }} />
         )}
       </main>
 
-      <LogoutController
-        isOpen={isLogoutOpen}
-        onClose={() => setIsLogoutOpen(false)}
-      />
+      <LogoutController isOpen={isLogoutOpen} onClose={closeLogoutModal} />
     </div>
   );
 };

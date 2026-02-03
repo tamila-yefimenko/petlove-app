@@ -5,9 +5,20 @@ import UserBlock from "../UserBlock/UserBlock";
 import s from "./UserCard.module.css";
 import ModalEditUser from "../ModalEditUser/ModalEditUser";
 import LogOutBtn from "../LogOutBtn/LogOutBtn";
+import { useAppSelector } from "../../redux/hooks";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
+import { useOutletContext } from "react-router-dom";
+
+type OutletContextType = {
+  openLogoutModal: () => void;
+};
 
 const UserCard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const { openLogoutModal } = useOutletContext<OutletContextType>();
+
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -18,7 +29,9 @@ const UserCard: React.FC = () => {
       <EditUserBtn onClick={handleModalOpen} />
       <UserBlock onClick={handleModalOpen} />
       <PetsBlock />
-      <LogOutBtn className={s.button} onClick={() => {}} />
+      {isLoggedIn && (
+        <LogOutBtn className={s.button} onClick={openLogoutModal} />
+      )}
 
       {isModalOpen && (
         <ModalEditUser
