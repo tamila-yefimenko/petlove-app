@@ -8,9 +8,11 @@ export const selectFiltersForFetch = createSelector(
     category: filters.category,
     species: filters.species,
     sex: filters.sex,
+    speciesList: filters.speciesList,
+    sexList: filters.sexList,
     locationId: filters.locationId,
     byPopularity: filters.byPopularity,
     byPrice: filters.byPrice,
     page: filters.page,
-  })
+  }),
 );

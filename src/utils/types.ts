@@ -122,6 +122,16 @@ export interface Pet {
   updatedAt?: string;
 }
 
+export interface AddPetState {
+  name: string;
+  title: string;
+  imgURL: string;
+  species: string;
+  birthday: string;
+  sex: string;
+  error: string | null;
+}
+
 export interface Filters {
   category?: string;
   byGender?: string;
@@ -160,4 +170,13 @@ export interface EditUserFormValues {
   email?: string;
   avatar?: string;
   phone?: string;
+}
+
+export interface AddPetFormValues {
+  name: string;
+  title: string;
+  imgURL: string;
+  species: string;
+  birthday: string;
+  sex: string;
 }
