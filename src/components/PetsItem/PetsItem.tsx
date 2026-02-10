@@ -8,27 +8,36 @@ interface PetsItemProps {
 const PetsItem: React.FC<PetsItemProps> = ({ pet }) => {
   return (
     <>
-      <img src={pet.imgURL} alt={pet.name} />
-      <h3>{pet.title}</h3>
-      <button>delete</button>
-      <ul>
-        <li>
-          <h4>Name</h4>
-          <p>{pet.name}</p>
-        </li>
-        <li>
-          <h4>Birthday</h4>
-          <p>{pet.birthday}</p>
-        </li>
-        <li>
-          <h4>Sex</h4>
-          <p>{pet.sex}</p>
-        </li>
-        <li>
-          <h4>Species</h4>
-          <p>{pet.species}</p>
-        </li>
-      </ul>
+      <img src={pet.imgURL} alt={pet.name} className={s.img} />
+
+      <button className={s.trash}>
+        <svg className={s.icon}>
+          <use href={"/icons/sprite.svg#icon-trash-2"} />
+        </svg>
+      </button>
+      <div className={s.wrapper}>
+        <h3 className={s.petTitle}>{pet.title}</h3>
+        <ul className={s.list}>
+          <li className={s.item}>
+            <h4 className={s.subtitle}>Name</h4>
+            <p className={s.data}>{pet.name}</p>
+          </li>
+          <li className={s.item}>
+            <h4 className={s.subtitle}>Birthday</h4>
+            <p className={s.data}>
+              {pet.birthday?.split("-").reverse().join(".")}
+            </p>
+          </li>
+          <li className={s.item}>
+            <h4 className={s.subtitle}>Sex</h4>
+            <p className={s.data}>{pet.sex}</p>
+          </li>
+          <li className={s.item}>
+            <h4 className={s.subtitle}>Species</h4>
+            <p className={s.data}>{pet.species}</p>
+          </li>
+        </ul>
+      </div>
     </>
   );
 };
