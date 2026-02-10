@@ -94,9 +94,9 @@ const NoticesItem: React.FC<NoticesItemProps> = ({ pet, variant }) => {
           Name: <span className={s.span}>{pet.name}</span>
         </li>
         <li className={s.item}>
-          Birthday:{" "}
+          Birthday:
           <span className={s.span}>
-            {pet.birthday?.split("-").reverse().join(".")}
+            {pet.birthday ? pet.birthday?.split("-").reverse().join(".") : "-"}
           </span>
         </li>
         <li className={s.item}>
