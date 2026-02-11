@@ -122,7 +122,7 @@ export interface Pet {
   updatedAt?: string;
 }
 
-export interface AddPetState {
+export interface PetState {
   name: string;
   title: string;
   imgURL: string;
@@ -172,7 +172,7 @@ export interface EditUserFormValues {
   phone?: string;
 }
 
-export interface AddPetFormValues {
+export interface PetFormValues {
   name: string;
   title: string;
   imgURL: string;

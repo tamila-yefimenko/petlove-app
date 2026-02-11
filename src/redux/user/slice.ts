@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  addPet,
   addToFavorites,
   deleteFromFavorites,
+  deletePet,
   editUser,
   fetchUser,
 } from "./operations";
@@ -82,6 +84,22 @@ const userSlice = createSlice({
         );
       })
       .addCase(deleteFromFavorites.rejected, (state, action) => {
+        state.error = action.payload ?? "Unknown error";
+      })
+      .addCase(addPet.pending, (state, action) => {
+        state.error = null;
+      })
+      .addCase(addPet.fulfilled, (state, action) => {})
+      .addCase(addPet.rejected, (state, action) => {
+        state.error = action.payload ?? "Unknown error";
+      })
+      .addCase(deletePet.pending, (state, action) => {
+        state.error = null;
+      })
+      .addCase(deletePet.fulfilled, (state, action) => {
+        state.pets = state.pets?.filter((pet) => pet._id !== action.payload);
+      })
+      .addCase(deletePet.rejected, (state, action) => {
         state.error = action.payload ?? "Unknown error";
       });
   },

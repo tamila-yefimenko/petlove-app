@@ -2,7 +2,12 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { setLoading } from "../global/slice";
 import axios from "axios";
 import { getErrorMessage, goitAPI } from "../auth/operations";
-import { EditUserFormValues, Pet, User } from "../../utils/types";
+import {
+  EditUserFormValues,
+  Pet,
+  PetFormValues,
+  User,
+} from "../../utils/types";
 
 export const fetchUser = createAsyncThunk<User, void, { rejectValue: string }>(
   "user/fetchUser",
@@ -64,6 +69,39 @@ export const deleteFromFavorites = createAsyncThunk<
     const response = await goitAPI.delete(`/notices/favorites/remove/${id}`);
 
     return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(getErrorMessage(error));
+  }
+});
+
+export const addPet = createAsyncThunk<
+  Pet,
+  PetFormValues,
+  { rejectValue: string }
+>("user/addPet", async (data, thunkAPI) => {
+  const { dispatch } = thunkAPI;
+
+  try {
+    dispatch(setLoading(true));
+
+    const response = await goitAPI.post<Pet>("users/current/pets/add", data);
+    return response.data;
+  } catch (error: any) {
+    return thunkAPI.rejectWithValue(getErrorMessage(error));
+  } finally {
+    dispatch(setLoading(false));
+  }
+});
+
+export const deletePet = createAsyncThunk<
+  string,
+  string,
+  { rejectValue: string }
+>("user/deletePet", async (id, thunkAPI) => {
+  try {
+    await goitAPI.delete(`/users/current/pets/remove/${id}`);
+
+    return id;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   }

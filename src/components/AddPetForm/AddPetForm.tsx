@@ -1,21 +1,12 @@
 import { useEffect, useState } from "react";
-import {
-  selectBirthday,
-  selectError,
-  selectImgUrl,
-  selectName,
-  selectSex,
-  selectSpecies,
-  selectTitle,
-} from "../../redux/addPet/selectors";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import s from "./AddPetForm.module.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addPetSchema } from "./validation";
-import { AddPetFormValues } from "../../utils/types";
+import { PetFormValues } from "../../utils/types";
 import { toast } from "react-toastify";
-import { addPet } from "../../redux/addPet/operations";
+// import { addPet } from "../../redux/pet/operations";
 import { useNavigate } from "react-router-dom";
 import { uploadToCloudinary } from "../../utils/uploadFile";
 import clsx from "clsx";
@@ -24,6 +15,7 @@ import { selectFiltersForFetch } from "../../redux/noticesFilters/selectors";
 import { fetchSex, fetchSpecies } from "../../redux/noticesFilters/operations";
 import { getSelectStyles } from "../../utils/selectStyles";
 import Select from "react-select";
+import { addPet } from "../../redux/user/operations";
 
 const AddPetForm: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -44,7 +36,7 @@ const AddPetForm: React.FC = () => {
     watch,
     setValue,
     formState: { errors, isSubmitting },
-  } = useForm<AddPetFormValues>({
+  } = useForm<PetFormValues>({
     resolver: yupResolver(addPetSchema),
     defaultValues: {
       name: "",
@@ -86,7 +78,7 @@ const AddPetForm: React.FC = () => {
     }
   };
 
-  const onSubmit = async (data: AddPetFormValues) => {
+  const onSubmit = async (data: PetFormValues) => {
     try {
       await dispatch(addPet(data)).unwrap();
       navigate("/profile");
