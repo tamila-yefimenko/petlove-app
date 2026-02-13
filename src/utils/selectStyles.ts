@@ -1,10 +1,14 @@
-export const getSelectStyles = (isTablet: boolean) => ({
+export const getSelectStyles = (isTablet: boolean, withBorder?: boolean) => ({
   control: (base: any, state: any) => ({
     ...base,
     minHeight: isTablet ? "48px" : "42px",
     width: "100%",
     borderRadius: "30px",
-    border: state.isFocused ? "1px solid #f6b83d" : "1px solid transparent",
+    border: state.isFocused
+      ? "1px solid #f6b83d"
+      : withBorder
+        ? "1px solid rgba(38, 38, 38, 0.15)"
+        : "1px solid transparent",
     boxShadow: "none",
     padding: "0 8px",
     cursor: "pointer",
@@ -72,8 +76,8 @@ export const getSelectStyles = (isTablet: boolean) => ({
           ? "#f6b83d"
           : "rgba(38, 38, 38, 0.6)"
         : state.isSelected
-        ? "#f6b83d"
-        : "rgba(38, 38, 38, 0.6)",
+          ? "#f6b83d"
+          : "rgba(38, 38, 38, 0.6)",
 
       "&:active": {
         backgroundColor: "rgba(246, 184, 61, 0.15)",

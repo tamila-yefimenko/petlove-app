@@ -1,37 +1,120 @@
-.avatarWrapper {
+.addForm {
+  border-radius: 30px;
+  background-color: #fff;
+  padding: 28px 20px 20px 20px;
+}
+
+.titleWrapper {
   display: flex;
-  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-transform: capitalize;
+}
+
+.details {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.28571;
+  color: rgba(43, 43, 42, 0.4);
+  text-transform: capitalize;
+}
+
+.sexGroup {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.sexLabel {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  width: 80px;
-  height: 80px;
-  margin: 0 auto 12px;
+  width: 32px;
+  height: 32px;
+  border-radius: 30px;
+}
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: none;
+}
+
+.female .icon {
+  stroke-width: 1.5px;
+  stroke: #f43f5e;
+}
+
+.male .icon {
+  stroke-width: 1.5px;
+  stroke: #54adff;
+}
+
+.multiple .icon {
+  fill: #f6b83d;
+}
+
+.sexActive .icon {
+  stroke: #fff;
+}
+
+.sexActive.female {
+  background-color: #f43f5e;
+}
+
+.sexActive.male {
+  background-color: #54adff;
+}
+
+.sexActive.multiple {
+  background-color: #f6b83d;
+}
+
+.female {
+  background-color: rgba(244, 63, 94, 0.1);
+}
+
+.male {
+  background-color: rgba(84, 173, 255, 0.1);
+}
+
+.multiple {
+  background-color: #fff4df;
 }
 
 .avatar {
   display: block;
-  width: 100%;
-  height: 100%;
+  width: 68px;
+  height: 68px;
   overflow: hidden;
   object-fit: cover;
   border-radius: 100px;
+  margin: 0 auto 16px;
 }
 
 .bigIconWrapper {
+  width: 68px;
+  height: 68px;
   display: flex;
   align-items: center;
   justify-content: center;
   border-radius: 100px;
   background-color: #fff4df;
+  margin: 0 auto 16px;
 }
 
 .bigIcon {
   width: 40px;
   height: 40px;
   fill: #f6b83d;
-  stroke-width: 2px;
-  stroke: #f6b83d;
 }
 
 .upload {
@@ -42,14 +125,14 @@
 }
 
 .uploadInput {
-  width: 126px;
-  height: 42px;
+  width: 117px;
+  height: 36px;
   border-radius: 30px;
   font-size: 12px;
   line-height: 1.33333;
   letter-spacing: -0.02em;
   color: #262626;
-  padding: 13px 12px;
+  padding: 10px;
   background-color: #fff4df;
   flex-shrink: 0;
   transition: background-color 0.3s ease-in-out;
@@ -61,12 +144,12 @@
 }
 
 .uploadIcon {
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   stroke-width: 2px;
   stroke: #f6b83d;
   fill: transparent;
-  margin-left: 6px;
+  margin-left: 5px;
   vertical-align: middle;
 }
 
@@ -84,14 +167,21 @@
   margin-bottom: 10px;
 }
 
+.dateSpecies .item {
+  width: 144px;
+  margin-bottom: 31px;
+}
+
 .last {
   margin-bottom: 21px;
 }
 
-.item::placeholder {
+.item::placeholder,
+.placeholder {
   font-size: 14px;
   line-height: 1.28571;
   letter-spacing: -0.03em;
+  color: rgba(38, 38, 38, 0.5);
 }
 
 .item:hover,
@@ -105,6 +195,8 @@
 }
 
 .readonly {
+  height: 36px;
+  padding: 9px 10px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -117,4 +209,179 @@
   letter-spacing: -0.03em;
   text-align: left;
   padding: 2px;
+}
+
+.dateSpecies {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 31px;
+}
+
+.buttonsWrapper {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.button {
+  width: 100px;
+}
+
+.datePicker {
+  width: 144px;
+  height: 42px;
+}
+
+.datePicker :global(.react-date-picker__wrapper) {
+  display: flex;
+  align-items: center;
+  border: 1px solid rgba(38, 38, 38, 0.15);
+  border-radius: 30px;
+  padding: 0 7px 0 10px;
+  height: 42px;
+  transition: border 0.3s ease-in-out;
+  background-color: #fff;
+}
+
+.datePicker:global(.react-date-picker) {
+  border: none;
+}
+
+.datePicker :global(.react-date-picker__wrapper:hover),
+.datePicker :global(.react-date-picker__wrapper:focus-within) {
+  border: 1px solid #f6b83d;
+}
+
+.hasValue :global(.react-date-picker__wrapper) {
+  border: 1px solid #f6b83d;
+}
+
+.datePicker :global(.react-date-picker__inputGroup) {
+  flex: 1;
+  align-items: baseline !important;
+}
+
+.datePicker :global(input) {
+  border: none;
+  outline: none;
+  font-family: inherit !important;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.03em;
+  color: #262626;
+}
+
+.datePicker :global(.react-date-picker__inputGroup__input::placeholder) {
+  color: rgba(38, 38, 38, 0.5);
+}
+
+.datePicker :global(.react-date-picker__inputGroup__input:invalid) {
+  background: #fff;
+}
+
+.datePicker :global(.react-date-picker__inputGroup__day),
+.datePicker :global(.react-date-picker__inputGroup__month) {
+  width: 18px;
+}
+
+.datePicker :global(.react-date-picker__inputGroup__year) {
+  width: 34px;
+}
+
+.datePicker :global(.react-date-picker__inputGroup__input) {
+  padding: 0 !important;
+  margin: 0;
+  text-align: left;
+}
+
+.datePicker :global(.react-date-picker__inputGroup__divider) {
+  padding: 0;
+  font-size: 14px;
+}
+
+.datePicker :global(.react-date-picker__inputGroup__leadingZero) {
+  font-family: inherit !important;
+  font-size: 14px;
+  line-height: 1.28571;
+  letter-spacing: -0.03em;
+  color: #262626;
+}
+
+.calendarIcon {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.5px;
+  stroke: #262626;
+}
+
+.datePicker :global(.react-calendar) {
+  width: 260px; /* було ~350 */
+  border-radius: 20px;
+  border: none;
+  padding: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  font-family: inherit;
+}
+
+.datePicker :global(.react-calendar__navigation) {
+  margin-bottom: 10px;
+}
+
+.datePicker :global(.react-calendar__navigation button) {
+  min-width: 32px;
+  background: none;
+  font-size: 14px;
+  font-weight: 500;
+  color: #262626;
+}
+
+.datePicker :global(.react-calendar__tile) {
+  height: 32px;
+  border-radius: 10px;
+  font-size: 13px;
+  background: none;
+}
+
+.datePicker :global(.react-calendar__tile:enabled:hover) {
+  background-color: #fff4df;
+}
+
+.datePicker :global(.react-calendar__tile--active) {
+  background: #f6b83d !important;
+  color: #fff;
+  border-radius: 10px;
+}
+
+.datePicker :global(.react-calendar__tile--now) {
+  background: transparent;
+  border: 1px solid #f6b83d;
+  border-radius: 10px;
+}
+
+.select {
+  width: 100%;
+  max-width: 143px;
+}
+
+.datePicker :global(.react-calendar button:focus) {
+  outline: none;
+}
+
+.dateSpecies :global(.react-select__menu-list)::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dateSpecies :global(.react-select__menu-list)::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.dateSpecies :global(.react-select__menu-list)::-webkit-scrollbar-thumb {
+  background-color: rgba(38, 38, 38, 0.08);
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.dateSpecies :global(.react-select__menu-list) {
+  scrollbar-width: initial;
+  scrollbar-color: rgba(38, 38, 38, 0.08) transparent;
 }

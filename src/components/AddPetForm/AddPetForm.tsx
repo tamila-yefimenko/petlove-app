@@ -1,33 +1,43 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+  useWindowWidth,
+} from "../../redux/hooks";
 import s from "./AddPetForm.module.css";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { addPetSchema } from "./validation";
 import { PetFormValues } from "../../utils/types";
 import { toast } from "react-toastify";
-// import { addPet } from "../../redux/pet/operations";
 import { useNavigate } from "react-router-dom";
 import { uploadToCloudinary } from "../../utils/uploadFile";
 import clsx from "clsx";
 import Button from "../Button/Button";
 import { selectFiltersForFetch } from "../../redux/noticesFilters/selectors";
-import { fetchSex, fetchSpecies } from "../../redux/noticesFilters/operations";
+import { fetchSpecies } from "../../redux/noticesFilters/operations";
 import { getSelectStyles } from "../../utils/selectStyles";
 import Select from "react-select";
 import { addPet } from "../../redux/user/operations";
+import { Controller } from "react-hook-form";
+import DatePicker from "react-date-picker";
+import "react-date-picker/dist/DatePicker.css";
+import "react-calendar/dist/Calendar.css";
+import { HiOutlineCalendar } from "react-icons/hi2";
 
 const AddPetForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { speciesList, sexList } = useAppSelector(selectFiltersForFetch);
+  const width = useWindowWidth();
+  const isTablet = width >= 768;
+
+  const { speciesList } = useAppSelector(selectFiltersForFetch);
 
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
 
   useEffect(() => {
     dispatch(fetchSpecies());
-    dispatch(fetchSex());
   }, [dispatch]);
 
   const {
@@ -35,6 +45,7 @@ const AddPetForm: React.FC = () => {
     handleSubmit,
     watch,
     setValue,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<PetFormValues>({
     resolver: yupResolver(addPetSchema),
@@ -53,10 +64,11 @@ const AddPetForm: React.FC = () => {
     label: item,
   }));
 
-  const sexOptions = sexList.map((item) => ({
-    value: item,
-    label: item,
-  }));
+  const sexOptions = [
+    { value: "female", icon: "icon-female1" },
+    { value: "male", icon: "icon-male" },
+    { value: "multiple", icon: "icon-healthicons_sexual-reproductive-health" },
+  ];
 
   const selectedSpecies =
     speciesOptions.find((o) => o.value === watch("species")) ?? null;
@@ -88,20 +100,26 @@ const AddPetForm: React.FC = () => {
   };
 
   return (
-    <>
-      <h2>add my pet/</h2>
-      <p>personal details</p>
+    <div className={s.addForm}>
+      <div className={s.titleWrapper}>
+        <h2 className={s.title}>add my pet/</h2>
+        <p className={s.details}>personal details</p>
+      </div>
 
       <div className={s.sexGroup}>
-        {sexOptions.map(({ value, label }) => (
+        {sexOptions.map(({ value, icon }) => (
           <label key={value} className={s.sexItem}>
             <input type="radio" value={value} {...register("sex")} hidden />
+
             <span
               className={clsx(
                 s.sexLabel,
+                s[value],
                 watch("sex") === value && s.sexActive,
               )}>
-              {label}
+              <svg className={clsx(s.icon)}>
+                <use href={`/icons/sprite.svg#${icon}`} />
+              </svg>
             </span>
           </label>
         ))}
@@ -115,7 +133,7 @@ const AddPetForm: React.FC = () => {
         ) : (
           <div className={s.bigIconWrapper}>
             <svg className={s.bigIcon}>
-              <use href="/icons/sprite.svg#icon-user-02" />
+              <use href="/icons/sprite.svg#icon-icons8_cat-footprint-1" />
             </svg>
           </div>
         )}
@@ -123,7 +141,11 @@ const AddPetForm: React.FC = () => {
 
       <div className={s.upload}>
         <div
-          className={clsx(s.item, s.readonly, watch("imgURL") && s.itemValue)}>
+          className={clsx(
+            s.item,
+            s.readonly,
+            watch("imgURL") ? s.itemValue : s.placeholder,
+          )}>
           {watch("imgURL") || "Enter URL"}
         </div>
 
@@ -147,64 +169,95 @@ const AddPetForm: React.FC = () => {
         <input
           {...register("title")}
           placeholder="Title"
-          className={clsx(s.item, errors.title && s.errorInput)}
+          className={clsx(
+            s.item,
+            watch("title") && s.itemValue,
+            errors.title && s.errorInput,
+          )}
         />
         {errors.name && <p className={s.error}>{errors.name.message}</p>}
 
         <input
           {...register("name")}
           placeholder="Pet's name"
-          className={clsx(s.item, errors.name && s.errorInput)}
+          className={clsx(
+            s.item,
+            watch("name") && s.itemValue,
+            errors.name && s.errorInput,
+          )}
         />
         {errors.birthday && (
           <p className={s.error}>{errors.birthday.message}</p>
         )}
 
-        <input
-          type="date"
-          {...register("birthday")}
-          className={clsx(s.item, errors.birthday && s.errorInput)}
-        />
-        {errors.birthday && (
-          <p className={s.error}>{errors.birthday.message}</p>
-        )}
+        <div className={s.dateSpecies}>
+          <Controller
+            control={control}
+            name="birthday"
+            render={({ field }) => (
+              <DatePicker
+                onChange={field.onChange}
+                value={field.value ? new Date(field.value) : null}
+                format="dd.MM.yyyy"
+                clearIcon={null}
+                calendarIcon={<HiOutlineCalendar className={s.calendarIcon} />}
+                className={clsx(s.datePicker, {
+                  [s.hasValue]: !!field.value,
+                })}
+                dayPlaceholder="00"
+                monthPlaceholder="00"
+                yearPlaceholder="0000"
+                showLeadingZeros
+              />
+            )}
+          />
+          {errors.birthday && (
+            <p className={s.error}>{errors.birthday.message}</p>
+          )}
 
-        <Select
-          styles={getSelectStyles(true)}
-          classNamePrefix="react-select"
-          className={s.select}
-          options={speciesOptions}
-          placeholder="Type of pet"
-          value={selectedSpecies}
-          onChange={(opt) =>
-            setValue("species", opt?.value ?? "", {
-              shouldValidate: true,
-              shouldDirty: true,
-            })
-          }
-        />
+          <Select
+            styles={getSelectStyles(isTablet, true)}
+            classNamePrefix="react-select"
+            className={s.select}
+            options={speciesOptions}
+            placeholder="Type of pet"
+            value={selectedSpecies}
+            onChange={(opt) =>
+              setValue("species", opt?.value ?? "", {
+                shouldValidate: true,
+                shouldDirty: true,
+              })
+            }
+          />
 
-        {errors.species && <p className={s.error}>{errors.species.message}</p>}
+          {errors.species && (
+            <p className={s.error}>{errors.species.message}</p>
+          )}
+        </div>
 
-        <Button
-          type="button"
-          variant="gray"
-          size="medium"
-          onClick={() => {
-            navigate("/profile");
-          }}>
-          Back
-        </Button>
+        <div className={s.buttonsWrapper}>
+          <Button
+            className={s.button}
+            type="button"
+            variant="gray"
+            size="medium"
+            onClick={() => {
+              navigate("/profile");
+            }}>
+            Back
+          </Button>
 
-        <Button
-          type="submit"
-          variant="orange"
-          size="medium"
-          disabled={isSubmitting}>
-          Go to profile
-        </Button>
+          <Button
+            className={s.button}
+            type="submit"
+            variant="orange"
+            size="medium"
+            disabled={isSubmitting}>
+            Go to profile
+          </Button>
+        </div>
       </form>
-    </>
+    </div>
   );
 };
 
