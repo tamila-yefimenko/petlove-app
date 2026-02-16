@@ -102,41 +102,43 @@ const AddPetForm: React.FC = () => {
   return (
     <div className={s.addForm}>
       <div className={s.titleWrapper}>
-        <h2 className={s.title}>add my pet/</h2>
+        <h2 className={s.title}>Add my pet/</h2>
         <p className={s.details}>personal details</p>
       </div>
 
-      <div className={s.sexGroup}>
-        {sexOptions.map(({ value, icon }) => (
-          <label key={value} className={s.sexItem}>
-            <input type="radio" value={value} {...register("sex")} hidden />
+      <div className={s.sexAvatarWrapper}>
+        <div className={s.sexGroup}>
+          {sexOptions.map(({ value, icon }) => (
+            <label key={value} className={s.sexItem}>
+              <input type="radio" value={value} {...register("sex")} hidden />
 
-            <span
-              className={clsx(
-                s.sexLabel,
-                s[value],
-                watch("sex") === value && s.sexActive,
-              )}>
-              <svg className={clsx(s.icon)}>
-                <use href={`/icons/sprite.svg#${icon}`} />
+              <span
+                className={clsx(
+                  s.sexLabel,
+                  s[value],
+                  watch("sex") === value && s.sexActive,
+                )}>
+                <svg className={clsx(s.icon)}>
+                  <use href={`/icons/sprite.svg#${icon}`} />
+                </svg>
+              </span>
+            </label>
+          ))}
+        </div>
+
+        {errors.sex && <p className={s.error}>{errors.sex.message}</p>}
+
+        <div className={s.avatarWrapper}>
+          {avatarPreview ? (
+            <img src={avatarPreview} alt="pet's photo" className={s.avatar} />
+          ) : (
+            <div className={s.bigIconWrapper}>
+              <svg className={s.bigIcon}>
+                <use href="/icons/sprite.svg#icon-icons8_cat-footprint-1" />
               </svg>
-            </span>
-          </label>
-        ))}
-      </div>
-
-      {errors.sex && <p className={s.error}>{errors.sex.message}</p>}
-
-      <div className={s.avatarWrapper}>
-        {avatarPreview ? (
-          <img src={avatarPreview} alt="pet's photo" className={s.avatar} />
-        ) : (
-          <div className={s.bigIconWrapper}>
-            <svg className={s.bigIcon}>
-              <use href="/icons/sprite.svg#icon-icons8_cat-footprint-1" />
-            </svg>
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </div>
 
       <div className={s.upload}>

@@ -1,7 +1,7 @@
 export const getSelectStyles = (isTablet: boolean, withBorder?: boolean) => ({
   control: (base: any, state: any) => ({
     ...base,
-    minHeight: isTablet ? "48px" : "42px",
+    minHeight: isTablet ? (withBorder ? "52px" : "48px") : "42px",
     width: "100%",
     borderRadius: "30px",
     border: state.isFocused
@@ -28,7 +28,7 @@ export const getSelectStyles = (isTablet: boolean, withBorder?: boolean) => ({
 
   placeholder: (base: any) => ({
     ...base,
-    color: "#262626",
+    color: withBorder ? "rgba(38, 38, 38, 0.5)" : "#262626",
     fontSize: isTablet ? "16px" : "14px",
     marginLeft: 0,
     textAlign: "left",

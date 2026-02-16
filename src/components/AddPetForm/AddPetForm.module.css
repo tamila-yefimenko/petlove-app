@@ -16,7 +16,6 @@
   font-size: 28px;
   line-height: 1;
   letter-spacing: -0.03em;
-  text-transform: capitalize;
 }
 
 .details {
@@ -90,6 +89,10 @@
   background-color: #fff4df;
 }
 
+.avatarWrapper {
+  margin-bottom: 16px;
+}
+
 .avatar {
   display: block;
   width: 68px;
@@ -97,7 +100,7 @@
   overflow: hidden;
   object-fit: cover;
   border-radius: 100px;
-  margin: 0 auto 16px;
+  margin: 0 auto;
 }
 
 .bigIconWrapper {
@@ -108,7 +111,7 @@
   justify-content: center;
   border-radius: 100px;
   background-color: #fff4df;
-  margin: 0 auto 16px;
+  margin: 0 auto;
 }
 
 .bigIcon {
@@ -177,6 +180,7 @@
 }
 
 .item::placeholder,
+.item.item.readonly::placeholder,
 .placeholder {
   font-size: 14px;
   line-height: 1.28571;
@@ -194,7 +198,7 @@
   border: 1px solid #f6b83d;
 }
 
-.readonly {
+.item.readonly {
   height: 36px;
   padding: 9px 10px !important;
   white-space: nowrap;
@@ -315,7 +319,7 @@
 }
 
 .datePicker :global(.react-calendar) {
-  width: 260px; /* було ~350 */
+  width: 260px;
   border-radius: 20px;
   border: none;
   padding: 12px;
@@ -384,4 +388,154 @@
 .dateSpecies :global(.react-select__menu-list) {
   scrollbar-width: initial;
   scrollbar-color: rgba(38, 38, 38, 0.08) transparent;
+}
+
+@media (min-width: 768px) {
+  .addForm {
+    padding: 40px 136px;
+  }
+
+  .titleWrapper {
+    margin-bottom: 40px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .details {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .sexAvatarWrapper {
+    display: flex;
+    gap: 37px;
+    justify-content: flex-start;
+  }
+
+  .avatarWrapper {
+    margin: 18px 0 12px;
+  }
+
+  .avatar,
+  .bigIconWrapper {
+    width: 86px;
+    height: 86px;
+  }
+
+  .bigIcon {
+    width: 44px;
+    height: 44px;
+  }
+
+  .sexGroup {
+    margin-bottom: 0;
+  }
+
+  .sexLabel {
+    width: 40px;
+    height: 40px;
+  }
+
+  .icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .upload {
+    margin-bottom: 18px;
+  }
+
+  .uploadInput {
+    width: 146px;
+    height: 42px;
+    font-size: 14px;
+    line-height: 1.28571;
+    padding: 12px 16px;
+  }
+
+  .uploadIcon {
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+  }
+
+  .item {
+    height: 52px;
+    padding: 16px !important;
+    margin-bottom: 18px;
+  }
+
+  .item,
+  .item::placeholder {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .item.readonly {
+    font-size: 14px;
+    line-height: 1.28571;
+    height: 42px;
+    padding: 12px !important;
+  }
+
+  .item.readonly::placeholder {
+    font-size: 14px !important;
+    line-height: 1.28571;
+  }
+
+  .datePicker {
+    width: 210px;
+    height: 52px;
+  }
+
+  .datePicker :global(.react-date-picker__wrapper) {
+    height: 52px;
+    padding: 0 10px 0 14px;
+  }
+
+  .datePicker :global(.react-date-picker__inputGroup) {
+    text-align: left;
+  }
+
+  .datePicker :global(input),
+  .datePicker :global(.react-date-picker__inputGroup__leadingZero) {
+    font-size: 16px;
+    line-height: 1.25;
+  }
+
+  .datePicker :global(.react-date-picker__inputGroup__day),
+  .datePicker :global(.react-date-picker__inputGroup__month) {
+    width: 24px;
+  }
+
+  .datePicker :global(.react-date-picker__inputGroup__year) {
+    width: 44px;
+  }
+
+  .calendarIcon {
+    width: 20px;
+    height: 20px;
+    stroke-width: 1.8px;
+  }
+
+  .dateSpecies {
+    margin-bottom: 40px;
+  }
+
+  .select {
+    max-width: 210px;
+  }
+
+  .button {
+    width: 170px;
+    height: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .addForm {
+    padding: 60px 80px;
+  }
 }
