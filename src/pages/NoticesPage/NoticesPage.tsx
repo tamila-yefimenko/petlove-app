@@ -15,6 +15,7 @@ import NoticesList from "../../components/NoticesList/NoticesList";
 import NoticesFilters from "../../components/NoticesFilters/NoticesFilters";
 import { selectFiltersForFetch } from "../../redux/noticesFilters/selectors";
 import { setPage } from "../../redux/noticesFilters/slice";
+import { toast } from "react-toastify";
 
 const NoticesPage: React.FC = () => {
   const isLoading = useAppSelector(selectIsLoading);
@@ -92,7 +93,7 @@ const NoticesPage: React.FC = () => {
             onChange={handlePageChange}
           />
         )}
-        {error && <p>error</p>}
+        {error && toast.error(error)}
       </Container>
     </div>
   );

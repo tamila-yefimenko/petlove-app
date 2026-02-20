@@ -163,9 +163,8 @@ const AddPetForm: React.FC = () => {
             onChange={handleAvatarChange}
           />
         </label>
-
-        {errors.imgURL && <p className={s.error}>{errors.imgURL.message}</p>}
       </div>
+      {errors.imgURL && <p className={s.error}>{errors.imgURL.message}</p>}
 
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
         <input
@@ -193,48 +192,54 @@ const AddPetForm: React.FC = () => {
         )}
 
         <div className={s.dateSpecies}>
-          <Controller
-            control={control}
-            name="birthday"
-            render={({ field }) => (
-              <DatePicker
-                onChange={field.onChange}
-                value={field.value ? new Date(field.value) : null}
-                format="dd.MM.yyyy"
-                clearIcon={null}
-                calendarIcon={<HiOutlineCalendar className={s.calendarIcon} />}
-                className={clsx(s.datePicker, {
-                  [s.hasValue]: !!field.value,
-                })}
-                dayPlaceholder="00"
-                monthPlaceholder="00"
-                yearPlaceholder="0000"
-                showLeadingZeros
-              />
+          <div className={s.dateWrapper}>
+            <Controller
+              control={control}
+              name="birthday"
+              render={({ field }) => (
+                <DatePicker
+                  onChange={field.onChange}
+                  value={field.value ? new Date(field.value) : null}
+                  format="dd.MM.yyyy"
+                  clearIcon={null}
+                  calendarIcon={
+                    <HiOutlineCalendar className={s.calendarIcon} />
+                  }
+                  className={clsx(s.datePicker, {
+                    [s.hasValue]: !!field.value,
+                  })}
+                  dayPlaceholder="00"
+                  monthPlaceholder="00"
+                  yearPlaceholder="0000"
+                  showLeadingZeros
+                />
+              )}
+            />
+            {errors.birthday && (
+              <p className={s.error}>{errors.birthday.message}</p>
             )}
-          />
-          {errors.birthday && (
-            <p className={s.error}>{errors.birthday.message}</p>
-          )}
+          </div>
 
-          <Select
-            styles={getSelectStyles(isTablet, true)}
-            classNamePrefix="react-select"
-            className={s.select}
-            options={speciesOptions}
-            placeholder="Type of pet"
-            value={selectedSpecies}
-            onChange={(opt) =>
-              setValue("species", opt?.value ?? "", {
-                shouldValidate: true,
-                shouldDirty: true,
-              })
-            }
-          />
+          <div className={s.typeWrapper}>
+            <Select
+              styles={getSelectStyles(isTablet, true)}
+              classNamePrefix="react-select"
+              className={s.select}
+              options={speciesOptions}
+              placeholder="Type of pet"
+              value={selectedSpecies}
+              onChange={(opt) =>
+                setValue("species", opt?.value ?? "", {
+                  shouldValidate: true,
+                  shouldDirty: true,
+                })
+              }
+            />
 
-          {errors.species && (
-            <p className={s.error}>{errors.species.message}</p>
-          )}
+            {errors.species && (
+              <p className={s.error}>{errors.species.message}</p>
+            )}
+          </div>
         </div>
 
         <div className={s.buttonsWrapper}>

@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { Friend } from "../../utils/types";
 import s from "./FriendsItem.module.css";
 
@@ -19,7 +18,7 @@ const FriendsItem: React.FC<FriendsItemProps> = ({ friend }) => {
   const phoneHref = friend.phone ? `tel:${friend.phone}` : null;
   const mapHref = friend.address
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-        friend.address
+        friend.address,
       )}`
     : null;
 

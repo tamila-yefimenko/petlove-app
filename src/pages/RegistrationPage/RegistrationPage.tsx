@@ -4,6 +4,7 @@ import s from "./RegistrationPage.module.css";
 import { useAppSelector } from "../../redux/hooks";
 import { selectIsError } from "../../redux/auth/selectors";
 import { Container } from "../../components/Container/Container";
+import { toast } from "react-toastify";
 
 const RegistrationPage: React.FC = () => {
   const error = useAppSelector(selectIsError);
@@ -31,7 +32,7 @@ const RegistrationPage: React.FC = () => {
           </div>
         </div>
         <RegistrationForm />
-        {error && <p>error</p>}
+        {error && toast.error(error)}
       </div>
     </Container>
   );

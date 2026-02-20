@@ -8,6 +8,7 @@ import { selectIsLoading } from "../../redux/global/selectors";
 import { selectError } from "../../redux/user/selectors";
 import { fetchUser } from "../../redux/user/operations";
 import Loader from "../../components/Loader/Loader";
+import { toast } from "react-toastify";
 
 const ProfilePage: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -27,7 +28,7 @@ const ProfilePage: React.FC = () => {
           <MyNotices />
         </div>
         {isLoading && <Loader />}
-        {error && <p>error</p>}
+        {error && toast.error(error)}
       </Container>
     </>
   );

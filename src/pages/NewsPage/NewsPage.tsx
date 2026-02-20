@@ -16,6 +16,7 @@ import { resetNews, setQuery } from "../../redux/news/slice";
 import { Container } from "../../components/Container/Container";
 import Pagination from "../../components/Pagination/Pagination";
 import { selectIsLoading } from "../../redux/global/selectors";
+import { toast } from "react-toastify";
 
 const NewsPage: React.FC = () => {
   const news = useAppSelector(selectNews);
@@ -59,7 +60,7 @@ const NewsPage: React.FC = () => {
             onChange={handlePageChange}
           />
         )}
-        {error && <p>error</p>}
+        {error && toast.error(error)}
       </Container>
     </div>
   );

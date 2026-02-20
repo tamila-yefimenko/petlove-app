@@ -1,3 +1,4 @@
+import { toast } from "react-toastify";
 import AddPetForm from "../../components/AddPetForm/AddPetForm";
 import { Container } from "../../components/Container/Container";
 import { useAppSelector } from "../../redux/hooks";
@@ -12,7 +13,7 @@ const AddPetPage: React.FC = () => {
       <div className={s.addPetPage}>
         <div className={s.wrapper}></div>
         <AddPetForm />
-        {error && <p>error</p>}
+        {error && toast.error(error)}
       </div>
     </Container>
   );

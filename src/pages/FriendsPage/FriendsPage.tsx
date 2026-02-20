@@ -7,6 +7,7 @@ import { selectIsLoading } from "../../redux/global/selectors";
 import { Container } from "../../components/Container/Container";
 import s from "./FriendsPage.module.css";
 import Title from "../../components/Title/Title";
+import { toast } from "react-toastify";
 
 const FriendsPage: React.FC = () => {
   const friends = useAppSelector(selectItems);
@@ -26,7 +27,7 @@ const FriendsPage: React.FC = () => {
       <Container className={s.friendsContainer}>
         {!isLoading && <Title className={s.friendsTitle}>Our friends</Title>}
         {hasFriends && <FriendsList friends={friends} />}
-        {error && <p>error</p>}
+        {error && toast.error(error)}
       </Container>
     </div>
   );
