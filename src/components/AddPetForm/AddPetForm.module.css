@@ -28,7 +28,9 @@
 
 .sexGroup {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  max-width: 112px;
   margin-bottom: 8px;
 }
 
@@ -122,8 +124,9 @@
 
 .upload {
   display: flex;
-  gap: 8px;
+  gap: 2px 8px;
   justify-content: space-between;
+  flex-wrap: wrap;
   margin-bottom: 10px;
 }
 
@@ -156,6 +159,10 @@
   vertical-align: middle;
 }
 
+.inputWrapper {
+  margin-bottom: 10px;
+}
+
 .item {
   text-align: left;
   border: 1px solid rgba(38, 38, 38, 0.15);
@@ -167,7 +174,6 @@
   line-height: 1.28571;
   letter-spacing: -0.03em;
   transition: border 0.3s ease-in-out;
-  margin-bottom: 10px;
 }
 
 .dateSpecies .item {
@@ -199,20 +205,13 @@
 }
 
 .item.readonly {
+  width: calc(100% - 117px - 8px);
   height: 36px;
   padding: 9px 10px !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 0 !important;
-}
-
-.error {
-  font-size: 10px;
-  line-height: 1.28571;
-  letter-spacing: -0.03em;
-  text-align: left;
-  padding: 2px;
 }
 
 .dateSpecies {
@@ -231,12 +230,18 @@
   width: 100px;
 }
 
+.dateWrapper {
+  width: calc((100% - 8px) / 2);
+}
+
 .datePicker {
-  width: 144px;
+  width: 100%;
   height: 42px;
 }
 
 .datePicker :global(.react-date-picker__wrapper) {
+  width: 100%;
+  min-width: 0;
   display: flex;
   align-items: center;
   border: 1px solid rgba(38, 38, 38, 0.15);
@@ -260,12 +265,19 @@
   border: 1px solid #f6b83d;
 }
 
-.datePicker :global(.react-date-picker__inputGroup) {
-  flex: 1;
-  align-items: baseline !important;
+.errorBorder :global(.react-date-picker__wrapper) {
+  border: 1px solid #ef2447 !important;
 }
 
-.datePicker :global(input) {
+.datePicker :global(.react-date-picker__inputGroup) {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  align-items: baseline;
+  overflow: hidden;
+}
+
+.datePicker :global(.react-date-picker__inputGroup__input) {
   border: none;
   outline: none;
   font-family: inherit !important;
@@ -273,6 +285,11 @@
   line-height: 1.28571;
   letter-spacing: -0.03em;
   color: #262626;
+
+  flex: 0 0 auto;
+  padding: 0 !important;
+  margin: 0;
+  text-align: left;
 }
 
 .datePicker :global(.react-date-picker__inputGroup__input::placeholder) {
@@ -286,16 +303,12 @@
 .datePicker :global(.react-date-picker__inputGroup__day),
 .datePicker :global(.react-date-picker__inputGroup__month) {
   width: 18px;
+  flex: 0 0 18px;
 }
 
 .datePicker :global(.react-date-picker__inputGroup__year) {
   width: 34px;
-}
-
-.datePicker :global(.react-date-picker__inputGroup__input) {
-  padding: 0 !important;
-  margin: 0;
-  text-align: left;
+  flex: 0 0 34px;
 }
 
 .datePicker :global(.react-date-picker__inputGroup__divider) {
@@ -362,9 +375,12 @@
   border-radius: 10px;
 }
 
+.typeWrapper {
+  width: calc((100% - 8px) / 2);
+}
+
 .select {
   width: 100%;
-  max-width: 143px;
 }
 
 .datePicker :global(.react-calendar button:focus) {
@@ -388,6 +404,26 @@
 .dateSpecies :global(.react-select__menu-list) {
   scrollbar-width: initial;
   scrollbar-color: rgba(38, 38, 38, 0.08) transparent;
+}
+
+.error {
+  min-height: 12px;
+  padding-left: 12px;
+  margin-top: 2px;
+  display: flex;
+  align-items: center;
+  color: #ef2447;
+  text-align: left;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+}
+
+.errorBorder,
+.item.errorBorder:hover,
+.item.errorBorder:focus {
+  border: 1px solid #ef2447;
 }
 
 @media (min-width: 768px) {
@@ -430,6 +466,8 @@
   }
 
   .sexGroup {
+    max-width: 136px;
+    height: fit-content;
     margin-bottom: 0;
   }
 
@@ -461,10 +499,13 @@
     margin-left: 8px;
   }
 
+  .inputWrapper {
+    margin-bottom: 18px;
+  }
+
   .item {
     height: 52px;
     padding: 16px !important;
-    margin-bottom: 18px;
   }
 
   .item,
@@ -474,6 +515,7 @@
   }
 
   .item.readonly {
+    width: calc(100% - 146px - 8px);
     font-size: 14px;
     line-height: 1.28571;
     height: 42px;
@@ -486,7 +528,6 @@
   }
 
   .datePicker {
-    width: 210px;
     height: 52px;
   }
 
@@ -499,19 +540,22 @@
     text-align: left;
   }
 
-  .datePicker :global(input),
-  .datePicker :global(.react-date-picker__inputGroup__leadingZero) {
+  .datePicker :global(.react-date-picker__inputGroup__input),
+  .datePicker :global(.react-date-picker__inputGroup__leadingZero),
+  .datePicker :global(.react-date-picker__inputGroup__divider) {
     font-size: 16px;
     line-height: 1.25;
   }
 
   .datePicker :global(.react-date-picker__inputGroup__day),
   .datePicker :global(.react-date-picker__inputGroup__month) {
-    width: 24px;
+    width: 20px;
+    flex: 0 0 20px;
   }
 
   .datePicker :global(.react-date-picker__inputGroup__year) {
     width: 44px;
+    flex: 0 0 44px;
   }
 
   .calendarIcon {
@@ -522,10 +566,6 @@
 
   .dateSpecies {
     margin-bottom: 40px;
-  }
-
-  .select {
-    max-width: 210px;
   }
 
   .button {

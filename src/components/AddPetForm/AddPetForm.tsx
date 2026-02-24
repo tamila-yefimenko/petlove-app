@@ -64,14 +64,14 @@ const AddPetForm: React.FC = () => {
     label: item,
   }));
 
+  const selectedSpecies =
+    speciesOptions.find((o) => o.value === watch("species")) ?? null;
+
   const sexOptions = [
     { value: "female", icon: "icon-female1" },
     { value: "male", icon: "icon-male" },
     { value: "multiple", icon: "icon-healthicons_sexual-reproductive-health" },
   ];
-
-  const selectedSpecies =
-    speciesOptions.find((o) => o.value === watch("species")) ?? null;
 
   const handleAvatarChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -99,6 +99,9 @@ const AddPetForm: React.FC = () => {
     }
   };
 
+  const capitalize = (text?: string) =>
+    text ? text.charAt(0).toUpperCase() + text.slice(1) : "";
+
   return (
     <div className={s.addForm}>
       <div className={s.titleWrapper}>
@@ -124,9 +127,10 @@ const AddPetForm: React.FC = () => {
               </span>
             </label>
           ))}
+          {errors.sex && (
+            <p className={s.error}>{capitalize(errors.sex.message)}</p>
+          )}
         </div>
-
-        {errors.sex && <p className={s.error}>{errors.sex.message}</p>}
 
         <div className={s.avatarWrapper}>
           {avatarPreview ? (
@@ -146,6 +150,7 @@ const AddPetForm: React.FC = () => {
           className={clsx(
             s.item,
             s.readonly,
+            errors.imgURL && s.errorBorder,
             watch("imgURL") ? s.itemValue : s.placeholder,
           )}>
           {watch("imgURL") || "Enter URL"}
@@ -163,33 +168,37 @@ const AddPetForm: React.FC = () => {
             onChange={handleAvatarChange}
           />
         </label>
+        {errors.imgURL && <p className={s.error}>{errors.imgURL.message}</p>}
       </div>
-      {errors.imgURL && <p className={s.error}>{errors.imgURL.message}</p>}
 
       <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-        <input
-          {...register("title")}
-          placeholder="Title"
-          className={clsx(
-            s.item,
-            watch("title") && s.itemValue,
-            errors.title && s.errorInput,
-          )}
-        />
-        {errors.name && <p className={s.error}>{errors.name.message}</p>}
+        <div className={s.inputWrapper}>
+          <input
+            {...register("title")}
+            placeholder="Title"
+            className={clsx(
+              s.item,
+              watch("title") && s.itemValue,
+              errors.title && s.errorInput,
+              errors.title && s.errorBorder,
+            )}
+          />
+          {errors.title && <p className={s.error}>{errors.title.message}</p>}
+        </div>
 
-        <input
-          {...register("name")}
-          placeholder="Pet's name"
-          className={clsx(
-            s.item,
-            watch("name") && s.itemValue,
-            errors.name && s.errorInput,
-          )}
-        />
-        {errors.birthday && (
-          <p className={s.error}>{errors.birthday.message}</p>
-        )}
+        <div className={s.inputWrapper}>
+          <input
+            {...register("name")}
+            placeholder="Pet's name"
+            className={clsx(
+              s.item,
+              watch("name") && s.itemValue,
+              errors.name && s.errorInput,
+              errors.name && s.errorBorder,
+            )}
+          />
+          {errors.name && <p className={s.error}>{errors.name.message}</p>}
+        </div>
 
         <div className={s.dateSpecies}>
           <div className={s.dateWrapper}>
@@ -198,16 +207,28 @@ const AddPetForm: React.FC = () => {
               name="birthday"
               render={({ field }) => (
                 <DatePicker
-                  onChange={field.onChange}
+                  onChange={(value) => {
+                    if (!value || Array.isArray(value)) {
+                      field.onChange("");
+                      return;
+                    }
+
+                    const formatted = value.toISOString().split("T")[0];
+                    field.onChange(formatted);
+                  }}
                   value={field.value ? new Date(field.value) : null}
                   format="dd.MM.yyyy"
                   clearIcon={null}
                   calendarIcon={
                     <HiOutlineCalendar className={s.calendarIcon} />
                   }
-                  className={clsx(s.datePicker, {
-                    [s.hasValue]: !!field.value,
-                  })}
+                  className={clsx(
+                    s.datePicker,
+                    errors.birthday && s.errorBorder,
+                    {
+                      [s.hasValue]: !!field.value,
+                    },
+                  )}
                   dayPlaceholder="00"
                   monthPlaceholder="00"
                   yearPlaceholder="0000"
@@ -222,7 +243,7 @@ const AddPetForm: React.FC = () => {
 
           <div className={s.typeWrapper}>
             <Select
-              styles={getSelectStyles(isTablet, true)}
+              styles={getSelectStyles(isTablet, true, !!errors.species)}
               classNamePrefix="react-select"
               className={s.select}
               options={speciesOptions}
@@ -237,7 +258,7 @@ const AddPetForm: React.FC = () => {
             />
 
             {errors.species && (
-              <p className={s.error}>{errors.species.message}</p>
+              <p className={s.error}>{capitalize(errors.species.message)}</p>
             )}
           </div>
         </div>

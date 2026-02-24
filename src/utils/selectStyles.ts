@@ -1,21 +1,27 @@
-export const getSelectStyles = (isTablet: boolean, withBorder?: boolean) => ({
+export const getSelectStyles = (
+  isTablet: boolean,
+  withBorder?: boolean,
+  hasError?: boolean,
+) => ({
   control: (base: any, state: any) => ({
     ...base,
     minHeight: isTablet ? (withBorder ? "52px" : "48px") : "42px",
     width: "100%",
     borderRadius: "30px",
-    border: state.isFocused
-      ? "1px solid #f6b83d"
-      : withBorder
-        ? "1px solid rgba(38, 38, 38, 0.15)"
-        : "1px solid transparent",
+    border: hasError
+      ? "1px solid #ef2447"
+      : state.isFocused
+        ? "1px solid #f6b83d"
+        : withBorder
+          ? "1px solid rgba(38,38,38,0.15)"
+          : "1px solid transparent",
     boxShadow: "none",
     padding: "0 8px",
     cursor: "pointer",
     backgroundColor: "#fff",
 
     "&:hover": {
-      border: "1px solid #f6b83d",
+      border: hasError ? "1px solid #ef2447" : "1px solid #f6b83d",
       boxShadow: "none",
     },
   }),
@@ -52,7 +58,7 @@ export const getSelectStyles = (isTablet: boolean, withBorder?: boolean) => ({
 
   menuList: (base: any) => ({
     ...base,
-    maxHeight: "180px",
+    maxHeight: withBorder ? "80px" : "180px",
     padding: "4px",
   }),
 
