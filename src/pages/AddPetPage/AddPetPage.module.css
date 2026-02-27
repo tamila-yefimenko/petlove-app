@@ -61,7 +61,7 @@
   }
 
   .wrapper {
-    max-width: 592px;
+    width: calc((100% - 32px) / 2);
     height: 654px;
     border-radius: 60px;
     background:

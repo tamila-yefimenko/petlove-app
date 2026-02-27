@@ -133,6 +133,7 @@
 .uploadInput {
   width: 117px;
   height: 36px;
+  cursor: pointer;
   border-radius: 30px;
   font-size: 12px;
   line-height: 1.33333;
@@ -232,6 +233,7 @@
 
 .dateWrapper {
   width: calc((100% - 8px) / 2);
+  min-width: 0;
 }
 
 .datePicker {
@@ -244,6 +246,7 @@
   min-width: 0;
   display: flex;
   align-items: center;
+  justify-content: space-between;
   border: 1px solid rgba(38, 38, 38, 0.15);
   border-radius: 30px;
   padding: 0 7px 0 10px;
@@ -252,7 +255,7 @@
   background-color: #fff;
 }
 
-.datePicker:global(.react-date-picker) {
+.datePicker :global(.react-date-picker) {
   border: none;
 }
 
@@ -272,12 +275,14 @@
 .datePicker :global(.react-date-picker__inputGroup) {
   display: flex;
   min-width: 0;
+  max-width: 74px;
   flex: 1;
   align-items: baseline;
   overflow: hidden;
 }
 
 .datePicker :global(.react-date-picker__inputGroup__input) {
+  min-width: 0;
   border: none;
   outline: none;
   font-family: inherit !important;
@@ -286,7 +291,6 @@
   letter-spacing: -0.03em;
   color: #262626;
 
-  flex: 0 0 auto;
   padding: 0 !important;
   margin: 0;
   text-align: left;
@@ -298,17 +302,6 @@
 
 .datePicker :global(.react-date-picker__inputGroup__input:invalid) {
   background: #fff;
-}
-
-.datePicker :global(.react-date-picker__inputGroup__day),
-.datePicker :global(.react-date-picker__inputGroup__month) {
-  width: 18px;
-  flex: 0 0 18px;
-}
-
-.datePicker :global(.react-date-picker__inputGroup__year) {
-  width: 34px;
-  flex: 0 0 34px;
 }
 
 .datePicker :global(.react-date-picker__inputGroup__divider) {
@@ -332,10 +325,11 @@
 }
 
 .datePicker :global(.react-calendar) {
-  width: 260px;
+  width: 248px;
+  max-width: calc(100vw - 32px);
   border-radius: 20px;
   border: none;
-  padding: 12px;
+  padding: 12px 8px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   font-family: inherit;
 }
@@ -354,6 +348,7 @@
 
 .datePicker :global(.react-calendar__tile) {
   height: 32px;
+  padding: 6px;
   border-radius: 10px;
   font-size: 13px;
   background: none;
@@ -537,6 +532,7 @@
   }
 
   .datePicker :global(.react-date-picker__inputGroup) {
+    max-width: 90px;
     text-align: left;
   }
 
@@ -545,17 +541,6 @@
   .datePicker :global(.react-date-picker__inputGroup__divider) {
     font-size: 16px;
     line-height: 1.25;
-  }
-
-  .datePicker :global(.react-date-picker__inputGroup__day),
-  .datePicker :global(.react-date-picker__inputGroup__month) {
-    width: 20px;
-    flex: 0 0 20px;
-  }
-
-  .datePicker :global(.react-date-picker__inputGroup__year) {
-    width: 44px;
-    flex: 0 0 44px;
   }
 
   .calendarIcon {
@@ -576,6 +561,7 @@
 
 @media (min-width: 1280px) {
   .addForm {
+    width: calc((100% - 32px) / 2);
     padding: 60px 80px;
   }
 }

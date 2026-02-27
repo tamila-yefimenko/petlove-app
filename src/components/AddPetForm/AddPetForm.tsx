@@ -218,6 +218,7 @@ const AddPetForm: React.FC = () => {
                   }}
                   value={field.value ? new Date(field.value) : null}
                   format="dd.MM.yyyy"
+                  locale="en-GB"
                   clearIcon={null}
                   calendarIcon={
                     <HiOutlineCalendar className={s.calendarIcon} />
