@@ -138,6 +138,7 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
             className={clsx(
               s.item,
               s.readonly,
+              errors.avatar && s.errorInput,
               watch("avatar") && s.itemValue,
             )}>
             {watch("avatar") || "https://..."}
@@ -159,47 +160,53 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
-          <input
-            className={clsx(
-              s.item,
-              name && s.itemValue,
-              errors.name && s.errorInput,
-            )}
-            {...register("name")}
-            placeholder="Name"
-          />
-          {errors.name && <p className={s.error}>{errors.name.message}</p>}
+          <div className={s.inputWrapper}>
+            <input
+              className={clsx(
+                s.item,
+                name && s.itemValue,
+                errors.name && s.errorInput,
+              )}
+              {...register("name")}
+              placeholder="Name"
+            />
+            {errors.name && <p className={s.error}>{errors.name.message}</p>}
+          </div>
 
-          <input
-            className={clsx(
-              s.item,
-              email && s.itemValue,
-              errors.email && s.errorInput,
-            )}
-            {...register("email")}
-            placeholder="name@gmail.com"
-          />
-          {errors.email && <p className={s.error}>{errors.email.message}</p>}
+          <div className={s.inputWrapper}>
+            <input
+              className={clsx(
+                s.item,
+                email && s.itemValue,
+                errors.email && s.errorInput,
+              )}
+              {...register("email")}
+              placeholder="name@gmail.com"
+            />
+            {errors.email && <p className={s.error}>{errors.email.message}</p>}
+          </div>
 
-          <input
-            className={clsx(
-              s.item,
-              s.last,
-              phone && s.itemValue,
-              errors.phone && s.errorInput,
-            )}
-            {...register("phone")}
-            placeholder="+380"
-          />
-          {errors.phone && <p className={s.error}>{errors.phone.message}</p>}
+          <div className={clsx(s.inputWrapper, s.last)}>
+            <input
+              className={clsx(
+                s.item,
+                phone && s.itemValue,
+                errors.phone && s.errorInput,
+              )}
+              {...register("phone")}
+              placeholder="+380"
+            />
+            {errors.phone && <p className={s.error}>{errors.phone.message}</p>}
+          </div>
 
           <Button
             type="submit"
+            className={s.button}
             variant="orange"
             size="medium"
             fullWidth
             disabled={isSubmitting}>
-            Go to profile
+            Save
           </Button>
         </form>
       </div>

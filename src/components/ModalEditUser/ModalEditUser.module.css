@@ -123,6 +123,10 @@
   margin-bottom: 21px !important;
 }
 
+.inputWrapper {
+  margin-bottom: 10px;
+}
+
 .item {
   text-align: left;
   border: 1px solid rgba(38, 38, 38, 0.15);
@@ -134,7 +138,6 @@
   line-height: 1.28571;
   letter-spacing: -0.03em;
   transition: border 0.3s ease-in-out;
-  margin-bottom: 10px;
 }
 
 .last {
@@ -166,8 +169,71 @@
 
 .error {
   font-size: 10px;
-  line-height: 1.28571;
+  line-height: 1.2;
   letter-spacing: -0.03em;
+  color: #ef2447;
   text-align: left;
   padding: 2px;
+}
+
+.errorInput,
+.errorInput:hover,
+.errorInput:focus {
+  border: 1px solid #ef2447;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    max-width: 480px;
+    border-radius: 30px;
+    padding: 50px;
+  }
+
+  .title {
+    font-size: 18px;
+    line-height: 1.33333;
+  }
+
+  .avatarWrapper {
+    width: 86px;
+    height: 86px;
+  }
+
+  .upload {
+    margin-bottom: 20px;
+  }
+
+  .uploadInput {
+    width: 146px;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+  }
+
+  .item {
+    height: 52px;
+    font-size: 16px;
+    line-height: 1.25;
+    padding: 16px !important;
+  }
+
+  .readonly {
+    height: 42px;
+    font-size: 14px;
+    line-height: 1.28571;
+    letter-spacing: -0.02em;
+    padding: 12px !important;
+  }
+
+  .inputWrapper {
+    margin-bottom: 14px;
+  }
+
+  .last {
+    margin-bottom: 40px;
+  }
+
+  .button {
+    height: 52px;
+  }
 }
