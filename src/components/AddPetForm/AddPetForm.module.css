@@ -239,6 +239,7 @@
 .datePicker {
   width: 100%;
   height: 42px;
+  border: none;
 }
 
 .datePicker :global(.react-date-picker__wrapper) {
@@ -415,7 +416,7 @@
   letter-spacing: -0.03em;
 }
 
-.errorBorder,
+.item.errorBorder,
 .item.errorBorder:hover,
 .item.errorBorder:focus {
   border: 1px solid #ef2447;
