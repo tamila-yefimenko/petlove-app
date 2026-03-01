@@ -52,10 +52,10 @@ const NoticesFilters: React.FC = () => {
   } = useAppSelector((state) => state.noticesFilters);
 
   useEffect(() => {
-    dispatch(fetchCategories());
-    dispatch(fetchSpecies());
-    dispatch(fetchSex());
-    dispatch(fetchLocations());
+    if (!categories.length) dispatch(fetchCategories());
+    if (!speciesList.length) dispatch(fetchSpecies());
+    if (!sexList.length) dispatch(fetchSex());
+    if (!allLocations.length) dispatch(fetchLocations());
   }, [dispatch]);
 
   const handleSearch = (value: string) => {
@@ -70,7 +70,7 @@ const NoticesFilters: React.FC = () => {
           dispatch(searchCities(trimmed));
         }
       }, 400),
-    [dispatch]
+    [dispatch],
   );
 
   useEffect(() => () => loadCities.cancel(), [loadCities]);
@@ -81,7 +81,7 @@ const NoticesFilters: React.FC = () => {
         setFilter({
           key,
           value: opt ? opt.value : "",
-        })
+        }),
       );
     };
 

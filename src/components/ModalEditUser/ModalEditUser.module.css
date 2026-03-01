@@ -208,6 +208,7 @@
     font-size: 14px;
     line-height: 1.28571;
     letter-spacing: -0.02em;
+    cursor: pointer;
   }
 
   .item {

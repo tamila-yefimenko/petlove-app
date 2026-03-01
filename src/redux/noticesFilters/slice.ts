@@ -44,8 +44,15 @@ const noticesFiltersSlice = createSlice({
     setByPopularity(state, action) {
       state.byPopularity = action.payload;
     },
-    resetFilters() {
-      return { ...initialState };
+    resetFilters(state) {
+      state.keyword = "";
+      state.category = "";
+      state.sex = "";
+      state.species = "";
+      state.locationId = "";
+      state.byPopularity = null;
+      state.byPrice = null;
+      state.page = 1;
     },
   },
   extraReducers: (builder) => {
