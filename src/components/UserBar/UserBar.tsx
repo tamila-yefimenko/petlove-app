@@ -1,9 +1,5 @@
 import { NavLink } from "react-router-dom";
-import {
-  selectIsLoggedIn,
-  selectIsRefreshing,
-  selectUser,
-} from "../../redux/auth/selectors";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import { useAppSelector } from "../../redux/hooks";
 import s from "./UserBar.module.css";
 import { selectAvatar, selectIsLoaded } from "../../redux/user/selectors";

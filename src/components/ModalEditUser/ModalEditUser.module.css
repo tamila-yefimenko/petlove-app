@@ -101,6 +101,7 @@
   padding: 13px 12px;
   background-color: #fff4df;
   flex-shrink: 0;
+  cursor: pointer;
   transition: background-color 0.3s ease-in-out;
 }
 
@@ -208,7 +209,6 @@
     font-size: 14px;
     line-height: 1.28571;
     letter-spacing: -0.02em;
-    cursor: pointer;
   }
 
   .item {
