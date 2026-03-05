@@ -2,6 +2,7 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthResponse } from "../../utils/types";
 import { setLoading } from "../global/slice";
+import { fetchUser } from "../user/operations";
 
 export const goitAPI = axios.create({
   baseURL: "https://petlove.b.goit.study/api",
@@ -99,6 +100,9 @@ export const refreshThunk = createAsyncThunk<
     setAuthNav(persistedToken);
 
     const response = await goitAPI.get("/users/current");
+
+    thunkAPI.dispatch(fetchUser());
+
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));

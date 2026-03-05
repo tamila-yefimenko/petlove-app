@@ -13,3 +13,4 @@ export const selectNoticesFavorites = (state: RootState): Pet[] =>
 export const selectNoticesFavIds = (state: RootState) =>
   state.user.noticesFavIds;
 export const selectPets = (state: RootState) => state.user.pets;
+export const selectIsLoaded = (state: RootState) => state.user.isLoaded;

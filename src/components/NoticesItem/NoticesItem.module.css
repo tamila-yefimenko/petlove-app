@@ -17,6 +17,10 @@
   font-size: 16px;
   line-height: 1.25;
   color: #2b2b2a;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pop {

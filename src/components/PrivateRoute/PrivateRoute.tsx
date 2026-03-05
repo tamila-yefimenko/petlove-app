@@ -2,6 +2,7 @@ import { ReactNode } from "react";
 import {
   selectIsLoggedIn,
   selectIsRefreshing,
+  selectToken,
 } from "../../redux/auth/selectors";
 import { Navigate } from "react-router-dom";
 import { useAppSelector } from "../../redux/hooks";
@@ -13,13 +14,14 @@ export interface PrivateRouteProps {
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const isRefreshing = useAppSelector(selectIsRefreshing);
+  const token = useAppSelector(selectToken);
 
-  if (isRefreshing) {
+  if (token && isRefreshing) {
     return null;
   }
 
-  if (!isLoggedIn) {
-    return <Navigate to="/login" />;
+  if (!token && !isLoggedIn) {
+    return <Navigate to="/login" replace />;
   }
   return children;
 };

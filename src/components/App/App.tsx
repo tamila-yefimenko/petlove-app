@@ -31,7 +31,9 @@ const App: React.FC = () => {
     dispatch(refreshThunk());
   }, [dispatch]);
 
-  return isRefreshing ? null : (
+  if (isRefreshing) return null;
+
+  return (
     <Suspense fallback={<h2>Loading...</h2>}>
       <>
         <Routes>

@@ -19,6 +19,7 @@ const initialState: UserState = {
   noticesFavIds: [],
   pets: [],
   error: null,
+  isLoaded: false,
 };
 
 const userSlice = createSlice({
@@ -40,6 +41,7 @@ const userSlice = createSlice({
         state.noticesFavIds =
           action.payload.noticesFavorites?.map((fav) => fav._id) ?? [];
         state.pets = action.payload.pets ?? [];
+        state.isLoaded = true;
       })
       .addCase(fetchUser.rejected, (state, action) => {
         state.error = action.payload ?? "unknown error";

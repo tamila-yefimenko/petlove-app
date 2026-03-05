@@ -96,6 +96,7 @@ export interface UserState {
   noticesFavIds: string[];
   pets?: Pet[];
   error: string | null;
+  isLoaded: boolean;
 }
 
 export interface Location {
