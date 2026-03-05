@@ -14,6 +14,12 @@
   background-color: #fff4df;
   border-radius: 100%;
 }
+
+.avatar {
+  object-fit: cover;
+  border-radius: 100%;
+}
+
 .iconUser {
   fill: #f6b83d;
   stroke-width: 2px;
