@@ -5,9 +5,16 @@ import { useAppSelector } from "../../redux/hooks";
 import { selectIsError } from "../../redux/auth/selectors";
 import { Container } from "../../components/Container/Container";
 import { toast } from "react-toastify";
+import { useEffect } from "react";
 
 const RegistrationPage: React.FC = () => {
   const error = useAppSelector(selectIsError);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <Container className={s.registerContainer}>
@@ -32,7 +39,6 @@ const RegistrationPage: React.FC = () => {
           </div>
         </div>
         <RegistrationForm />
-        {error && toast.error(error)}
       </div>
     </Container>
   );

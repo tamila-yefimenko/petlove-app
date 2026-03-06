@@ -66,6 +66,12 @@ const NoticesPage: React.FC = () => {
     dispatch(setPage(newPage));
   };
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   return (
     <div className={s.noticesPage}>
       <Container className={s.noticesContainer}>
@@ -93,7 +99,6 @@ const NoticesPage: React.FC = () => {
             onChange={handlePageChange}
           />
         )}
-        {error && toast.error(error)}
       </Container>
     </div>
   );

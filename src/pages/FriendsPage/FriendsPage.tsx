@@ -20,6 +20,12 @@ const FriendsPage: React.FC = () => {
     dispatch(fetchFriends());
   }, [dispatch]);
 
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
+
   const hasFriends = friends.length > 0;
 
   return (
@@ -27,7 +33,6 @@ const FriendsPage: React.FC = () => {
       <Container className={s.friendsContainer}>
         {!isLoading && <Title className={s.friendsTitle}>Our friends</Title>}
         {hasFriends && <FriendsList friends={friends} />}
-        {error && toast.error(error)}
       </Container>
     </div>
   );

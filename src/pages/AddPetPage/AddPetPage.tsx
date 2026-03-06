@@ -4,16 +4,22 @@ import { Container } from "../../components/Container/Container";
 import { useAppSelector } from "../../redux/hooks";
 import { selectError } from "../../redux/user/selectors";
 import s from "./AddPetPage.module.css";
+import { useEffect } from "react";
 
 const AddPetPage: React.FC = () => {
   const error = useAppSelector(selectError);
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <Container className={s.addPetContainer}>
       <div className={s.addPetPage}>
         <div className={s.wrapper}></div>
         <AddPetForm />
-        {error && toast.error(error)}
       </div>
     </Container>
   );

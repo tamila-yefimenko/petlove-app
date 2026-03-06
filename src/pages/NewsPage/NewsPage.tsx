@@ -29,19 +29,32 @@ const NewsPage: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchNews({ page: 1, keyword: query }));
+    dispatch(
+      fetchNews({
+        page: 1,
+        ...(query ? { keyword: query } : {}),
+      }),
+    );
   }, [dispatch, query]);
 
   const hasNews = news.length > 0;
 
   const handleSearch = (value: string) => {
     dispatch(resetNews());
-    dispatch(setQuery(value.toLowerCase()));
+    dispatch(setQuery(value.trim().toLowerCase()));
   };
 
   const handlePageChange = (newPage: number) => {
-    dispatch(fetchNews({ page: newPage, keyword: query }));
+    dispatch(
+      fetchNews({ page: newPage, ...(query ? { keyword: query } : {}) }),
+    );
   };
+
+  useEffect(() => {
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <div className={s.newsPage}>
@@ -60,7 +73,6 @@ const NewsPage: React.FC = () => {
             onChange={handlePageChange}
           />
         )}
-        {error && toast.error(error)}
       </Container>
     </div>
   );
