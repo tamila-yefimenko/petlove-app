@@ -3,22 +3,25 @@ import { Container } from "../../components/Container/Container";
 import MyNotices from "../../components/MyNotices/MyNotices";
 import UserCard from "../../components/UserCard/UserCard";
 import s from "./ProfilePage.module.css";
-import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useAppSelector } from "../../redux/hooks";
 import { selectIsLoading } from "../../redux/global/selectors";
 import { selectError } from "../../redux/user/selectors";
-import { fetchUser } from "../../redux/user/operations";
 import Loader from "../../components/Loader/Loader";
 import { toast } from "react-toastify";
+import { selectIsRefreshing } from "../../redux/auth/selectors";
 
 const ProfilePage: React.FC = () => {
-  const dispatch = useAppDispatch();
-
   const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectError);
+  const isRefreshing = useAppSelector(selectIsRefreshing);
+
+  if (isRefreshing) return null;
 
   useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
+    if (error) {
+      toast.error(error);
+    }
+  }, [error]);
 
   return (
     <>
@@ -28,7 +31,6 @@ const ProfilePage: React.FC = () => {
           <MyNotices />
         </div>
         {isLoading && <Loader />}
-        {error && toast.error(error)}
       </Container>
     </>
   );

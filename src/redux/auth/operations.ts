@@ -56,6 +56,9 @@ export const loginThunk = createAsyncThunk<
 
     const response = await goitAPI.post("/users/signin", body);
     setAuthNav(response.data.token);
+
+    thunkAPI.dispatch(fetchUser()).unwrap();
+
     return response.data;
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
@@ -101,7 +104,7 @@ export const refreshThunk = createAsyncThunk<
 
     const response = await goitAPI.get("/users/current");
 
-    thunkAPI.dispatch(fetchUser());
+    thunkAPI.dispatch(fetchUser()).unwrap();
 
     return response.data;
   } catch (error) {

@@ -37,7 +37,7 @@ const AddPetForm: React.FC = () => {
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
 
   useEffect(() => {
-    dispatch(fetchSpecies());
+    if (!speciesList.length) dispatch(fetchSpecies());
   }, [dispatch]);
 
   const {

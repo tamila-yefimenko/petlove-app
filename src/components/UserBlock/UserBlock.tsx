@@ -3,6 +3,7 @@ import { useAppSelector } from "../../redux/hooks";
 import {
   selectAvatar,
   selectEmail,
+  selectIsLoaded,
   selectName,
   selectPhone,
 } from "../../redux/user/selectors";
@@ -18,7 +19,17 @@ const UserBlock: React.FC<UserBlockProps> = ({ onClick }) => {
   const phone = useAppSelector(selectPhone);
   const avatar = useAppSelector(selectAvatar);
 
+  const isLoaded = useAppSelector(selectIsLoaded);
+
   const renderItem = (value?: string, placeholder = "No info") => {
+    if (!isLoaded) {
+      return (
+        <li className={s.item}>
+          <div className={s.textPlaceholder}></div>
+        </li>
+      );
+    }
+
     const hasValue = Boolean(value?.trim());
 
     return (
@@ -37,7 +48,9 @@ const UserBlock: React.FC<UserBlockProps> = ({ onClick }) => {
         </svg>
       </div>
       <div className={s.avatarWrapper}>
-        {avatar ? (
+        {!isLoaded ? (
+          <div className={s.avatarPlaceholder}></div>
+        ) : avatar ? (
           <img src={avatar} alt={name} className={s.avatar} />
         ) : (
           <div className={s.bigIconWrapper}>
@@ -46,7 +59,7 @@ const UserBlock: React.FC<UserBlockProps> = ({ onClick }) => {
             </svg>
           </div>
         )}
-        {!avatar && (
+        {isLoaded && !avatar && (
           <button className={s.uploadButton} onClick={onClick}>
             Upload photo
           </button>
