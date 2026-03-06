@@ -85,6 +85,7 @@ const ModalEditUser: React.FC<ModalEditUserProps> = ({ isOpen, onClose }) => {
 
     setValue("avatar", uploadedUrl, {
       shouldValidate: true,
+      shouldDirty: true,
     });
   };
 
