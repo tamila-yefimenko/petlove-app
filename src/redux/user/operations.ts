@@ -7,6 +7,7 @@ import {
   Pet,
   PetFormValues,
   User,
+  UserState,
 } from "../../utils/types";
 
 export const fetchUser = createAsyncThunk<User, void, { rejectValue: string }>(
@@ -75,7 +76,7 @@ export const deleteFromFavorites = createAsyncThunk<
 });
 
 export const addPet = createAsyncThunk<
-  Pet,
+  UserState,
   PetFormValues,
   { rejectValue: string }
 >("user/addPet", async (data, thunkAPI) => {
@@ -84,7 +85,10 @@ export const addPet = createAsyncThunk<
   try {
     dispatch(setLoading(true));
 
-    const response = await goitAPI.post<Pet>("users/current/pets/add", data);
+    const response = await goitAPI.post<UserState>(
+      "users/current/pets/add",
+      data,
+    );
     return response.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));

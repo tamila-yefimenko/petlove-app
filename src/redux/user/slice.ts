@@ -91,7 +91,9 @@ const userSlice = createSlice({
       .addCase(addPet.pending, (state, action) => {
         state.error = null;
       })
-      .addCase(addPet.fulfilled, (state, action) => {})
+      .addCase(addPet.fulfilled, (state, action) => {
+        state.pets = action.payload.pets ?? [];
+      })
       .addCase(addPet.rejected, (state, action) => {
         state.error = action.payload ?? "Unknown error";
       })
