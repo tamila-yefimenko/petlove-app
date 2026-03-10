@@ -15,12 +15,12 @@ import { fetchNews } from "../../redux/news/operations";
 import { resetNews, setQuery } from "../../redux/news/slice";
 import { Container } from "../../components/Container/Container";
 import Pagination from "../../components/Pagination/Pagination";
-import { selectIsLoading } from "../../redux/global/selectors";
+import { selectIsPageLoading } from "../../redux/global/selectors";
 import { toast } from "react-toastify";
 
 const NewsPage: React.FC = () => {
   const news = useAppSelector(selectNews);
-  const isLoading = useAppSelector(selectIsLoading);
+  const isLoading = useAppSelector(selectIsPageLoading);
   const error = useAppSelector(selectError);
   const totalPages = useAppSelector(selectTotalPages);
   const query = useAppSelector(selectQuery);

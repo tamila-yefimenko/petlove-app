@@ -4,14 +4,11 @@ import MyNotices from "../../components/MyNotices/MyNotices";
 import UserCard from "../../components/UserCard/UserCard";
 import s from "./ProfilePage.module.css";
 import { useAppSelector } from "../../redux/hooks";
-import { selectIsLoading } from "../../redux/global/selectors";
 import { selectError } from "../../redux/user/selectors";
-import Loader from "../../components/Loader/Loader";
 import { toast } from "react-toastify";
 import { selectIsRefreshing } from "../../redux/auth/selectors";
 
 const ProfilePage: React.FC = () => {
-  const isLoading = useAppSelector(selectIsLoading);
   const error = useAppSelector(selectError);
   const isRefreshing = useAppSelector(selectIsRefreshing);
 
@@ -30,7 +27,6 @@ const ProfilePage: React.FC = () => {
           <UserCard />
           <MyNotices />
         </div>
-        {isLoading && <Loader />}
       </Container>
     </>
   );

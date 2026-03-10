@@ -1,10 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import Title from "../../components/Title/Title";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import s from "./NoticesPage.module.css";
 import { Container } from "../../components/Container/Container";
 import Pagination from "../../components/Pagination/Pagination";
-import { selectIsLoading } from "../../redux/global/selectors";
+import { selectIsPageLoading } from "../../redux/global/selectors";
 import {
   selectError,
   selectNotices,
@@ -18,12 +18,14 @@ import { setPage } from "../../redux/noticesFilters/slice";
 import { toast } from "react-toastify";
 
 const NoticesPage: React.FC = () => {
-  const isLoading = useAppSelector(selectIsLoading);
+  const isLoading = useAppSelector(selectIsPageLoading);
   const error = useAppSelector(selectError);
   const totalPages = useAppSelector(selectTotalPages);
   const notices = useAppSelector(selectNotices);
 
   const hasNotices = notices.length > 0;
+
+  const listRef = useRef<HTMLDivElement | null>(null);
 
   const dispatch = useAppDispatch();
 
@@ -72,6 +74,22 @@ const NoticesPage: React.FC = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    listRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [
+    keyword,
+    category,
+    species,
+    sex,
+    locationId,
+    byPopularity,
+    byPrice,
+    page,
+  ]);
+
   return (
     <div className={s.noticesPage}>
       <Container className={s.noticesContainer}>
@@ -85,7 +103,9 @@ const NoticesPage: React.FC = () => {
             </div>
           )}
         </div>
-        {hasNotices && <NoticesList notices={notices} variant="notice" />}
+        <div ref={listRef}>
+          {hasNotices && <NoticesList notices={notices} variant="notice" />}
+        </div>
         {!hasNotices && (
           <div className={s.noWrapper}>
             <p className={s.noResults}>No results found.</p>

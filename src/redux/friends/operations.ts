@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { Friend } from "../../utils/types";
-import { setLoading } from "../global/slice";
+import { setPageLoading } from "../global/slice";
 import { getErrorMessage, goitAPI } from "../auth/operations";
 
 export const fetchFriends = createAsyncThunk<
@@ -11,7 +11,7 @@ export const fetchFriends = createAsyncThunk<
   const { dispatch } = thunkAPI;
 
   try {
-    dispatch(setLoading(true));
+    dispatch(setPageLoading(true));
 
     const response = await goitAPI.get("/friends");
 
@@ -19,6 +19,6 @@ export const fetchFriends = createAsyncThunk<
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    dispatch(setPageLoading(false));
   }
 });

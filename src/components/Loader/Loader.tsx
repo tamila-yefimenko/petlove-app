@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import s from "./Loader.module.css";
 import ProgressCircle from "../ProgressCircle/ProgressCircle";
 import { useAppSelector } from "../../redux/hooks";
-import { selectIsLoading } from "../../redux/global/selectors";
+import { selectIsPageLoading } from "../../redux/global/selectors";
 
 const Loader: React.FC = () => {
   const [showLogo, setShowLogo] = useState(false);
   const [value, setValue] = useState(70);
   const [visible, setVisible] = useState(false);
 
-  const isLoading = useAppSelector(selectIsLoading);
+  const isLoading = useAppSelector(selectIsPageLoading);
 
   useEffect(() => {
     if (isLoading) {

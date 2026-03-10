@@ -2,17 +2,24 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage, goitAPI } from "../auth/operations";
 import { FetchNewsParams, NewsState, OneNews } from "../../utils/types";
-import { setLoading } from "../global/slice";
+import { setListLoading, setPageLoading } from "../global/slice";
 
 export const fetchNews = createAsyncThunk<
   { results: OneNews[]; totalPages: number },
   FetchNewsParams,
   { rejectValue: string; state: { news: NewsState } }
 >("news/fetchAll", async (params, thunkAPI) => {
-  const { dispatch } = thunkAPI;
+  const { dispatch, getState } = thunkAPI;
+
+  const { news } = getState();
+  const isInitialLoad = news.items.length === 0;
 
   try {
-    dispatch(setLoading(true));
+    if (isInitialLoad) {
+      dispatch(setPageLoading(true));
+    } else {
+      dispatch(setListLoading(true));
+    }
 
     const response = await goitAPI.get("/news", {
       params: params,
@@ -25,6 +32,10 @@ export const fetchNews = createAsyncThunk<
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    if (isInitialLoad) {
+      dispatch(setPageLoading(false));
+    } else {
+      dispatch(setListLoading(false));
+    }
   }
 });

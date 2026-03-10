@@ -3,7 +3,7 @@ import FriendsList from "../../components/FriendsList/FriendsList";
 import { selectError, selectItems } from "../../redux/friends/selectors";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { fetchFriends } from "../../redux/friends/operations";
-import { selectIsLoading } from "../../redux/global/selectors";
+import { selectIsPageLoading } from "../../redux/global/selectors";
 import { Container } from "../../components/Container/Container";
 import s from "./FriendsPage.module.css";
 import Title from "../../components/Title/Title";
@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 
 const FriendsPage: React.FC = () => {
   const friends = useAppSelector(selectItems);
-  const isLoading = useAppSelector(selectIsLoading);
+  const isLoading = useAppSelector(selectIsPageLoading);
   const error = useAppSelector(selectError);
 
   const dispatch = useAppDispatch();

@@ -47,7 +47,8 @@ export interface FetchNewsParams {
 }
 
 export interface GlobalState {
-  isLoading: boolean;
+  isPageLoading: boolean;
+  isListLoading: boolean;
 }
 
 export interface WorkDay {

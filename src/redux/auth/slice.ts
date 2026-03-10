@@ -56,6 +56,7 @@ const slice = createSlice({
       })
       .addCase(refreshThunk.rejected, (state) => {
         state.isRefreshing = false;
+        state.isLoggedIn = false;
       });
   },
 });

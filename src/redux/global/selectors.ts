@@ -1,3 +1,6 @@
 import { RootState } from "../store";
 
-export const selectIsLoading = (state: RootState) => state.global.isLoading;
+export const selectIsPageLoading = (state: RootState) =>
+  state.global.isPageLoading;
+export const selectIsListLoading = (state: RootState) =>
+  state.global.isListLoading;

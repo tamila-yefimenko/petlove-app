@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { setLoading } from "../global/slice";
+import { setPageLoading } from "../global/slice";
 import axios from "axios";
 import { getErrorMessage, goitAPI } from "../auth/operations";
 import {
@@ -16,14 +16,14 @@ export const fetchUser = createAsyncThunk<User, void, { rejectValue: string }>(
     const { dispatch } = thunkAPI;
 
     try {
-      dispatch(setLoading(true));
+      dispatch(setPageLoading(true));
 
       const response = await goitAPI.get("/users/current/full");
       return response.data;
     } catch (error: any) {
       return thunkAPI.rejectWithValue(getErrorMessage(error));
     } finally {
-      dispatch(setLoading(false));
+      dispatch(setPageLoading(false));
     }
   },
 );
@@ -36,14 +36,14 @@ export const editUser = createAsyncThunk<
   const { dispatch } = thunkAPI;
 
   try {
-    dispatch(setLoading(true));
+    dispatch(setPageLoading(true));
 
     const response = await goitAPI.patch<User>("users/current/edit", data);
     return response.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    dispatch(setPageLoading(false));
   }
 });
 
@@ -83,7 +83,7 @@ export const addPet = createAsyncThunk<
   const { dispatch } = thunkAPI;
 
   try {
-    dispatch(setLoading(true));
+    dispatch(setPageLoading(true));
 
     const response = await goitAPI.post<UserState>(
       "users/current/pets/add",
@@ -93,7 +93,7 @@ export const addPet = createAsyncThunk<
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    dispatch(setPageLoading(false));
   }
 });
 

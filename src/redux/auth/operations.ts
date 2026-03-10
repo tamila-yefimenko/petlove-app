@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { AuthResponse } from "../../utils/types";
-import { setLoading } from "../global/slice";
+import { setPageLoading } from "../global/slice";
 import { fetchUser } from "../user/operations";
 
 export const goitAPI = axios.create({
@@ -32,7 +32,7 @@ export const registerThunk = createAsyncThunk<
   const { dispatch } = thunkAPI;
 
   try {
-    dispatch(setLoading(true));
+    dispatch(setPageLoading(true));
 
     const response = await goitAPI.post("/users/signup", body);
     setAuthNav(response.data.token);
@@ -40,7 +40,7 @@ export const registerThunk = createAsyncThunk<
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    dispatch(setPageLoading(false));
   }
 });
 
@@ -52,7 +52,7 @@ export const loginThunk = createAsyncThunk<
   const { dispatch } = thunkAPI;
 
   try {
-    dispatch(setLoading(true));
+    dispatch(setPageLoading(true));
 
     const response = await goitAPI.post("/users/signin", body);
     setAuthNav(response.data.token);
@@ -63,7 +63,7 @@ export const loginThunk = createAsyncThunk<
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    dispatch(setPageLoading(false));
   }
 });
 
@@ -75,14 +75,14 @@ export const logoutThunk = createAsyncThunk<
   const { dispatch } = thunkAPI;
 
   try {
-    dispatch(setLoading(true));
+    dispatch(setPageLoading(true));
 
     await goitAPI.post("/users/signout");
     removeAuthNav();
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    dispatch(setPageLoading(false));
   }
 });
 
@@ -94,7 +94,7 @@ export const refreshThunk = createAsyncThunk<
   const { dispatch } = thunkAPI;
 
   try {
-    dispatch(setLoading(true));
+    dispatch(setPageLoading(true));
 
     const persistedToken = thunkAPI.getState().auth.token;
     if (!persistedToken) {
@@ -110,6 +110,6 @@ export const refreshThunk = createAsyncThunk<
   } catch (error) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    dispatch(setPageLoading(false));
   }
 });

@@ -2,17 +2,24 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getErrorMessage, goitAPI } from "../auth/operations";
 import { FetchNoticesParams, NoticesState, Pet } from "../../utils/types";
-import { setLoading } from "../global/slice";
+import { setListLoading, setPageLoading } from "../global/slice";
 
 export const fetchNotices = createAsyncThunk<
   { results: Pet[]; totalPages: number },
   FetchNoticesParams,
   { rejectValue: string; state: { notices: NoticesState } }
 >("notices/fetchAll", async (inputParams, thunkAPI) => {
-  const { dispatch } = thunkAPI;
+  const { dispatch, getState } = thunkAPI;
+
+  const { notices } = getState();
+  const isInitialLoad = notices.items.length === 0;
 
   try {
-    dispatch(setLoading(true));
+    if (isInitialLoad) {
+      dispatch(setPageLoading(true));
+    } else {
+      dispatch(setListLoading(true));
+    }
 
     const params: any = {};
 
@@ -31,7 +38,11 @@ export const fetchNotices = createAsyncThunk<
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    if (isInitialLoad) {
+      dispatch(setPageLoading(false));
+    } else {
+      dispatch(setListLoading(false));
+    }
   }
 });
 
@@ -43,7 +54,7 @@ export const fetchNoticeById = createAsyncThunk<
   const { dispatch } = thunkAPI;
 
   try {
-    dispatch(setLoading(true));
+    dispatch(setListLoading(true));
 
     const response = await goitAPI.get(`/notices/${id}`);
 
@@ -51,6 +62,6 @@ export const fetchNoticeById = createAsyncThunk<
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
   } finally {
-    dispatch(setLoading(false));
+    dispatch(setListLoading(false));
   }
 });

@@ -14,15 +14,34 @@
   margin-bottom: 20px;
 }
 
+.wrapper {
+  position: relative;
+}
+
+.loaderOverlay {
+  position: absolute;
+  inset: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(2px);
+
+  z-index: 5;
+}
+
 @media (min-width: 768px) {
   .noticesList {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-wrap: wrap;
     gap: 20px;
   }
 
   .noticesItem {
     max-width: none;
+    width: calc((100% - 20px) / 2);
   }
 
   .noticesItem:not(:last-child) {
@@ -32,10 +51,12 @@
 
 @media (min-width: 1280px) {
   .noticesList {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
     gap: 40px 32px;
     padding-left: 32px !important;
     padding-right: 32px !important;
+  }
+
+  .noticesItem {
+    width: calc((100% - 64px) / 3);
   }
 }
