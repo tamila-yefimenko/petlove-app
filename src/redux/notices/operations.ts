@@ -51,17 +51,11 @@ export const fetchNoticeById = createAsyncThunk<
   string,
   { rejectValue: string }
 >("notices/fetchById", async (id, thunkAPI) => {
-  const { dispatch } = thunkAPI;
-
   try {
-    dispatch(setListLoading(true));
-
     const response = await goitAPI.get(`/notices/${id}`);
 
     return response.data;
   } catch (error: any) {
     return thunkAPI.rejectWithValue(getErrorMessage(error));
-  } finally {
-    dispatch(setListLoading(false));
   }
 });

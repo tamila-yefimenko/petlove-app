@@ -1,0 +1,100 @@
+.skeleton {
+  animation: shimmer 1.4s ease infinite;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e4e4e4 37%, #f0f0f0 63%);
+  background-size: 400% 100%;
+  border-radius: 8px;
+}
+
+.img {
+  height: 178px;
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 24px;
+}
+
+.titleWrapper {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.title {
+  height: 20px;
+  width: 60%;
+}
+
+.pop {
+  height: 16px;
+  width: 40px;
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+  gap: 4px;
+  margin-bottom: 16px !important;
+  padding: 0;
+}
+
+.infoItem {
+  height: 30px;
+  width: 18%;
+}
+
+.comment {
+  height: 36px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.price {
+  height: 18px;
+  width: 70px;
+  margin-bottom: 12px;
+}
+
+.btnWrapper {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  height: 42px;
+  width: 100%;
+  border-radius: 30px;
+}
+
+.heart {
+  height: 46px;
+  width: 46px;
+  border-radius: 30px;
+  flex-shrink: 0;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .title {
+    height: 24px;
+  }
+
+  .infoItem {
+    height: 36px;
+  }
+
+  .price {
+    height: 24px;
+    margin-bottom: 14px;
+  }
+
+  .button {
+    height: 48px;
+  }
+}

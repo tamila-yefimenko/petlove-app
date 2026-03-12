@@ -4,7 +4,7 @@ import NoticesItem from "../NoticesItem/NoticesItem";
 import clsx from "clsx";
 import { useAppSelector } from "../../redux/hooks";
 import { selectIsListLoading } from "../../redux/global/selectors";
-import SmallLoader from "../SmallLoader/SmallLoader";
+import NoticesItemSkeleton from "../NoticesItemSkeleton/NoticesItemSkeleton";
 
 interface NoticesListProps {
   notices: Pet[];
@@ -20,21 +20,19 @@ const NoticesList: React.FC<NoticesListProps> = ({
   const isListLoading = useAppSelector(selectIsListLoading);
 
   return (
-    <div className={s.wrapper}>
-      {isListLoading && (
-        <div className={s.loaderOverlay}>
-          <SmallLoader />
-        </div>
-      )}
-
-      <ul className={clsx(s.noticesList, className)}>
-        {notices.map((pet) => (
-          <li className={s.noticesItem} key={pet._id}>
-            <NoticesItem pet={pet} variant={variant} />
-          </li>
-        ))}
-      </ul>
-    </div>
+    <ul className={clsx(s.noticesList, className)}>
+      {isListLoading
+        ? Array.from({ length: 6 }).map((_, index) => (
+            <li className={s.noticesItem} key={index}>
+              <NoticesItemSkeleton />
+            </li>
+          ))
+        : notices.map((pet) => (
+            <li className={s.noticesItem} key={pet._id}>
+              <NoticesItem pet={pet} variant={variant} />
+            </li>
+          ))}
+    </ul>
   );
 };
 

@@ -25,7 +25,7 @@ const NoticesPage: React.FC = () => {
 
   const hasNotices = notices.length > 0;
 
-  const listRef = useRef<HTMLDivElement | null>(null);
+  // const listRef = useRef<HTMLDivElement | null>(null);
 
   const dispatch = useAppDispatch();
 
@@ -74,21 +74,21 @@ const NoticesPage: React.FC = () => {
     }
   }, [error]);
 
-  useEffect(() => {
-    listRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, [
-    keyword,
-    category,
-    species,
-    sex,
-    locationId,
-    byPopularity,
-    byPrice,
-    page,
-  ]);
+  // useEffect(() => {
+  //   listRef.current?.scrollIntoView({
+  //     behavior: "smooth",
+  //     block: "start",
+  //   });
+  // }, [
+  //   keyword,
+  //   category,
+  //   species,
+  //   sex,
+  //   locationId,
+  //   byPopularity,
+  //   byPrice,
+  //   page,
+  // ]);
 
   return (
     <div className={s.noticesPage}>
@@ -103,9 +103,9 @@ const NoticesPage: React.FC = () => {
             </div>
           )}
         </div>
-        <div ref={listRef}>
-          {hasNotices && <NoticesList notices={notices} variant="notice" />}
-        </div>
+        {/* <div ref={listRef}> */}
+        {hasNotices && <NoticesList notices={notices} variant="notice" />}
+        {/* </div> */}
         {!hasNotices && (
           <div className={s.noWrapper}>
             <p className={s.noResults}>No results found.</p>
