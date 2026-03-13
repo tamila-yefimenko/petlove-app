@@ -1,5 +1,9 @@
-import { selectIsListLoading } from "../../redux/global/selectors";
+import {
+  selectIsListLoading,
+  selectIsPageLoading,
+} from "../../redux/global/selectors";
 import { useAppSelector } from "../../redux/hooks";
+import { selectIsLoaded } from "../../redux/user/selectors";
 import { Pet } from "../../utils/types";
 import PetsItem from "../PetsItem/PetsItem";
 import PetsItemSkeleton from "../PetsItemSkeleton/PetsItemSkeleton";
@@ -10,11 +14,11 @@ interface PetsListProps {
 }
 
 const PetsList: React.FC<PetsListProps> = ({ pets }) => {
-  const isListLoading = useAppSelector(selectIsListLoading);
+  const isLoaded = useAppSelector(selectIsLoaded);
 
   return (
     <ul className={s.petsList}>
-      {isListLoading
+      {!isLoaded
         ? Array.from({ length: 2 }).map((_, index) => (
             <li className={s.item} key={index}>
               <PetsItemSkeleton />

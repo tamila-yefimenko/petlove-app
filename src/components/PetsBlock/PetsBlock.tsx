@@ -13,8 +13,8 @@ const PetsBlock = () => {
         <h3>My pets</h3>
         <AddPet />
       </div>
-      {pets.length === 0 && <div className={s.spacer} />}
-      {pets.length > 0 && <PetsList pets={pets} />}
+
+      <PetsList pets={pets} />
     </>
   );
 };
