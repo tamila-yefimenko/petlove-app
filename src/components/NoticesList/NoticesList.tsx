@@ -10,12 +10,14 @@ interface NoticesListProps {
   notices: Pet[];
   variant: "notice" | "favorite" | "viewed";
   className?: string;
+  itemClassName?: string;
 }
 
 const NoticesList: React.FC<NoticesListProps> = ({
   notices,
   variant,
   className,
+  itemClassName,
 }) => {
   const isListLoading = useAppSelector(selectIsListLoading);
 
@@ -28,7 +30,7 @@ const NoticesList: React.FC<NoticesListProps> = ({
             </li>
           ))
         : notices.map((pet) => (
-            <li className={s.noticesItem} key={pet._id}>
+            <li className={clsx(s.noticesItem, itemClassName)} key={pet._id}>
               <NoticesItem pet={pet} variant={variant} />
             </li>
           ))}

@@ -26,9 +26,11 @@
 }
 
 @media (min-width: 1280px) {
+  .profileItem {
+    width: calc((100% - 24px) / 2);
+  }
+
   .list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
     gap: 24px;
     padding-left: 0 !important;
     padding-right: 0 !important;

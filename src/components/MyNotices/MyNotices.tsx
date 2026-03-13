@@ -23,7 +23,12 @@ const MyNotices = () => {
     <div className={s.wrapper}>
       <Tabs activeTab={activeTab} onChange={setActiveTab} />
       {notices.length > 0 ? (
-        <NoticesList className={s.list} notices={notices} variant={variant} />
+        <NoticesList
+          className={s.list}
+          notices={notices}
+          variant={variant}
+          itemClassName={s.profileItem}
+        />
       ) : (
         <p className={s.text}>
           Oops,
