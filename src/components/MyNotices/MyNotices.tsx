@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useAppSelector } from "../../redux/hooks";
 import {
+  selectIsLoaded,
   selectNoticesFavorites,
   selectNoticesViewed,
 } from "../../redux/user/selectors";
@@ -13,6 +14,7 @@ export type TabType = "favorites" | "viewed";
 const MyNotices = () => {
   const viewed = useAppSelector(selectNoticesViewed) ?? [];
   const favorites = useAppSelector(selectNoticesFavorites) ?? [];
+  const isLoaded = useAppSelector(selectIsLoaded);
 
   const [activeTab, setActiveTab] = useState<TabType>("favorites");
 
@@ -22,7 +24,15 @@ const MyNotices = () => {
   return (
     <div className={s.wrapper}>
       <Tabs activeTab={activeTab} onChange={setActiveTab} />
-      {notices.length > 0 ? (
+      {!isLoaded ? (
+        <NoticesList
+          className={s.list}
+          notices={[]}
+          variant={variant}
+          itemClassName={s.profileItem}
+          isLoading
+        />
+      ) : notices.length > 0 ? (
         <NoticesList
           className={s.list}
           notices={notices}

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import NewsList from "../../components/NewsList/NewsList";
 import SearchField from "../../components/SearchField/SearchField";
 import Title from "../../components/Title/Title";
@@ -25,6 +25,8 @@ const NewsPage: React.FC = () => {
   const totalPages = useAppSelector(selectTotalPages);
   const query = useAppSelector(selectQuery);
   const page = useAppSelector(selectPage);
+
+  const listRef = useRef<HTMLDivElement | null>(null);
 
   const dispatch = useAppDispatch();
 
@@ -56,6 +58,13 @@ const NewsPage: React.FC = () => {
     }
   }, [error]);
 
+  useEffect(() => {
+    listRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [page]);
+
   return (
     <div className={s.newsPage}>
       <Container className={s.newsContainer}>
@@ -65,7 +74,9 @@ const NewsPage: React.FC = () => {
             <SearchField className={s.search} onSubmit={handleSearch} />
           )}
         </div>
-        {hasNews && <NewsList news={news} />}
+
+        <div ref={listRef}>{hasNews && <NewsList news={news} />}</div>
+
         {totalPages > 1 && (
           <Pagination
             totalPages={totalPages}

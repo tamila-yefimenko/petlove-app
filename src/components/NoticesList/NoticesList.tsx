@@ -2,8 +2,6 @@ import s from "./NoticesList.module.css";
 import { Pet } from "../../utils/types";
 import NoticesItem from "../NoticesItem/NoticesItem";
 import clsx from "clsx";
-import { useAppSelector } from "../../redux/hooks";
-import { selectIsListLoading } from "../../redux/global/selectors";
 import NoticesItemSkeleton from "../NoticesItemSkeleton/NoticesItemSkeleton";
 
 interface NoticesListProps {
@@ -11,6 +9,7 @@ interface NoticesListProps {
   variant: "notice" | "favorite" | "viewed";
   className?: string;
   itemClassName?: string;
+  isLoading?: boolean;
 }
 
 const NoticesList: React.FC<NoticesListProps> = ({
@@ -18,14 +17,13 @@ const NoticesList: React.FC<NoticesListProps> = ({
   variant,
   className,
   itemClassName,
+  isLoading = false,
 }) => {
-  const isListLoading = useAppSelector(selectIsListLoading);
-
   return (
     <ul className={clsx(s.noticesList, className)}>
-      {isListLoading
+      {isLoading
         ? Array.from({ length: 6 }).map((_, index) => (
-            <li className={s.noticesItem} key={index}>
+            <li className={clsx(s.noticesItem, itemClassName)} key={index}>
               <NoticesItemSkeleton />
             </li>
           ))

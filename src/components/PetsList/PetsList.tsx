@@ -1,7 +1,3 @@
-import {
-  selectIsListLoading,
-  selectIsPageLoading,
-} from "../../redux/global/selectors";
 import { useAppSelector } from "../../redux/hooks";
 import { selectIsLoaded } from "../../redux/user/selectors";
 import { Pet } from "../../utils/types";

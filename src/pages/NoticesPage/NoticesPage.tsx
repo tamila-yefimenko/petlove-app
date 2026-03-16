@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import s from "./NoticesPage.module.css";
 import { Container } from "../../components/Container/Container";
 import Pagination from "../../components/Pagination/Pagination";
-import { selectIsPageLoading } from "../../redux/global/selectors";
+import { selectIsListLoading } from "../../redux/global/selectors";
 import {
   selectError,
   selectNotices,
@@ -18,14 +18,14 @@ import { setPage } from "../../redux/noticesFilters/slice";
 import { toast } from "react-toastify";
 
 const NoticesPage: React.FC = () => {
-  const isLoading = useAppSelector(selectIsPageLoading);
+  const isListLoading = useAppSelector(selectIsListLoading);
   const error = useAppSelector(selectError);
   const totalPages = useAppSelector(selectTotalPages);
   const notices = useAppSelector(selectNotices);
 
   const hasNotices = notices.length > 0;
 
-  // const listRef = useRef<HTMLDivElement | null>(null);
+  const listRef = useRef<HTMLDivElement | null>(null);
 
   const dispatch = useAppDispatch();
 
@@ -74,39 +74,40 @@ const NoticesPage: React.FC = () => {
     }
   }, [error]);
 
-  // useEffect(() => {
-  //   listRef.current?.scrollIntoView({
-  //     behavior: "smooth",
-  //     block: "start",
-  //   });
-  // }, [
-  //   keyword,
-  //   category,
-  //   species,
-  //   sex,
-  //   locationId,
-  //   byPopularity,
-  //   byPrice,
-  //   page,
-  // ]);
+  useEffect(() => {
+    listRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    });
+  }, [
+    keyword,
+    category,
+    species,
+    sex,
+    locationId,
+    byPopularity,
+    byPrice,
+    page,
+  ]);
 
   return (
     <div className={s.noticesPage}>
       <Container className={s.noticesContainer}>
         <div className={s.wrapper}>
-          {!isLoading && (
-            <Title className={s.title}>Find your favorite pet</Title>
-          )}
-          {!isLoading && (
-            <div className={s.searchWrapper}>
-              <NoticesFilters />
-            </div>
-          )}
+          <Title className={s.title}>Find your favorite pet</Title>
+
+          <div className={s.searchWrapper}>
+            <NoticesFilters />
+          </div>
         </div>
-        {/* <div ref={listRef}> */}
-        {hasNotices && <NoticesList notices={notices} variant="notice" />}
-        {/* </div> */}
-        {!hasNotices && (
+        <div ref={listRef}>
+          <NoticesList
+            notices={notices}
+            variant="notice"
+            isLoading={isListLoading}
+          />
+        </div>
+        {!isListLoading && !hasNotices && (
           <div className={s.noWrapper}>
             <p className={s.noResults}>No results found.</p>
             <p className={s.text}>Try changing your search parameters.</p>
