@@ -4,7 +4,10 @@ import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import s from "./NoticesPage.module.css";
 import { Container } from "../../components/Container/Container";
 import Pagination from "../../components/Pagination/Pagination";
-import { selectIsListLoading } from "../../redux/global/selectors";
+import {
+  selectIsListLoading,
+  selectIsPageLoading,
+} from "../../redux/global/selectors";
 import {
   selectError,
   selectNotices,
@@ -19,6 +22,7 @@ import { toast } from "react-toastify";
 
 const NoticesPage: React.FC = () => {
   const isListLoading = useAppSelector(selectIsListLoading);
+  const isPageLoading = useAppSelector(selectIsPageLoading);
   const error = useAppSelector(selectError);
   const totalPages = useAppSelector(selectTotalPages);
   const notices = useAppSelector(selectNotices);
@@ -107,7 +111,7 @@ const NoticesPage: React.FC = () => {
             isLoading={isListLoading}
           />
         </div>
-        {!isListLoading && !hasNotices && (
+        {!isListLoading && !isPageLoading && !hasNotices && (
           <div className={s.noWrapper}>
             <p className={s.noResults}>No results found.</p>
             <p className={s.text}>Try changing your search parameters.</p>
