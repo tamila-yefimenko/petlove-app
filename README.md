@@ -1,16 +1,243 @@
-# React + Vite
+# 🐾 PetLove App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern web application for finding, saving, and managing pets.
+Users can browse notices, read news, manage favorites, and create their own pet profiles.
 
-Currently, two official plugins are available:
+## 🎨 Design (Figma)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+👉 [View Figma Design](https://www.figma.com/file/puMNfZVg4YI8UZoJ1QiLLi/Petl%F0%9F%92%9Bve?type=design&node-id=55838-750&mode=design&t=Xg1IwIcKebTl5xGs-0)
 
-## React Compiler
+## 📸 Screenshots
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+### 🏠 Home Page
 
-## Expanding the ESLint configuration
+<p align="left">
+  <img src="./screenshots/home.png" width="500" />
+</p>
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 📰 News Page
+
+<p align="left">
+  <img src="./screenshots/news.png" width="500" />
+</p>
+
+### 🐶 Notices Page
+
+<p align="left">
+  <img src="./screenshots/notices-desc.png" width="505" />
+  <img src="./screenshots/notices-tab.png" width="400" />
+</p>
+
+### 🤝 Friends Page
+
+<p align="left">
+  <img src="./screenshots/friends.png" width="500" />
+</p>
+
+### 👤 Profile Page
+
+<p align="left">
+  <img src="./screenshots/profile.png" width="500" />
+</p>
+
+### ➕ Add Pet Page
+
+<p align="left">
+  <img src="./screenshots/add-pet.png" width="500" />
+</p>
+
+## 🚀 Pages
+
+- 🏠 **Home** — landing page
+
+- 📰 **News** — latest pet-related news with search
+
+- 🐾 **Notices** — browse pets with filters & pagination
+
+- 🤝 **Friends** — partners / organizations list
+
+- 👤 **Profile** — user info, pets, favorites, viewed
+
+- ➕ **AddPet** — create your own pet profile
+
+## 🚀 Features
+
+- 🔐 Authentication (register / login / logout)
+
+- 🔎 Search & filtering system
+
+- 📄 Pagination
+
+- ❤️ Add/remove favorites
+
+- 👁 Viewed notices history
+
+- 🐕 Add & delete pets
+
+- ✏️ Edit user profile
+
+- 📱 Responsive design
+
+- ⚡ Loaders (page + list)
+
+- 🧩 Skeleton components for smooth UX
+
+## 🛠 Tech Stack
+
+### Frontend:
+
+- React
+
+- TypeScript
+
+- Redux Toolkit
+
+- React Router
+
+- Axios
+
+### State & Logic:
+
+- Redux Thunk
+
+- Redux Persist
+
+### Forms & Validation:
+
+- Formik
+
+- Yup
+
+- React-select
+
+### UI:
+
+- CSS Modules
+
+- Adaptive layout
+
+- Skeleton loaders
+
+## 📂 Project Structure
+
+```bash
+src/
+│
+├── components/        # Reusable UI components
+│   ├── Button/
+│   ├── Loader/
+│   ├── NoticesList/
+│   └── ...
+│
+├── pages/             # Application pages
+│   ├── HomePage/
+│   ├── NewsPage/
+│   ├── NoticesPage/
+│   ├── FriendsPage/
+│   ├── ProfilePage/
+│   └── AddPetPage/
+│
+├── redux/             # State management
+│   ├── auth/
+|   ├── authInterceptor/
+│   ├── news/
+│   ├── user/
+│   ├── notices/
+│   ├── friends/
+│   └── global/
+│
+├── hooks/
+├── utils/
+├── assets/
+└── main.tsx
+```
+
+## ⚙️ Installation & Setup
+
+```bash
+# Clone repository
+
+git clone https://github.com/your-username/your-project.git
+
+# Go to project folder
+
+cd your-project
+
+# Install dependencies
+
+npm install
+
+# Run project
+
+npm run dev
+```
+
+## 🌐 API
+
+Used for:
+
+- authentication
+
+- users
+
+- pets
+
+- notices
+
+- news
+
+- friends
+
+## 📌 Key Implementation Details
+
+### 🔎 Smart search
+
+- keyword is sent only when not empty
+
+### ⏳ Loading system
+
+- isPageLoading → global loader (Layout)
+
+- isListLoading → skeletons in lists
+
+### 🐾 Pets management
+
+- Add / delete pets
+
+- Synced with backend
+
+- UI updates instantly
+
+### ❤️ Favorites
+
+- Stored as IDs for performance
+
+- Synced with backend
+
+## 📈 Performance & UX
+
+- No UI flickering
+
+- Smooth pagination
+
+- Skeletons instead of empty states
+
+- Scroll-to-top on data change
+
+## 👩‍💻 Author
+
+**Tamila Yefimenko**
+
+## 💡 Future Improvements
+
+- Lazy loading images
+
+- Dark mode 🌙
+
+- Better error handling UI
+
+- Animations
+
+## ⭐️ Support
+
+If you like this project — give it a ⭐️ on GitHub!
